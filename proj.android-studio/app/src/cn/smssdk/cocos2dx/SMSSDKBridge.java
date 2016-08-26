@@ -25,7 +25,8 @@ public class SMSSDKBridge {
         if (context == null) {
             context = Cocos2dxActivity.getContext().getApplicationContext();
         }
-        Looper.prepare();
+		if(Looper.myLooper() == null)
+        	Looper.prepare();
         SMSSDK.initSDK(context,appKey,appSecret,isWarn);
         EventHandler handler = new EventHandler(){
             public void afterEvent(int event, int result, Object data) {
