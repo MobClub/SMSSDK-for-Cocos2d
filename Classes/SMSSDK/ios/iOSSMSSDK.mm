@@ -101,7 +101,6 @@ bool iOSSMSSDK::commitCode (string phoneNumber, string zone, string verification
         
         NSString *verificationCodeStr = [NSString stringWithCString:verificationCode.c_str() encoding:NSUTF8StringEncoding];
         
-         NSLog(@"cocos2d-x: \nphone_%@  \nzone_%@  \ncode_%@",phoneNumberStr,zoneStr,verificationCodeStr);
         [SMSSDK commitVerificationCode:verificationCodeStr phoneNumber:phoneNumberStr zone:zoneStr result:^(NSError *error) {
             
             NSMutableDictionary *resultDic = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -312,7 +311,6 @@ bool iOSSMSSDK::showContactsPage()
     } result:^{
         
         NSString *resString = @"showContractFriendsViewSuccess";
-        
         string resultString = [resString cStringUsingEncoding: NSUTF8StringEncoding];
         string res(resultString);
         
