@@ -150,7 +150,7 @@ void HelloWorld::editBoxEditingDidEnd(cocos2d::extension::EditBox *editBox)
 void HelloWorld::editBoxReturn(cocos2d::extension::EditBox *editBox)
 {
     CCLOG("editboxreturn");
-    string phone("18616261983");
+    string phone("186******");
     string zone("86");
     SMSSDK::commitCode(phone,zone,editBox->getText());
 }
@@ -162,7 +162,7 @@ void HelloWorld::editBoxTextChanged(cocos2d::extension::EditBox *editBox, const 
 
 void HelloWorld::getTextCodeHandler(cocos2d::Ref* pSender)
 {    
-    string phone("18616261983");
+    string phone("186******");
     string zone("86");
     SMSSDK::getCode(TextCode,phone,zone);
 }
@@ -170,14 +170,14 @@ void HelloWorld::getTextCodeHandler(cocos2d::Ref* pSender)
 //
 void HelloWorld::getVoiceCodeHandler(cocos2d::Ref* pSender)
 {
-    string phone("18616261983");
+    string phone("186******");
     string zone("86");
     SMSSDK::getCode(VoiceCode,phone,zone);
 }
 
 void HelloWorld::commitCodeHandler(cocos2d::Ref *pSender)
 {
-    string phone("18616261983");
+    string phone("186******");
     string zone("86");
     SMSSDK::commitCode(phone,zone,"6358");
 }
