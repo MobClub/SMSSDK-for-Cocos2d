@@ -109,7 +109,7 @@ bool iOSSMSSDK::commitCode (string phoneNumber, string zone, string verification
             
             if (!error)
             {
-                string res("commitVerificationCode");
+                string res("commitCodeSuccess");
                 if (_handler != nullptr) {
                     _handler->onComplete(Action_CommitCode, res);
                 }
