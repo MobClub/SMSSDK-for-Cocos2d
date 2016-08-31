@@ -1,10 +1,12 @@
 #include "HelloWorldScene.h"
 #include "SMSSDK.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
 using namespace std;
 using namespace smssdk;
+using namespace CocosDenshion;
 
 Scene* HelloWorld::createScene()
 {
@@ -42,20 +44,31 @@ bool HelloWorld::init()
     this->addChild(getVoiceCodeMenu);
     
     //提交验证码
-    MenuItemLabel *commitCodeItem = MenuItemLabel::create(LabelTTF::create("Commit Code", "Arial", 10),
-                                                          CC_CALLBACK_1(HelloWorld::commitCodeHandler, this));
-    commitCodeItem->setPosition(winSize.width/2 , 225);
-    auto commitCodeMenu = Menu::create(commitCodeItem,NULL);
-    commitCodeMenu->setPosition(Vec2::ZERO);
-    this->addChild(commitCodeMenu);
+//    MenuItemLabel *commitCodeItem = MenuItemLabel::create(LabelTTF::create("Commit Code", "Arial", 10),
+//                                                          CC_CALLBACK_1(HelloWorld::commitCodeHandler, this));
+//    commitCodeItem->setPosition(winSize.width/2 , 225);
+//    auto commitCodeMenu = Menu::create(commitCodeItem,NULL);
+//    commitCodeMenu->setPosition(Vec2::ZERO);
+//    this->addChild(commitCodeMenu);
     
     
-//    //输入框
-//    TextField *textField = TextField::create("input words here", "Arial", 10);
-//    
-//    textField->setPosition(Vec2(winSize.width/2 , 200));
+    //提交验证码，输入完毕后敲回车键
+    CCSize size = CCDirector::sharedDirector()->getWinSize();
+    Scale9Sprite* sacel9SprY = Scale9Sprite::create("Icon@2x.png");
+    EditBox* box = EditBox::create(CCSizeMake(winSize.width/2, 25), sacel9SprY);
+    //设置位置
+    box->setPosition(ccp(winSize.width/2 + 75 , 225));
+    box->setDelegate(this);
+    //设置文本的颜色
+    box->setFontColor(ccc3(255, 0, 0));
     
-//    textField->addEventListener(CC_CALLBACK_2(HelloWorld::textFieldEvent, this));
+    //当编辑框中没有任何字符的提示
+    box->setPlaceHolder("请在此处输入验证码");
+    box->setPlaceholderFont("Arial", 10);
+    //最大输入文本长度
+    box->setMaxLength(4);
+    this->addChild(box);
+    
     
     //获取国家列表
     MenuItemLabel *getCoutriesItem = MenuItemLabel::create(LabelTTF::create("GetCountryCodes", "Arial", 10),
@@ -119,9 +132,31 @@ bool HelloWorld::init()
     label->setPosition(Point(winSize.width/2 , 25));
     label->setHorizontalAlignment(TextHAlignment::CENTER);
     this->addChild(label);
-
+    
     SMSSDK::setHandler(this);
     return true;
+}
+
+void HelloWorld::editBoxEditingDidBegin(cocos2d::extension::EditBox *editBox)
+{
+    
+}
+
+void HelloWorld::editBoxEditingDidEnd(cocos2d::extension::EditBox *editBox)
+{
+   
+}
+
+void HelloWorld::editBoxReturn(cocos2d::extension::EditBox *editBox)
+{
+    CCLOG("editboxreturn");
+    string phone("18616261983");
+    string zone("86");
+    SMSSDK::commitCode(phone,zone,editBox->getText());
+}
+
+void HelloWorld::editBoxTextChanged(cocos2d::extension::EditBox *editBox, const std::string &text)
+{
 }
 
 
@@ -141,10 +176,10 @@ void HelloWorld::getVoiceCodeHandler(cocos2d::Ref* pSender)
 }
 
 void HelloWorld::commitCodeHandler(cocos2d::Ref *pSender)
-{    
+{
     string phone("18616261983");
     string zone("86");
-    SMSSDK::commitCode(phone,zone,"8767");
+    SMSSDK::commitCode(phone,zone,"6358");
 }
 
 void HelloWorld::getFriendsHandler(cocos2d::Ref *pSender)

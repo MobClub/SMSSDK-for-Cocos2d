@@ -60,7 +60,7 @@ bool SMSSDK::commitCode(string phone, string zone, string code)
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
     //iOS
-    return iOSSMSSDK::commitCode(zone, phone, code);
+    return iOSSMSSDK::commitCode(phone,zone, code);
     
 #endif
     return false;

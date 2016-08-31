@@ -3,14 +3,22 @@
 
 #include "SMSSDK/SMSSDKType.h"
 #include "cocos2d.h"
-
+#include "cocos-ext.h"
+using namespace cocos2d;
+using namespace extension;
 using  namespace smssdk;
 
-class HelloWorld : public cocos2d::Layer,public SMSSDKHandler
+class HelloWorld : public cocos2d::Layer,public SMSSDKHandler,public EditBoxDelegate
 {
 public:
     static cocos2d::Scene* createScene();
     virtual bool init();
+    
+    void menuCloseCallback(CCObject* pSender);
+    virtual void editBoxEditingDidBegin(cocos2d::extension::EditBox *editBox);
+    virtual void editBoxEditingDidEnd(EditBox *editBox);
+    virtual void editBoxTextChanged(EditBox *editBox,const std::string &text);
+    virtual void editBoxReturn(EditBox *editBox);
     
     //获取文本验证码
     void getTextCodeHandler(cocos2d::Ref* pSender);

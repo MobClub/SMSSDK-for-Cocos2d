@@ -39,15 +39,14 @@ bool iOSSMSSDK::init(string appKey, string appSecret, bool isWarn)
 
 bool iOSSMSSDK::getCode(SMSSDKCodeType codeType, string phoneNumber, string zone)
 {
-    NSString  *phoneNumberStr = [NSString stringWithCString:phoneNumber.c_str() encoding:NSUTF8StringEncoding];
-    NSString *zoneStr = [NSString stringWithCString:zone.c_str() encoding:NSUTF8StringEncoding];
-    SMSGetCodeMethod smsGetCodeMethod = (SMSGetCodeMethod)codeType;
-    
-    if (phoneNumber.length() != 0 && zone.length() != 0){
+    if (phoneNumber.length() != 0 && zone.length() != 0)
+    {
+        NSString  *phoneNumberStr = [NSString stringWithCString:phoneNumber.c_str() encoding:NSUTF8StringEncoding];
+        NSString *zoneStr = [NSString stringWithCString:zone.c_str() encoding:NSUTF8StringEncoding];
+        SMSGetCodeMethod smsGetCodeMethod = (SMSGetCodeMethod)codeType;
         
         [SMSSDK getVerificationCodeByMethod:smsGetCodeMethod phoneNumber:phoneNumberStr zone:zoneStr customIdentifier:nil result:^(NSError *error) {
             
-            //            int action = 1;
             if (!error )
             {
                 string res("");
@@ -66,7 +65,8 @@ bool iOSSMSSDK::getCode(SMSSDKCodeType codeType, string phoneNumber, string zone
                     res = [resString cStringUsingEncoding:NSUTF8StringEncoding];
                 }
                 
-                if (_handler != nullptr) {
+                if (_handler != nullptr)
+                {
                     _handler->onComplete(Action_GetCode, res);
                 }
                 
@@ -79,7 +79,8 @@ bool iOSSMSSDK::getCode(SMSSDKCodeType codeType, string phoneNumber, string zone
                 
                 string res([resultMsg UTF8String]);
                 
-                if (_handler != nullptr) {
+                if (_handler != nullptr)
+                {
                     _handler->onError(Action_GetCode, res);
                 }
             }
@@ -91,17 +92,16 @@ bool iOSSMSSDK::getCode(SMSSDKCodeType codeType, string phoneNumber, string zone
 
 bool iOSSMSSDK::commitCode (string phoneNumber, string zone, string verificationCode)
 {
-    NSString *phoneNumberStr = nil;
-    NSString *zoneStr = nil;
-    NSString *verificationCodeStr = nil;
-    
+
     if (phoneNumber.length() != 0 && zone.length() != 0 && verificationCode.length() != 0 && verificationCode.length() != 0)
     {
-        phoneNumberStr = [NSString stringWithCString:phoneNumber.c_str() encoding:NSUTF8StringEncoding];
-        zoneStr = [NSString stringWithCString:zone.c_str() encoding:NSUTF8StringEncoding];
-        verificationCodeStr = [NSString stringWithCString:verificationCode.c_str() encoding:NSUTF8StringEncoding];
-        //        observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
+        NSString *phoneNumberStr = [NSString stringWithCString:phoneNumber.c_str() encoding:NSUTF8StringEncoding];
         
+        NSString *zoneStr = [NSString stringWithCString:zone.c_str() encoding:NSUTF8StringEncoding];
+        
+        NSString *verificationCodeStr = [NSString stringWithCString:verificationCode.c_str() encoding:NSUTF8StringEncoding];
+        
+         NSLog(@"cocos2d-x: \nphone_%@  \nzone_%@  \ncode_%@",phoneNumberStr,zoneStr,verificationCodeStr);
         [SMSSDK commitVerificationCode:verificationCodeStr phoneNumber:phoneNumberStr zone:zoneStr result:^(NSError *error) {
             
             NSMutableDictionary *resultDic = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -122,7 +122,8 @@ bool iOSSMSSDK::commitCode (string phoneNumber, string zone, string verification
                 
                 string res([resultMsg UTF8String]);
                 
-                if (_handler != nullptr) {
+                if (_handler != nullptr)
+                {
                     _handler->onError(Action_CommitCode, res);
                 }
                 
@@ -152,10 +153,10 @@ bool iOSSMSSDK::getSupportedCountries()
             
             string res([resultMsg UTF8String]);
             
-            if (_handler != nullptr) {
+            if (_handler != nullptr)
+            {
                 _handler->onError(Action_GetSupportedCountries, res);
             }
-            
         }
     }];
     return true;
@@ -172,7 +173,8 @@ bool iOSSMSSDK::getFriends()
         if (!error)
         {
             string res("getFriendsSuccess");
-            if (_handler != nullptr) {
+            if (_handler != nullptr)
+            {
                 _handler->onComplete(Action_GetFriends, res);
             }
         }
@@ -184,7 +186,8 @@ bool iOSSMSSDK::getFriends()
             
             string res([resultMsg UTF8String]);
             
-            if (_handler != nullptr) {
+            if (_handler != nullptr)
+            {
                 _handler->onError(Action_GetFriends, res);
             }
         }
@@ -207,7 +210,8 @@ bool iOSSMSSDK::submitUserInfo (UserInfo &userInfo)
          if (!error)
          {
              string res("submitUserInfoSuccess");
-             if (_handler != nullptr) {
+             if (_handler != nullptr)
+             {
                  _handler->onComplete(Action_SubmitUserInfo, res);
              };
              
@@ -220,7 +224,8 @@ bool iOSSMSSDK::submitUserInfo (UserInfo &userInfo)
              
              string res([resultMsg UTF8String]);
              
-             if (_handler != nullptr) {
+             if (_handler != nullptr)
+             {
                  _handler->onError(Action_SubmitUserInfo, res);
              }
          }
@@ -274,7 +279,8 @@ bool iOSSMSSDK::showRegisterPage(SMSSDKCodeType type)
                 res = [resString cStringUsingEncoding:NSUTF8StringEncoding];
             }
             
-            if (_handler != nullptr) {
+            if (_handler != nullptr)
+            {
                 _handler->onComplete(Action_GetSupportedCountries, res);
             }
         }
@@ -287,14 +293,13 @@ bool iOSSMSSDK::showRegisterPage(SMSSDKCodeType type)
             
             string res([resultMsg UTF8String]);
             
-            if (_handler != nullptr) {
+            if (_handler != nullptr)
+            {
                 _handler->onError(Action_GetSupportedCountries, res);
             }
-            
         }
         
     }];
-    
     return true;
     
 }
@@ -310,11 +315,14 @@ bool iOSSMSSDK::showContactsPage()
         
         string resultString = [resString cStringUsingEncoding: NSUTF8StringEncoding];
         string res(resultString);
-        if (_handler != nullptr) {
+        
+        if (_handler != nullptr)
+        {
             _handler->onComplete(Action_GetFriends, res);
         }
         
-        if (_handler != nullptr) {
+        if (_handler != nullptr)
+        {
             _handler->onError(Action_GetFriends, res);
         }
         
