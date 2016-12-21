@@ -11,6 +11,8 @@ LOCAL_MODULE := MyGame_shared
 
 LOCAL_MODULE_FILENAME := libMyGame
 
+LOCAL_SHORT_COMMANDS := true
+
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/AppDelegate.cpp \
                    ../../../Classes/HelloWorldScene.cpp \
