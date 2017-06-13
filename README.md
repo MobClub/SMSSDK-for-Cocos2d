@@ -1,10 +1,10 @@
-#SMSSDK for Cocos2d-x
-
+SMSSDK for Cocos2d-x
+===
 ### This is a sample of SMSSDK for Cocos2d-x.
 **supported original SMSSDK version:**
 
 - Android - V2.0.0~
-- iOS - V2.0.0~
+- iOS - V3.0.0~
 - Cocos2d-x v3.0.0~
 
 ----------------------------------------------------
@@ -25,36 +25,34 @@ For Eclipse user, use proj.android.For Android Studio(Need 2.2 or up) user,use p
 > * #include "SMSSDK.h"
 
 > * using namespace smssdk;
-        
-2.Use your own  Appkey and AppSecret to initialize SDK
 
-		SMSSDK::init("114d7a34cf7ea","678ff550d7328de446585757c4e5de3f",false);
 
-3.Implements SMSSDKHandler and set it to SDK
+
+2.Implements SMSSDKHandler and set it to SDK
 
 add a class to implement SMSSDKHandler, then set it to SDK to handle callback
 
-        class Demo:SMSSDKHandler
-		....
-		SMSSDK::setHandler(demo);
+class Demo:SMSSDKHandler
+....
+SMSSDK::setHandler(demo);
 
-4.now you can use SDK to do something
+3.now you can use SDK to do something
 
-		SMSSDK.getCode(SMSCodeType(0),"86","18688888888");
-		SMSSDK.getFriends();
+SMSSDK.getCode(SMSCodeType(0),"86","18688888888");
+SMSSDK.getFriends();
 
 #### About Callback data
 Some APIs will send data to your SMSSDKHandler instance which you set.This callback data is a json string.You can use  any JSON library to handle it.The action is what API you call.
 
-	onComplete(SMSSDKActionType action, string resp)
-	onError(SMSSDKActionType action, string resp)
+onComplete(SMSSDKActionType action, string resp)
+onError(SMSSDKActionType action, string resp)
 
 #### About GUI
 
 This two APIs bellow is GUI APIs.
 
-	showRegisterPage(SMSCodeType getCodeMethodType)
-	showContactsPage()
+showRegisterPage(SMSCodeType getCodeMethodType)
+showContactsPage()
 ## For Android setting
 If you want to  use this GUI, you can add ShortMessageSDKGUI library in Eclipse. This ShortMessageSDKGUI library is open source at [SMSSDK for Android](https://github.com/MobClub/SMSSDK-for-Android),you can modify whatever you want to do.
 For Android Studio, a SMSSDKGUI.aar is already put in.
