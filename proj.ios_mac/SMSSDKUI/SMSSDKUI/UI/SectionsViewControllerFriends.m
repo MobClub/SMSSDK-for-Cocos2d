@@ -6,11 +6,9 @@
 #import "VerifyViewController.h"
 #import "YJLocalCountryData.h"
 #import <SMS_SDK/SMSSDK.h>
-#import <SMS_SDK/Extend/SMSSDKAddressBook.h>
-#import <SMS_SDK/Extend/SMSSDK+DeprecatedMethods.h>
-#import <SMS_SDK/Extend/SMSSDK+ExtexdMethods.h>
-#import <SMS_SDK/Extend/SMSSDK+AddressBookMethods.h>
-
+#import <SMS_SDK/SMSSDK+ContactFriends.h>
+#import <AddressBook/AddressBook.h>
+#import <SMS_SDK/SMSSDKAddressBook.h>
 
 @interface SectionsViewControllerFriends ()
 {
@@ -76,8 +74,6 @@
         self.onCloseResultHandler ();
         
     }
-    //修改消息条数为0
-    [SMSSDK setLatelyFriendsCount:0];
 
     if (_friendsBlock) {
         _friendsBlock(1,0);
@@ -145,8 +141,7 @@
     
     search.delegate = self;
     _other = [NSMutableArray array];
-    _addressBookData = [SMSSDK addressBook];
-    
+    _addressBookData = [self addressBook_ex];
     
     NSLog(@"获取到了%zi条通讯录信息",_addressBookData.count);
     
@@ -252,7 +247,6 @@
         [self presentViewController:invit animated:YES completion:^{
             ;
         }];
-
     }
 }
 
@@ -405,5 +399,167 @@ sectionForSectionIndexTitle:(NSString *)title
     
     [searchBar resignFirstResponder];
 }
+
+- (NSMutableArray *)addressBook_ex
+{
+    NSMutableArray *addressBookArray = [NSMutableArray array];
+    
+    ABAddressBookRef addressBooks = nil;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
+    {
+        addressBooks =  ABAddressBookCreateWithOptions(NULL, NULL);
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        ABAddressBookRequestAccessWithCompletion(addressBooks, ^(bool granted, CFErrorRef error){dispatch_semaphore_signal(sema);});
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        //dispatch_release(sema);
+    }
+    else
+    {
+        addressBooks = ABAddressBookCreate();
+    }
+    
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
+    CFIndex nPeople = ABAddressBookGetPersonCount(addressBooks);
+    for (NSInteger i = 0; i < nPeople; i++)
+    {
+        SMSSDKAddressBook* addressBook = [[SMSSDKAddressBook alloc] init];
+        addressBook.phonesEx = [NSMutableArray array];
+        
+        ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+        CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
+        CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
+        CFStringRef abFullName = ABRecordCopyCompositeName(person);
+        NSString *nameString = (__bridge NSString *)abName;
+        NSString *lastNameString = (__bridge NSString *)abLastName;
+        
+        if ((__bridge id)abFullName != nil)
+        {
+            nameString = (__bridge NSString *)abFullName;
+        }
+        else
+        {
+            if ((__bridge id)abLastName != nil)
+            {
+                nameString = [NSString stringWithFormat:@"%@ %@", nameString, lastNameString];
+            }
+        }
+        
+        addressBook.name = nameString;
+        addressBook.recordid = [NSString stringWithFormat:@"%i",(int)ABRecordGetRecordID(person)];
+        addressBook.prefixname = (__bridge NSString *)ABRecordCopyValue(person, kABPersonPrefixProperty);
+        addressBook.suffixname = (__bridge NSString *)ABRecordCopyValue(person, kABPersonSuffixProperty);
+        addressBook.lastname = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+        
+        addressBook.firstname = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+        addressBook.middlename = (__bridge NSString *)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
+        addressBook.nickname = (__bridge NSString *)ABRecordCopyValue(person, kABPersonNicknameProperty);
+        addressBook.displayname = (__bridge NSString *)ABRecordCopyValue(person, kABPersonNicknameProperty);
+        addressBook.company = (__bridge NSString *)ABRecordCopyValue(person, kABPersonOrganizationProperty);
+        
+        addressBook.position = (__bridge NSString *)ABRecordCopyValue(person, kABPersonJobTitleProperty);
+        addressBook.specialdata = (__bridge NSString *)ABRecordCopyValue(person, kABPersonBirthdayProperty);
+        addressBook.group = (__bridge NSString *)ABRecordCopyValue(person, kABPersonKindProperty);
+        addressBook.remarks = @"hello";
+        addressBook.others = @"over";
+        
+        ABPropertyID multiProperties[] =
+        {
+            kABPersonPhoneProperty,
+            kABPersonEmailProperty,
+            kABPersonAddressProperty,
+            kABPersonInstantMessageProperty,
+            kABPersonURLProperty,
+            kABPersonRelatedNamesProperty
+        };
+        
+        NSInteger multiPropertiesTotal = sizeof(multiProperties) / sizeof(ABPropertyID);
+        
+        for (NSInteger j = 0; j < multiPropertiesTotal; j++)
+        {
+            ABPropertyID property = multiProperties[j];
+            ABMultiValueRef valuesRef = ABRecordCopyValue(person, property);
+            NSInteger valuesCount = 0;
+            if (valuesRef != nil) valuesCount = ABMultiValueGetCount(valuesRef);
+            if (valuesCount == 0)
+            {
+                CFRelease(valuesRef);
+                continue;
+            }
+            
+            //获取电话号码和email
+            for (NSInteger k = 0; k < valuesCount; k++)
+            {
+                CFTypeRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
+                switch (j)
+                {
+                    case 0:
+                    {
+                        NSString* str1 = (__bridge NSString*)value;
+                        NSString* str2 = [str1 stringByReplacingOccurrencesOfString:@" " withString:@""];
+                        NSString* str3 = [str2 stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                        [addressBook.phonesEx addObject:str3];
+                        if (0 == k)
+                        {
+                            NSString* str1 = (__bridge NSString*)value;
+                            NSString* str2 = [str1 stringByReplacingOccurrencesOfString:@" " withString:@""];
+                            addressBook.phones = [str2 stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                        }
+                        else if(1 == k) {
+                            NSString* str1 = (__bridge NSString*)value;
+                            NSString* str2 = [str1 stringByReplacingOccurrencesOfString:@" " withString:@""];
+                            addressBook.phone2 = [str2 stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                        }
+                        break;
+                    }
+                    case 1:
+                    {
+                        addressBook.mails = (__bridge NSString*)value;
+                        break;
+                    }
+                    case 2:
+                    {
+                        addressBook.addresses = @"";
+                        break;
+                    }
+                    case 3:
+                    {
+                        addressBook.ims = (__bridge NSString*)value;
+                        break;
+                    }
+                    case 4:
+                    {
+                        addressBook.websites = (__bridge NSString*)value;
+                        break;
+                    }
+                    case 5:
+                    {
+                        addressBook.relations = (__bridge NSString*)value;
+                        break;
+                    }
+                        
+                    default:
+                        break;
+                }
+                
+                CFRelease(value);
+            }
+            CFRelease(valuesRef);
+        }
+        
+        //将个人信息添加到数组中，循环完成后addressBookTemp中包含所有联系人的信息
+        [addressBookArray addObject:addressBook];
+        if (abName) CFRelease(abName);
+        if (abLastName) CFRelease(abLastName);
+        if (abFullName) CFRelease(abFullName);
+    }
+    
+    if (allPeople)
+    {
+        CFRelease(allPeople);
+    }
+    
+    return addressBookArray;
+}
+
 
 @end

@@ -3,8 +3,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomCell.h"
 
-//#import <SMS_SDK/SMSSDKResultHanderDef.h>
-#import <SMS_SDK/Extend/SMSSDKResultHanderDef.h>
+#import <SMS_SDK/SMSSDKResultHanderDef.h>
 #import "SMSUIVerificationCodeViewResultDef.h"
 
 @interface SectionsViewControllerFriends : UIViewController
@@ -21,6 +20,8 @@ UISearchBarDelegate>
     
     BOOL    isSearching;
 }
+
+
 
 @property (nonatomic, strong)  UITableView *table;
 @property (nonatomic, strong)  UISearchBar *search;

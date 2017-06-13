@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SectionsViewController.h"
-//#import "SMSSDKUI.h"
-#import <SMS_SDK/Extend/SMSSDKResultHanderDef.h>
+#import <SMS_SDK/SMSSDKResultHanderDef.h>
 
 #import "SMSUIVerificationCodeViewResultDef.h"
 

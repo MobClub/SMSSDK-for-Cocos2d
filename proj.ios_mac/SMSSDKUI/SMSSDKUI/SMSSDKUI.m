@@ -8,9 +8,8 @@
 
 #import "SMSSDKUI.h"
 #import "RegViewController.h"
-#import <SMS_SDK/Extend/SMSSDK+ExtexdMethods.h>
-#import <SMS_SDK/Extend/SMSSDKUserInfo.h>
-#import <SMS_SDK/Extend/SMSSDK+AddressBookMethods.h>
+#import <SMS_SDK/SMSSDKUserInfo.h>
+#import <SMS_SDK/SMSSDK+ContactFriends.h>
 #import "SMSUIVerificationCodeViewController.h"
 
 @interface SMSSDKUI()
@@ -20,7 +19,7 @@
 
 @implementation SMSSDKUI
 
-+ (SMSUIVerificationCodeViewController *)showVerificationCodeViewWithMetohd:(SMSGetCodeMethod)whichMethod result:(SMSUIVerificationCodeResultHandler)result
++ (SMSUIVerificationCodeViewController *)showVerificationCodeViewWithMethod:(SMSGetCodeMethod)whichMethod result:(SMSUIVerificationCodeResultHandler)result
 {
     SMSUIVerificationCodeViewController *verificationCodeViewController = [[SMSUIVerificationCodeViewController alloc] initVerificationCodeViewWithMethod:whichMethod];
     

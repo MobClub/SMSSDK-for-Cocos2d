@@ -10,9 +10,7 @@
 #import "VerifyViewController.h"
 #import "SectionsViewController.h"
 #import <SMS_SDK/SMSSDK.h>
-#import <SMS_SDK/Extend/SMSSDKCountryAndAreaCode.h>
-#import <SMS_SDK/Extend/SMSSDK+DeprecatedMethods.h>
-#import <SMS_SDK/Extend/SMSSDK+ExtexdMethods.h>
+#import "SMSSDKCountryAndAreaCode.h"
 #import <MOBFoundation/MOBFoundation.h>
 #import "YJLocalCountryData.h"
 
@@ -132,7 +130,12 @@
         NSString* str2 = [self.areaCodeField.text stringByReplacingOccurrencesOfString:@"+" withString:@""];
         
         [self getVerificationCodeByMethod:self.getCodeMethod phoneNumber:self.telField.text zone:str2];
-        
+    }
+    else
+    {
+        NSString *imageString = [_bundle pathForResource:@"button4" ofType:@"png"];
+        self.nextButton.enabled = YES;
+        [self.nextButton setBackgroundImage:[[UIImage alloc] initWithContentsOfFile:imageString] forState:UIControlStateNormal];
     }
 }
 
@@ -144,7 +147,6 @@
         
         [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:phoneNumber
                                        zone:zone
-                           customIdentifier:nil
                                      result:^(NSError *error)
          {
              
@@ -157,7 +159,6 @@
     {
         [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodVoice phoneNumber:phoneNumber
                                        zone:zone
-                           customIdentifier:nil
                                      result:^(NSError *error)
          {
              [regViewController getVerificationCodeResultHandler:phoneNumber zone:zone error:error];
@@ -341,7 +342,10 @@
             {
                 NSLog(@"get the area code sucessfully");
                 //区号数据
-                regViewController.areaArray = [NSMutableArray arrayWithArray:zonesArray];
+                if ([zonesArray isKindOfClass:[NSArray class]])
+                {
+                    regViewController.areaArray = [NSMutableArray arrayWithArray:zonesArray];
+                }
                 //获取到国家列表数据后对进行缓存
                 [[MOBFDataService sharedInstance] setCacheData:regViewController.areaArray forKey:@"countryCodeArray" domain:nil];
                 //设置缓存时间

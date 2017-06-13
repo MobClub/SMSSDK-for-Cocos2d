@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SMS_SDK/SMSSDK.h>
-
 
 enum SMSUIResponseState
 {

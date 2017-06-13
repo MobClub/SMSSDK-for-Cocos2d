@@ -2,8 +2,8 @@
 
 #import "SectionsViewController.h"
 #import "YJLocalCountryData.h"
+#import "SMSSDKCountryAndAreaCode.h"
 #import <SMS_SDK/SMSSDK.h>
-#import <SMS_SDK/Extend/SMSSDKCountryAndAreaCode.h>
 
 @interface SectionsViewController ()
 {

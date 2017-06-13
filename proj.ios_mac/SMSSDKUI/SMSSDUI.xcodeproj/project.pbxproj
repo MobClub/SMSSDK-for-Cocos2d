@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44AB17C91ECD81DA00E6B0F5 /* SMSSDKCountryAndAreaCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AB17C81ECD81DA00E6B0F5 /* SMSSDKCountryAndAreaCode.m */; };
 		7B4910E31C96A10C00EDD0D0 /* SMSSDKUI.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B2A63011C4F711B00A160C8 /* SMSSDKUI.h */; };
 		7B4910E41C96A11100EDD0D0 /* SMSUIVerificationCodeViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B4910D71C9668CF00EDD0D0 /* SMSUIVerificationCodeViewController.h */; };
 		7B4910E51C96A11600EDD0D0 /* SMSUIVerificationCodeViewResultDef.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B4910D91C9668CF00EDD0D0 /* SMSUIVerificationCodeViewResultDef.h */; };
@@ -48,6 +49,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		44AB17C71ECD81DA00E6B0F5 /* SMSSDKCountryAndAreaCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSDKCountryAndAreaCode.h; sourceTree = "<group>"; };
+		44AB17C81ECD81DA00E6B0F5 /* SMSSDKCountryAndAreaCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSDKCountryAndAreaCode.m; sourceTree = "<group>"; };
 		7B2A62491C4F66BE00A160C8 /* libSMSSDUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSMSSDUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B2A62FB1C4F711B00A160C8 /* SMS_HYZBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMS_HYZBadgeView.h; sourceTree = "<group>"; };
 		7B2A62FC1C4F711B00A160C8 /* SMS_HYZBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMS_HYZBadgeView.m; sourceTree = "<group>"; };
@@ -65,7 +68,7 @@
 		7B2A630A1C4F711B00A160C8 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		7B2A630B1C4F711B00A160C8 /* VerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyViewController.h; sourceTree = "<group>"; };
 		7B2A630C1C4F711B00A160C8 /* VerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyViewController.m; sourceTree = "<group>"; };
-		7B2A630D1C4F711B00A160C8 /* SectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SectionsViewController.h; path = ../SectionsViewController.h; sourceTree = "<group>"; };
+		7B2A630D1C4F711B00A160C8 /* SectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionsViewController.h; sourceTree = "<group>"; };
 		7B2A630E1C4F711B00A160C8 /* SectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionsViewController.m; sourceTree = "<group>"; };
 		7B2A630F1C4F711B00A160C8 /* SectionsViewControllerFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionsViewControllerFriends.h; sourceTree = "<group>"; };
 		7B2A63101C4F711B00A160C8 /* SectionsViewControllerFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionsViewControllerFriends.m; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 				7B2A624A1C4F66BE00A160C8 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		7B2A624A1C4F66BE00A160C8 /* Products */ = {
 			isa = PBXGroup;
@@ -140,9 +144,12 @@
 				7B2A63061C4F711B00A160C8 /* InvitationViewControllerEx.h */,
 				7B2A63071C4F711B00A160C8 /* InvitationViewControllerEx.m */,
 				7B2A63081C4F711B00A160C8 /* Rigister */,
+				7B2A630D1C4F711B00A160C8 /* SectionsViewController.h */,
 				7B2A630E1C4F711B00A160C8 /* SectionsViewController.m */,
 				7B2A630F1C4F711B00A160C8 /* SectionsViewControllerFriends.h */,
 				7B2A63101C4F711B00A160C8 /* SectionsViewControllerFriends.m */,
+				44AB17C71ECD81DA00E6B0F5 /* SMSSDKCountryAndAreaCode.h */,
+				44AB17C81ECD81DA00E6B0F5 /* SMSSDKCountryAndAreaCode.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -154,7 +161,6 @@
 				7B2A630A1C4F711B00A160C8 /* RegViewController.m */,
 				7B2A630B1C4F711B00A160C8 /* VerifyViewController.h */,
 				7B2A630C1C4F711B00A160C8 /* VerifyViewController.m */,
-				7B2A630D1C4F711B00A160C8 /* SectionsViewController.h */,
 			);
 			path = Rigister;
 			sourceTree = "<group>";
@@ -223,6 +229,7 @@
 				7B4910ED1C96A41D00EDD0D0 /* SMSUIVerificationCodeViewController.m in Sources */,
 				7B4910EE1C96A41D00EDD0D0 /* CustomCell.m in Sources */,
 				7B4910EF1C96A41D00EDD0D0 /* InvitationViewControllerEx.m in Sources */,
+				44AB17C91ECD81DA00E6B0F5 /* SMSSDKCountryAndAreaCode.m in Sources */,
 				7B4910F01C96A41D00EDD0D0 /* RegViewController.m in Sources */,
 				7B4910F11C96A41D00EDD0D0 /* VerifyViewController.m in Sources */,
 				7B4910F21C96A41D00EDD0D0 /* SectionsViewController.m in Sources */,
@@ -255,6 +262,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../SDK/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -298,6 +306,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../SDK/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -316,10 +325,7 @@
 		7B2A62531C4F66BE00A160C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/../SMS_SDK",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../SDK/**";
 				HEADER_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -330,10 +336,7 @@
 		7B2A62541C4F66BE00A160C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/../SMS_SDK",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../SDK/**";
 				HEADER_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

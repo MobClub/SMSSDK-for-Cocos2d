@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RegViewController.h"
-#import <SMS_SDK/Extend/SMSSDKResultHanderDef.h>
+#import <SMS_SDK/SMSSDKResultHanderDef.h>
 @interface VerifyViewController : UIViewController <UIAlertViewDelegate>
 
 @property(nonatomic,strong)  UITextField* verifyCodeField;

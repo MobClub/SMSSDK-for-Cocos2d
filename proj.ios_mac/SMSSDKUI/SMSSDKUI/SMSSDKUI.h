@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SMS_SDK/Extend/SMSSDKUserInfo.h>
-#import <SMS_SDK/Extend/SMSSDKResultHanderDef.h>
+#import <SMS_SDK/SMSSDKUserInfo.h>
+#import <SMS_SDK/SMSSDKResultHanderDef.h>
 #import "SMSUIVerificationCodeViewController.h"
 #import "SMSUIContactsFriendsViewController.h"
 
@@ -21,7 +21,7 @@
  *  @param result      展示操作界面结果回调(Results of the showView )
  */
 
-+ (SMSUIVerificationCodeViewController *)showVerificationCodeViewWithMetohd:(SMSGetCodeMethod)whichMethod result:(SMSUIVerificationCodeResultHandler)result;
++ (SMSUIVerificationCodeViewController *)showVerificationCodeViewWithMethod:(SMSGetCodeMethod)whichMethod result:(SMSUIVerificationCodeResultHandler)result;
 
 
 

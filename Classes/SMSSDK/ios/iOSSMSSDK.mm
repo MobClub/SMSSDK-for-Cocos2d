@@ -6,11 +6,11 @@
 //
 
 #include "iOSSMSSDK.h"
-#import <SMS_SDK/SMSSDK.h>
 #import <MOBFoundation/MOBFRegex.h>
-#import <SMS_SDK/Extend/SMSSDK+AddressBookMethods.h>
-#import <SMS_SDK/Extend/SMSSDK+ExtexdMethods.h>
 #import <MOBFoundation/MOBFoundation.h>
+#import <SMS_SDK/SMSSDK.h>
+#import <SMS_SDK/SMSSDK+ContactFriends.h>
+
 #import "SMSSDKUI.h"
 
 using namespace smssdk;
@@ -24,19 +24,10 @@ static SMSSDKHandler* _handler = nullptr;
 
 bool iOSSMSSDK::init(string appKey, string appSecret, bool isWarn)
 {
-    NSString * appKeyStr = nil;
-    NSString * appSecretStr =nil;
     
-    if (appKey.length() != 0 && appSecret.length() != 0)
-    {
-        appKeyStr = [NSString stringWithCString:appKey.c_str() encoding:NSUTF8StringEncoding];
-        appSecretStr= [NSString stringWithCString:appSecret.c_str() encoding:NSUTF8StringEncoding];
-    }
-    [SMSSDK registerApp:appKeyStr withSecret:appSecretStr];
-    [SMSSDK enableAppContactFriends:isWarn];
+    NSLog(@"3.0.0版本后appkey和appSecret配置在info.Plist里");
     return true;
 }
-
 
 bool iOSSMSSDK::getCode(SMSSDKCodeType codeType, string phoneNumber, string zone)
 {
@@ -46,7 +37,9 @@ bool iOSSMSSDK::getCode(SMSSDKCodeType codeType, string phoneNumber, string zone
     
     if (phoneNumber.length() != 0 && zone.length() != 0)
     {
-        [SMSSDK getVerificationCodeByMethod:smsGetCodeMethod phoneNumber:phoneNumberStr zone:zoneStr customIdentifier:nil result:^(NSError *error) {
+        [SMSSDK getVerificationCodeByMethod:smsGetCodeMethod phoneNumber:phoneNumberStr zone:zoneStr result:^(NSError *error) {
+            
+            NSLog(@"%@",error);
             
             if (!error )
             {
@@ -104,7 +97,7 @@ bool iOSSMSSDK::commitCode (string phoneNumber, string zone, string verification
         verificationCodeStr = [NSString stringWithCString:verificationCode.c_str() encoding:NSUTF8StringEncoding];
         //        observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
         
-        [SMSSDK commitVerificationCode:verificationCodeStr phoneNumber:phoneNumberStr zone:zoneStr result:^(SMSSDKUserInfo *userInfo, NSError *error) {
+        [SMSSDK commitVerificationCode:verificationCodeStr phoneNumber:phoneNumberStr zone:zoneStr result:^( NSError *error) {
             NSMutableDictionary *resultDic = [NSMutableDictionary dictionaryWithCapacity:0];
             [resultDic setObject:[NSNumber numberWithInt:2] forKey:@"action"];
             
@@ -210,7 +203,7 @@ bool iOSSMSSDK::submitUserInfo (UserInfo &userInfo)
     smsUserInfo.avatar = [NSString stringWithCString:userInfo.avatar.c_str() encoding:NSUTF8StringEncoding];
     smsUserInfo.uid = [NSString stringWithCString:userInfo.uid.c_str() encoding:NSUTF8StringEncoding];
     
-    [SMSSDK submitUserInfoHandler:smsUserInfo result:^(NSError *error)
+    [SMSSDK submitUserInfo:smsUserInfo result:^(NSError *error)
      {
          NSMutableDictionary *resultDic = [NSMutableDictionary dictionaryWithCapacity:0];
          [resultDic setObject:[NSNumber numberWithInt:4] forKey:@"action"];
@@ -245,7 +238,7 @@ bool iOSSMSSDK::submitUserInfo (UserInfo &userInfo)
 
 string iOSSMSSDK::getVersion ()
 {
-    NSString *versionString = [SMSSDK SMSSDKVersion];
+    NSString *versionString = [SMSSDK version];
     string resultString = [versionString cStringUsingEncoding: NSUTF8StringEncoding];
     string res (resultString);
     
@@ -267,7 +260,7 @@ bool iOSSMSSDK::enableWarn (bool isWarn)
 //SMSSDK_Demo UI
 bool iOSSMSSDK::showRegisterPage(SMSSDKCodeType type)
 {
-    [SMSSDKUI showVerificationCodeViewWithMetohd:SMSGetCodeMethodSMS result:^(enum SMSUIResponseState state, NSString *phoneNumber, NSString *zone, NSError *error) {
+    [SMSSDKUI showVerificationCodeViewWithMethod:SMSGetCodeMethodSMS result:^(enum SMSUIResponseState state, NSString *phoneNumber, NSString *zone, NSError *error) {
         
         if (!error)
         {
