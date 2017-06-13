@@ -27,6 +27,7 @@ Thumbs.db
 # Eclipse project files
 .classpath
 .project
+.settings/
 
 # Android Studio
 *.iml
@@ -39,3 +40,4 @@ build/
 
 #NDK
 obj/
+proj.android/ant.properties

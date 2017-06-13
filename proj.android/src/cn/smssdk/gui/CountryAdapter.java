@@ -2,7 +2,8 @@
 /*
  * 官网地站:http://www.mob.com
  * 技术支持QQ: 4006852216
- * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
+ * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，
+ * 也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
  * 
  * Copyright (c) 2014年 mob.com. All rights reserved.
  */
@@ -10,18 +11,13 @@
 /*
  * Offical Website:http://www.mob.com
  * Support QQ: 4006852216
- * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version. If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
+ * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version.
+ * If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
  * 
  * Copyright (c) 2013 mob.com. All rights reserved.
  */
 //#endif
 package cn.smssdk.gui;
-
-import static com.mob.tools.utils.R.getColorRes;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import android.util.TypedValue;
 import android.view.View;
@@ -29,10 +25,18 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.mob.tools.utils.ResHelper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
 import cn.smssdk.SMSSDK;
 import cn.smssdk.gui.GroupListView.GroupAdapter;
 import cn.smssdk.gui.layout.SizeHelper;
 import cn.smssdk.utils.SMSLog;
+
 
 //#if def{lang} == cn
 /** 自定义的国家列表，适配器，用于填充国家listview*/
@@ -143,7 +147,7 @@ public class CountryAdapter extends GroupAdapter {
 	public String getGroupTitle(int group) {
 		if(titles.size() != 0){
 			return titles.get(group).toString();
-		}else{
+		} else {
 			return null;
 		}
 	}
@@ -157,7 +161,7 @@ public class CountryAdapter extends GroupAdapter {
 				SMSLog.getInstance().w(e);
 			}
 			return countriesArray;
-		}else{
+		} else {
 			return null;
 		}
 	}
@@ -178,12 +182,12 @@ public class CountryAdapter extends GroupAdapter {
 			
 			TextView tv = new TextView(parent.getContext());
 			tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(16));
-			int resId = getColorRes(parent.getContext(), "smssdk_lv_title_color");
+			int resId = ResHelper.getColorRes(parent.getContext(), "smssdk_lv_title_color");
 			if (resId > 0) {
 				tv.setTextColor(parent.getContext().getResources().getColor(resId));
 			}
-			int dp_6 = SizeHelper.fromPxWidth(14);
-			tv.setPadding(0, dp_6, 0, dp_6);
+			int dp6 = SizeHelper.fromPxWidth(14);
+			tv.setPadding(0, dp6, 0, dp6);
 			tv.setLayoutParams(new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			ll.addView(tv);
@@ -223,13 +227,13 @@ public class CountryAdapter extends GroupAdapter {
 			SizeHelper.prepare(parent.getContext());
 			
 			TextView tv = new TextView(parent.getContext());
-			int resId = getColorRes(parent.getContext(), "smssdk_lv_tv_color");
+			int resId = ResHelper.getColorRes(parent.getContext(), "smssdk_lv_tv_color");
 			if (resId > 0) {
 				tv.setTextColor(parent.getContext().getResources().getColor(resId));
 			}
 			tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(24));
-			int dp_16 = SizeHelper.fromPxWidth(30);
-			tv.setPadding(0, dp_16, 0, dp_16);
+			int dp16 = SizeHelper.fromPxWidth(30);
+			tv.setPadding(0, dp16, 0, dp16);
 			ll.addView(tv, new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		}

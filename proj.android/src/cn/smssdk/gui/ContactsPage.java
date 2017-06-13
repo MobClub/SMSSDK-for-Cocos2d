@@ -2,7 +2,8 @@
 /*
  * 官网地站:http://www.mob.com
  * 技术支持QQ: 4006852216
- * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
+ * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，
+ * 也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
  * 
  * Copyright (c) 2014年 mob.com. All rights reserved.
  */
@@ -10,18 +11,13 @@
 /*
  * Offical Website:http://www.mob.com
  * Support QQ: 4006852216
- * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version. If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
+ * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version.
+ * If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
  * 
  * Copyright (c) 2013 mob.com. All rights reserved.
  */
 //#endif
 package cn.smssdk.gui;
-
-import static com.mob.tools.utils.R.getStringRes;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -34,13 +30,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mob.tools.FakeActivity;
+import com.mob.tools.utils.ResHelper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import cn.smssdk.gui.layout.ContactListPageLayout;
-import cn.smssdk.gui.layout.Res;
 import cn.smssdk.utils.SMSLog;
 
-import com.mob.tools.FakeActivity;
 
 //#if def{lang} == cn
 /** 联系人列表页面*/
@@ -97,12 +99,12 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 
 	@Override
 	public void onResume(){
-	  	super.onResume();
+		super.onResume();
 	}
-	    
+
 	@Override
 	public void onPause() {
-	   	super.onPause();
+		super.onPause();
 	}
 	
 	public void show(Context context) {
@@ -115,20 +117,19 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 	}
 	
 	private void initView(){
-		
-		listView = (ContactsListView) activity.findViewById(Res.id.clContact);
+		listView = (ContactsListView) activity.findViewById(ResHelper.getIdRes(activity, "clContact"));
 	
-		activity.findViewById(Res.id.ll_back).setOnClickListener(this);
-		activity.findViewById(Res.id.ivSearch).setOnClickListener(this);
-		activity.findViewById(Res.id.iv_clear).setOnClickListener(this);
+		activity.findViewById(ResHelper.getIdRes(activity, "ll_back")).setOnClickListener(this);
+		activity.findViewById(ResHelper.getIdRes(activity, "ivSearch")).setOnClickListener(this);
+		activity.findViewById(ResHelper.getIdRes(activity, "iv_clear")).setOnClickListener(this);
 
-		TextView tv = (TextView) activity.findViewById(Res.id.tv_title);
-		int resId = getStringRes(activity, "smssdk_search_contact");
+		TextView tv = (TextView) activity.findViewById(ResHelper.getIdRes(activity, "tv_title"));
+		int resId = ResHelper.getStringRes(activity, "smssdk_search_contact");
 		if (resId > 0) {
-				tv.setText(resId);
+			tv.setText(resId);
 		}
 
-		etSearch = (EditText) activity.findViewById(Res.id.et_put_identify);
+		etSearch = (EditText) activity.findViewById(ResHelper.getIdRes(activity, "et_put_identify"));
 		etSearch.addTextChangedListener(this);
 	}
 	
@@ -170,7 +171,7 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 							//#elif def{lang} == en
 							// network error
 							//#endif
-							int resId = getStringRes(activity, "smssdk_network_error");
+							int resId = ResHelper.getStringRes(activity, "smssdk_network_error");
 							if (resId > 0) {
 								Toast.makeText(activity, resId, Toast.LENGTH_SHORT).show();
 							}
@@ -186,14 +187,14 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 		//#endif
 		SMSSDK.registerEventHandler(handler);
 		
-		if(friendsInApp != null && friendsInApp.size() > 0){
+		if(friendsInApp != null && friendsInApp.size() > 0) {
 			//#if def{lang} == cn
 			// 获取本地联系人
 			//#elif def{lang} == en
 			// Getting a list of contacts from phone
 			//#endif
 			SMSSDK.getContacts(false);
-		}else{
+		} else {
 			//#if def{lang} == cn
 			// 获取应用内的好友列表
 			//#elif def{lang} == en
@@ -205,12 +206,12 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 	
 	public boolean onKeyEvent(int keyCode, KeyEvent event) {
 		try {
-			int resId = Res.id.llSearch;
+			int resId = ResHelper.getIdRes(activity, "llSearch");
 			if (keyCode == KeyEvent.KEYCODE_BACK
 					&& event.getAction() == KeyEvent.ACTION_DOWN
 					&& activity.findViewById(resId).getVisibility() == View.VISIBLE) {
 				activity.findViewById(resId).setVisibility(View.GONE);
-				resId = Res.id.llTitle;
+				resId = ResHelper.getIdRes(activity, "llTitle");
 				activity.findViewById(resId).setVisibility(View.VISIBLE);
 				etSearch.setText("");
 				return true;
@@ -250,20 +251,20 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
-		int id_ll_back = Res.id.ll_back;
-		int id_ivSearch = Res.id.ivSearch;
-		int id_iv_clear = Res.id.iv_clear;
+		int idLlBack = ResHelper.getIdRes(activity, "ll_back");
+		int idIvSearch = ResHelper.getIdRes(activity, "ivSearch");
+		int idIvClear = ResHelper.getIdRes(activity, "iv_clear");
 		
-		if (id == id_ll_back) {
+		if (id == idLlBack) {
 			finish();
-		} else if (id == id_ivSearch) {
-			int id_llTitle = Res.id.llTitle;
-			activity.findViewById(id_llTitle).setVisibility(View.GONE);
-			int id_llSearch = Res.id.llSearch;
-			activity.findViewById(id_llSearch).setVisibility(View.VISIBLE);
+		} else if (id == idIvSearch) {
+			int idLlTitle = ResHelper.getIdRes(activity, "llTitle");
+			activity.findViewById(idLlTitle).setVisibility(View.GONE);
+			int idLlSearch = ResHelper.getIdRes(activity, "llSearch");
+			activity.findViewById(idLlSearch).setVisibility(View.VISIBLE);
 			etSearch.requestFocus();
 			etSearch.getText().clear();
-		} else if (id == id_iv_clear) {
+		} else if (id == idIvClear) {
 			etSearch.getText().clear();
 		}
 	}
