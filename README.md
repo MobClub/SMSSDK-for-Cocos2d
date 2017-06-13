@@ -3,8 +3,8 @@
 ### This is a sample of SMSSDK for Cocos2d-x.
 **supported original SMSSDK version:**
 
-- Android - V2.0.0~
-- iOS - V2.0.0~
+- Android - V3.0.0~
+- iOS - V3.0.0~
 - Cocos2d-x v3.0.0~
 
 ----------------------------------------------------
