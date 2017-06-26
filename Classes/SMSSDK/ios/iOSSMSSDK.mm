@@ -18,6 +18,7 @@ using namespace std;
 
 
 static SMSSDKHandler* _handler = nullptr;
+static UIWindow *_window;
 
 #pragma mark - SMSSDK 接口
 #pragma mark 初始化
@@ -260,74 +261,40 @@ bool iOSSMSSDK::enableWarn (bool isWarn)
 //SMSSDK_Demo UI
 bool iOSSMSSDK::showRegisterPage(SMSSDKCodeType type)
 {
-    [SMSSDKUI showVerificationCodeViewWithMethod:SMSGetCodeMethodSMS result:^(enum SMSUIResponseState state, NSString *phoneNumber, NSString *zone, NSError *error) {
-        
-        if (!error)
-        {
-            string res ("");
-            NSString *resString =  nil;
-            if (state == SMSUIResponseStateSuccess)
-            {
-                resString = @"commitCodeSuccess";
-            }
-            else if (state == SMSUIResponseStateCancel)
-            {
-                resString = @"showRegisterViewSuccess";
-            }
-            else if (state == SMSUIResponseStateFail)
-            {
-                resString = @"showRegisterViewFailer";
-            }
-            
-            res = [resString cStringUsingEncoding:NSUTF8StringEncoding];
-            
-            if (_handler != nullptr)
-            {
-                _handler->onComplete(Action_GetSupportedCountries, res);
-            }
-        }
-        else
-        {
-            NSMutableDictionary * resultErrorMsg =[NSMutableDictionary dictionaryWithObjectsAndKeys:@(error.code),@"code" ,error.domain,@"domain",error.userInfo,@"userInfo",  nil];
-            //转化回到JSONString的状态码
-            NSString *resultMsg= [MOBFJson jsonStringFromObject:resultErrorMsg];
-            
-            string res([resultMsg UTF8String]);
-            
-            if (_handler != nullptr)
-            {
-                _handler->onError(Action_GetSupportedCountries, res);
-            }
-        }
-        
-    }];
+    SMSSDKUIGetCodeViewController *vc = [[SMSSDKUIGetCodeViewController alloc] initWithMethod:SMSGetCodeMethodSMS];
     
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    UIViewController *rootVC = [[UIApplication sharedApplication].delegate viewController];
+    
+    [rootVC presentViewController:nav animated:YES completion:nil];
+
     return true;
 }
 
 
 bool iOSSMSSDK::showContactsPage()
 {
-    [SMSSDKUI showGetContactsFriendsViewWithNewFriends:[NSMutableArray array] newFriendClock:^(enum SMSResponseState state, int latelyFriendsCount) {
+    [SMSSDK getAllContactFriends:^(NSError *error, NSArray *friendsArray) {
         
-    } result:^{
-        
-        NSString *resString = @"showContractFriendsViewSuccess";
-        
-        string resultString = [resString cStringUsingEncoding: NSUTF8StringEncoding];
-        string res(resultString);
-        
-        if (_handler != nullptr)
+        if (error)
         {
-            _handler->onComplete(Action_GetFriends, res);
+            NSLog(@"%s,%@",__func__,error);
         }
-        
-        if (_handler != nullptr)
+        else
         {
-            _handler->onError(Action_GetFriends, res);
+            NSLog(@"%@",friendsArray);
+            
+            SMSSDKUIContactFriendsViewController *vc = [[SMSSDKUIContactFriendsViewController alloc] initWithContactFriends:friendsArray];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+            
+            UIViewController *rootVC = [[UIApplication sharedApplication].delegate viewController];
+            
+            [rootVC presentViewController:nav animated:YES completion:nil];
+
         }
-        
     }];
+
     return true;
 }
 

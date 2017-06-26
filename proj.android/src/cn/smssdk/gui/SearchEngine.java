@@ -1,9 +1,6 @@
 package cn.smssdk.gui;
 
-import android.content.Context;
-
-import com.mob.tools.utils.Hashon;
-import com.mob.tools.utils.ResHelper;
+import static com.mob.tools.utils.R.getRawRes;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -14,7 +11,9 @@ import java.util.HashSet;
 import java.util.zip.GZIPInputStream;
 
 import cn.smssdk.utils.SMSLog;
+import com.mob.tools.utils.Hashon;
 
+import android.content.Context;
 
 public class SearchEngine {
 	private static final String DB_FILE = "smssdk_pydb";
@@ -28,7 +27,7 @@ public class SearchEngine {
 				synchronized (DB_FILE) {
 					if (hanzi2Pinyin == null || hanzi2Pinyin.size() <= 0) {
 						try {
-							int resId = ResHelper.getRawRes(context, DB_FILE);
+							int resId = getRawRes(context, DB_FILE);
 							if (resId <= 0) {
 								hanzi2Pinyin = new HashMap<String, Object>();
 							} else {

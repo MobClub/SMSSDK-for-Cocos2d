@@ -29,38 +29,33 @@ extern "C" {
  */
 JNIEXPORT void JNICALL Java_cn_smssdk_cocos2dx_SMSSDKBridge_onJavaCallback
   (JNIEnv * env, jclass thiz, jstring resp);
-namespace smssdk {
-	class SMSSDK_android
-	{
-	public:
-		static bool getMethod(JniMethodInfo &mi, const char *methodName, const char *paramCode);
 
-		static void releaseMethod(JniMethodInfo &mi);
+bool getMethod(JniMethodInfo &mi, const char *methodName, const char *paramCode);
 
-		//jni methods
-		static bool initSDKJNI(string appKey, string appSecret, bool isWarn);
+void releaseMethod(JniMethodInfo &mi);
 
-		static bool getCodeJNI(SMSSDKCodeType codetype,string zone,string phone);
+//jni methods
+bool initSDKJNI(string appKey, string appSecret, bool isWarn);
 
-		static bool commitCodeJNI(string zone, string phone, string code);
+bool getCodeJNI(SMSSDKCodeType codetype,string zone,string phone);
 
-		static bool getSupportedCountriesJNI();
+bool commitCodeJNI(string zone, string phone, string code);
 
-		static bool getFriendsJNI();
+bool getSupportedCountriesJNI();
 
-		static bool submitUserInfoJNI(UserInfo& userinfo);
+bool getFriendsJNI();
 
-		static string getVersionJNI();
+bool submitUserInfoJNI(UserInfo& userinfo);
 
-		static bool enableWarnJNI(bool isWarn);
+string getVersionJNI();
 
-		static bool showRegisterPageJNI();
+bool enableWarnJNI(bool isWarn);
 
-		static bool showContactsPageJNI();
+bool showRegisterPageJNI();
 
-		static void setHandlerAndroid(SMSSDKHandler* handler);
-	};
-}
+bool showContactsPageJNI();
+
+void setHandlerAndroid(SMSSDKHandler* handler);
 
 #ifdef __cplusplus
 }

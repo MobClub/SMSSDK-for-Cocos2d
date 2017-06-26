@@ -15,8 +15,9 @@
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		44D661AF1ED80FC600DDED24 /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D661AC1ED80FC600DDED24 /* MOBFoundation.framework */; };
 		44D661B01ED80FC600DDED24 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D661AE1ED80FC600DDED24 /* SMS_SDK.framework */; };
-		44D661B91ED8123C00DDED24 /* libSMSSDUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D661B61ED8120F00DDED24 /* libSMSSDUI.a */; };
 		44D661BC1ED814BF00DDED24 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D661BB1ED814BF00DDED24 /* libiconv.tbd */; };
+		44EF93A31F00A37C0026009D /* libSMSSDKUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EF939F1F00A33F0026009D /* libSMSSDKUI.a */; };
+		44EF93AA1F00B2F40026009D /* SMSSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44EF93A91F00B2F40026009D /* SMSSDKUI.bundle */; };
 		46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
 		46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
 		46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7719C43A67006E1F66 /* CloseSelected.png */; };
@@ -60,7 +61,6 @@
 		7B45F0EC1D6EFD02008B5FE2 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */; };
 		AACB06C81D6BF31F006AEF94 /* iOSSMSSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = AACB06C71D6BF31F006AEF94 /* iOSSMSSDK.mm */; };
 		AACB06CC1D6BF348006AEF94 /* SMSSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AACB06C91D6BF348006AEF94 /* SMSSDK.cpp */; };
-		AACB06D91D6C3303006AEF94 /* SMSSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AACB06D81D6C3303006AEF94 /* SMSSDKUI.bundle */; };
 		AACB06DC1D6C339A006AEF94 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACB06DB1D6C339A006AEF94 /* MessageUI.framework */; };
 		AACB06DE1D6C33C7006AEF94 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACB06DD1D6C33C7006AEF94 /* JavaScriptCore.framework */; };
 		AACB06E01D6C33DD006AEF94 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AACB06DF1D6C33DD006AEF94 /* libicucore.tbd */; };
@@ -105,26 +105,19 @@
 			remoteGlobalIDString = A07A4C241783777C0073F6A7;
 			remoteInfo = "cocos2dx iOS";
 		};
-		44D661A11ED80EC800DDED24 /* PBXContainerItemProxy */ = {
+		44EF939E1F00A33F0026009D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			containerPortal = 44EF939A1F00A33F0026009D /* SMSSDKUI.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 507B40FD1C31BDD30067B53E;
-			remoteInfo = "libcocos2d tvOS";
+			remoteGlobalIDString = 448BEA291ED6D4170081B15A;
+			remoteInfo = SMSSDKUI;
 		};
-		44D661B51ED8120F00DDED24 /* PBXContainerItemProxy */ = {
+		44EF93A11F00A36A0026009D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 44D661B11ED8120F00DDED24 /* SMSSDUI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7B2A62491C4F66BE00A160C8;
-			remoteInfo = SMSSDUI;
-		};
-		44D661B71ED8123300DDED24 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 44D661B11ED8120F00DDED24 /* SMSSDUI.xcodeproj */;
+			containerPortal = 44EF939A1F00A33F0026009D /* SMSSDKUI.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 7B2A62481C4F66BE00A160C8;
-			remoteInfo = SMSSDUI;
+			remoteGlobalIDString = 448BEA281ED6D4170081B15A;
+			remoteInfo = SMSSDKUI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -137,8 +130,9 @@
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		44D661AC1ED80FC600DDED24 /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
 		44D661AE1ED80FC600DDED24 /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
-		44D661B11ED8120F00DDED24 /* SMSSDUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SMSSDUI.xcodeproj; path = SMSSDKUI/SMSSDUI.xcodeproj; sourceTree = "<group>"; };
 		44D661BB1ED814BF00DDED24 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
+		44EF939A1F00A33F0026009D /* SMSSDKUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SMSSDKUI.xcodeproj; path = SMSSDKUI/SMSSDKUI.xcodeproj; sourceTree = "<group>"; };
+		44EF93A91F00B2F40026009D /* SMSSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SMSSDKUI.bundle; path = SMSSDKUI/SMSSDKUI.bundle; sourceTree = "<group>"; };
 		46880B7619C43A67006E1F66 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		46880B7719C43A67006E1F66 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
 		46880B7A19C43A67006E1F66 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
@@ -182,7 +176,6 @@
 		AACB06C91D6BF348006AEF94 /* SMSSDK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SMSSDK.cpp; path = SMSSDK/SMSSDK.cpp; sourceTree = "<group>"; };
 		AACB06CA1D6BF348006AEF94 /* SMSSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMSSDK.h; path = SMSSDK/SMSSDK.h; sourceTree = "<group>"; };
 		AACB06CB1D6BF348006AEF94 /* SMSSDKType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMSSDKType.h; path = SMSSDK/SMSSDKType.h; sourceTree = "<group>"; };
-		AACB06D81D6C3303006AEF94 /* SMSSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SMSSDKUI.bundle; sourceTree = "<group>"; };
 		AACB06DB1D6C339A006AEF94 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		AACB06DD1D6C33C7006AEF94 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		AACB06DF1D6C33DD006AEF94 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/usr/lib/libicucore.tbd; sourceTree = DEVELOPER_DIR; };
@@ -203,8 +196,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44EF93A31F00A37C0026009D /* libSMSSDKUI.a in Frameworks */,
 				44D661BC1ED814BF00DDED24 /* libiconv.tbd in Frameworks */,
-				44D661B91ED8123C00DDED24 /* libSMSSDUI.a in Frameworks */,
 				44D661B01ED80FC600DDED24 /* SMS_SDK.framework in Frameworks */,
 				AACB06EC1D6C3599006AEF94 /* CoreMotion.framework in Frameworks */,
 				AACB06EA1D6C3570006AEF94 /* Security.framework in Frameworks */,
@@ -274,7 +267,6 @@
 			children = (
 				1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */,
 				1AC6FB07180E9839004C840B /* libcocos2d iOS.a */,
-				44D661A21ED80EC800DDED24 /* libcocos2d tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -282,9 +274,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				44D661B11ED8120F00DDED24 /* SMSSDUI.xcodeproj */,
+				44EF93A91F00B2F40026009D /* SMSSDKUI.bundle */,
+				44EF939A1F00A33F0026009D /* SMSSDKUI.xcodeproj */,
 				44D661AA1ED80FC600DDED24 /* SDK */,
-				AACB06D81D6C3303006AEF94 /* SMSSDKUI.bundle */,
 				46880B8319C43A87006E1F66 /* Classes */,
 				46880B7519C43A67006E1F66 /* Resources */,
 				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
@@ -348,10 +340,10 @@
 			path = SMSSDK;
 			sourceTree = "<group>";
 		};
-		44D661B21ED8120F00DDED24 /* Products */ = {
+		44EF939B1F00A33F0026009D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				44D661B61ED8120F00DDED24 /* libSMSSDUI.a */,
+				44EF939F1F00A33F0026009D /* libSMSSDKUI.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -436,7 +428,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				44D661B81ED8123300DDED24 /* PBXTargetDependency */,
+				44EF93A21F00A36A0026009D /* PBXTargetDependency */,
 				1AC6FB25180E99E1004C840B /* PBXTargetDependency */,
 			);
 			name = "MyCppGame iOS";
@@ -493,8 +485,8 @@
 					ProjectRef = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
 				},
 				{
-					ProductGroup = 44D661B21ED8120F00DDED24 /* Products */;
-					ProjectRef = 44D661B11ED8120F00DDED24 /* SMSSDUI.xcodeproj */;
+					ProductGroup = 44EF939B1F00A33F0026009D /* Products */;
+					ProjectRef = 44EF939A1F00A33F0026009D /* SMSSDKUI.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -520,18 +512,11 @@
 			remoteRef = 1AC6FB06180E9839004C840B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		44D661A21ED80EC800DDED24 /* libcocos2d tvOS.a */ = {
+		44EF939F1F00A33F0026009D /* libSMSSDKUI.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libcocos2d tvOS.a";
-			remoteRef = 44D661A11ED80EC800DDED24 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		44D661B61ED8120F00DDED24 /* libSMSSDUI.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSMSSDUI.a;
-			remoteRef = 44D661B51ED8120F00DDED24 /* PBXContainerItemProxy */;
+			path = libSMSSDKUI.a;
+			remoteRef = 44EF939E1F00A33F0026009D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -551,7 +536,7 @@
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
-				AACB06D91D6C3303006AEF94 /* SMSSDKUI.bundle in Resources */,
+				44EF93AA1F00B2F40026009D /* SMSSDKUI.bundle in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
@@ -619,10 +604,10 @@
 			name = "cocos2dx iOS";
 			targetProxy = 1AC6FB24180E99E1004C840B /* PBXContainerItemProxy */;
 		};
-		44D661B81ED8123300DDED24 /* PBXTargetDependency */ = {
+		44EF93A21F00A36A0026009D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SMSSDUI;
-			targetProxy = 44D661B71ED8123300DDED24 /* PBXContainerItemProxy */;
+			name = SMSSDKUI;
+			targetProxy = 44EF93A11F00A36A0026009D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

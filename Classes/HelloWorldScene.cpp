@@ -43,10 +43,10 @@ bool HelloWorld::init()
     getVoiceCodeMenu->setPosition(Vec2::ZERO);
     this->addChild(getVoiceCodeMenu);
     
-    //提交验证码
+//    //提交验证码
 //    MenuItemLabel *commitCodeItem = MenuItemLabel::create(LabelTTF::create("Commit Code", "Arial", 10),
 //                                                          CC_CALLBACK_1(HelloWorld::commitCodeHandler, this));
-//    commitCodeItem->setPosition(winSize.width/2 , 225);
+//    commitCodeItem->setPosition(winSize.width/2 , 300);
 //    auto commitCodeMenu = Menu::create(commitCodeItem,NULL);
 //    commitCodeMenu->setPosition(Vec2::ZERO);
 //    this->addChild(commitCodeMenu);
@@ -162,7 +162,7 @@ void HelloWorld::editBoxTextChanged(cocos2d::extension::EditBox *editBox, const 
 
 void HelloWorld::getTextCodeHandler(cocos2d::Ref* pSender)
 {    
-    string phone("186******");
+    string phone("18021058213");
     string zone("86");
     SMSSDK::getCode(TextCode,phone,zone);
 }
@@ -170,14 +170,14 @@ void HelloWorld::getTextCodeHandler(cocos2d::Ref* pSender)
 //
 void HelloWorld::getVoiceCodeHandler(cocos2d::Ref* pSender)
 {
-    string phone("186******");
+    string phone("18021058213");
     string zone("86");
     SMSSDK::getCode(VoiceCode,phone,zone);
 }
 
 void HelloWorld::commitCodeHandler(cocos2d::Ref *pSender)
 {
-    string phone("186******");
+    string phone("18021058213");
     string zone("86");
     SMSSDK::commitCode(phone,zone,"6358");
 }

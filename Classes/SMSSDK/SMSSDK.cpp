@@ -24,7 +24,7 @@ bool SMSSDK::init(string appKey, string appSecret, bool isWarn)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //Andorid
-    return SMSSDK_android::initSDKJNI(appKey, appSecret, isWarn);
+    return initSDKJNI(appKey, appSecret, isWarn);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
@@ -40,7 +40,7 @@ bool SMSSDK::getCode(SMSSDKCodeType codeType, string phone, string zone)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //Andorid
-    return SMSSDK_android::getCodeJNI(codeType, zone, phone);
+    return getCodeJNI(codeType, zone, phone);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
@@ -55,7 +55,7 @@ bool SMSSDK::commitCode(string phone, string zone, string code)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //Andorid
-    return SMSSDK_android::commitCodeJNI(zone, phone, code);
+    return commitCodeJNI(zone, phone, code);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
@@ -71,7 +71,7 @@ bool SMSSDK::getSupportedCountries()
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //Andorid
-    return SMSSDK_android::getSupportedCountriesJNI();
+    return getSupportedCountriesJNI();
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
@@ -87,7 +87,7 @@ bool SMSSDK::getFriends()
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //Andorid
-    return SMSSDK_android::getFriendsJNI();
+    return getFriendsJNI();
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS    
     //iOS
@@ -103,7 +103,7 @@ bool SMSSDK::submitUserInfo(UserInfo &userinfo)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //Andorid
-    return SMSSDK_android::submitUserInfoJNI(userinfo);
+    return submitUserInfoJNI(userinfo);
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
     //iOS
@@ -118,7 +118,7 @@ string SMSSDK::getVersion()
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
     //Andorid
-    return SMSSDK_android::getVersionJNI();
+    return getVersionJNI();
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
@@ -134,7 +134,7 @@ bool SMSSDK::enableWarn(bool isWarn)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //Andorid
-    return SMSSDK_android::enableWarnJNI(isWarn);
+    return enableWarnJNI(isWarn);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
@@ -150,7 +150,7 @@ bool SMSSDK::showRegisterPage(SMSSDKCodeType type)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
     //Andorid
-    return SMSSDK_android::showRegisterPageJNI();
+    return showRegisterPageJNI();
 
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
@@ -166,7 +166,7 @@ bool SMSSDK::showContactsPage()
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
     //Andorid
-    return SMSSDK_android::showContactsPageJNI();
+    return showContactsPageJNI();
 
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
@@ -182,7 +182,7 @@ void SMSSDK::setHandler(SMSSDKHandler* handler)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
     //Android
-	SMSSDK_android::setHandlerAndroid(handler);
+    setHandlerAndroid(handler);
 
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
