@@ -75,6 +75,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     
     // run
     director->runWithScene(scene);
+    
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    
     return true;
 }
 

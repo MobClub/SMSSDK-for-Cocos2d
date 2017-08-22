@@ -55,7 +55,15 @@ public:
 
     CREATE_FUNC(HelloWorld);
 private:
-    LabelTTF* label;
+    LabelTTF *label;
+    
+    string phone;
+    string zone;
+    string code;
+    
+    EditBox *phoneBox;
+    EditBox *zoneBox;
+    EditBox *codeBox;
 };
 
 #endif 

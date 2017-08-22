@@ -25,8 +25,7 @@ static UIWindow *_window;
 
 bool iOSSMSSDK::init(string appKey, string appSecret, bool isWarn)
 {
-    
-    NSLog(@"3.0.0版本后appkey和appSecret配置在info.Plist里");
+    NSLog(@"3.0.0版本后appkey和appSecret自动配置到info.plist里,init方法不需要实现");
     return true;
 }
 
