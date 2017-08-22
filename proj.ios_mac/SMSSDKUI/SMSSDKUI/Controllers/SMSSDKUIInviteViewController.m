@@ -106,7 +106,10 @@
     }
     else
     {
-        [self sendMessageTo:_contact.phones];
+        if (_contact.phones)
+        {
+            [self sendMessageTo:_contact.phones];
+        }
     }
 }
 
