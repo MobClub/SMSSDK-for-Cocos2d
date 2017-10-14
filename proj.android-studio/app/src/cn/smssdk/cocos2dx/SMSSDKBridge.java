@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.mob.MobSDK;
+
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.plugin.PluginWrapper;
 
@@ -15,6 +17,7 @@ import cn.smssdk.gui.RegisterPage;
 import cn.smssdk.utils.SPHelper;
 
 public class SMSSDKBridge {
+	private static final String TAG = SMSSDKBridge.class.getSimpleName();
     private static boolean DEBUG = true;
 
     private static Context context;
@@ -27,8 +30,11 @@ public class SMSSDKBridge {
         }
 		if(Looper.myLooper() == null)
         	Looper.prepare();
-        SMSSDK.initSDK(context,appKey,appSecret,isWarn);
-        EventHandler handler = new EventHandler(){
+		MobSDK.init(context, appKey, appSecret);
+		if (isWarn) {
+			SMSSDK.setAskPermisionOnReadContact(isWarn);
+		}
+		EventHandler handler = new EventHandler(){
             public void afterEvent(int event, int result, Object data) {
                 final String resp = JavaTools.javaActionResToCS(event, result, data);
                 Log.e("COCOS2D",resp);
@@ -74,7 +80,7 @@ public class SMSSDKBridge {
     }
 
     public static void enableWarn(boolean isWarn) {
-        SPHelper.getInstance(context).setWarnWhenReadContact(isWarn);
+        SPHelper.getInstance().setWarnWhenReadContact(isWarn);
     }
 
     public static void showRegisterPage() {

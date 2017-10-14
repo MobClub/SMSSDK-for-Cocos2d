@@ -45,16 +45,16 @@ JNIEXPORT void JNICALL Java_cn_smssdk_cocos2dx_SMSSDKBridge_onJavaCallback
 	dic->release();
 }
 
-bool getMethod(JniMethodInfo &mi, const char *methodName, const char *paramCode) {
+bool SMSSDK_android::getMethod(JniMethodInfo &mi, const char *methodName, const char *paramCode) {
 	return JniHelper::getStaticMethodInfo(mi, "cn/smssdk/cocos2dx/SMSSDKBridge", methodName, paramCode);
 }
 
-void releaseMethod(JniMethodInfo &mi) {
+void SMSSDK_android::releaseMethod(JniMethodInfo &mi) {
 	if(mi.classID != NULL)
 		mi.env->DeleteLocalRef(mi.classID);
 }
 
-bool initSDKJNI(string appKey, string appSecret, bool isWarn) {
+bool SMSSDK_android::initSDKJNI(string appKey, string appSecret, bool isWarn) {
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "init", "(Ljava/lang/String;Ljava/lang/String;Z)V");
 	if (!isHave) {
@@ -70,7 +70,7 @@ bool initSDKJNI(string appKey, string appSecret, bool isWarn) {
 	return true;
 }
 
-bool getCodeJNI(SMSSDKCodeType type, string zone, string phone) {
+bool SMSSDK_android::getCodeJNI(SMSSDKCodeType type, string zone, string phone) {
 	JniMethodInfo mi;
 	bool isHave;
 	if(type == TextCode) {
@@ -91,7 +91,7 @@ bool getCodeJNI(SMSSDKCodeType type, string zone, string phone) {
 	return true;
 }
 
-bool commitCodeJNI(string zone, string phone, string code) {
+bool SMSSDK_android::commitCodeJNI(string zone, string phone, string code) {
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "commitCode", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 	if (!isHave) {
@@ -107,7 +107,7 @@ bool commitCodeJNI(string zone, string phone, string code) {
 	return true;
 }
 
-bool getSupportedCountriesJNI() {
+bool SMSSDK_android::getSupportedCountriesJNI() {
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "getSupportedCountries", "()V");
 	if (!isHave) {
@@ -119,7 +119,7 @@ bool getSupportedCountriesJNI() {
 	return true;
 }
 
-bool getFriendsJNI() {
+bool SMSSDK_android::getFriendsJNI() {
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "getFriendsInApp", "()V");
 	if (!isHave) {
@@ -131,7 +131,7 @@ bool getFriendsJNI() {
 	return true;
 }
 
-bool submitUserInfoJNI(UserInfo &userinfo){
+bool SMSSDK_android::submitUserInfoJNI(UserInfo &userinfo){
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "submitUserInfo", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 	if (!isHave) {
@@ -148,7 +148,7 @@ bool submitUserInfoJNI(UserInfo &userinfo){
 	return true;
 }
 
-string getVersionJNI(){
+string SMSSDK_android::getVersionJNI(){
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "getVersion", "()Ljava/lang/String;");
 	if(!isHave){
@@ -161,7 +161,7 @@ string getVersionJNI(){
 }
 
 
-bool enableWarnJNI(bool isWarn){
+bool SMSSDK_android::enableWarnJNI(bool isWarn){
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "enableWarn", "(Z)V");
 	if (!isHave) {
@@ -174,7 +174,7 @@ bool enableWarnJNI(bool isWarn){
 	return true;
 }
 
-bool showRegisterPageJNI()
+bool SMSSDK_android::showRegisterPageJNI()
 {
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "showRegisterPage", "()V");
@@ -187,7 +187,7 @@ bool showRegisterPageJNI()
 	return true;
 }
 
-bool showContactsPageJNI()
+bool SMSSDK_android::showContactsPageJNI()
 {
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "showContactsPage", "()V");
@@ -201,7 +201,7 @@ bool showContactsPageJNI()
 	return true;
 }
 
-void setHandlerAndroid(SMSSDKHandler* handler)
+void SMSSDK_android::setHandlerAndroid(SMSSDKHandler* handler)
 {
 	_handler = handler;
 }
