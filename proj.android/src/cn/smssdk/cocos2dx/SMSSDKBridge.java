@@ -1,7 +1,9 @@
 package cn.smssdk.cocos2dx;
 
 import android.content.Context;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
@@ -20,7 +22,7 @@ public class SMSSDKBridge {
 
     private static Context context;
 
-    public static void init(String appKey, String appSecret, boolean isWarn) {
+    public static void init(final String appKey, final String appSecret, final boolean isWarn) {
         if (TextUtils.isEmpty(appKey) || TextUtils.isEmpty(appSecret))
             return;
         if (context == null) {
@@ -28,27 +30,36 @@ public class SMSSDKBridge {
         }
 		if(Looper.myLooper() == null)
         	Looper.prepare();
-        MobSDK.init(context, appKey, appSecret);
-        if (isWarn) {
-        	SMSSDK.setAskPermisionOnReadContact(isWarn);
-        }
-        EventHandler handler = new EventHandler(){
-            public void afterEvent(int event, int result, Object data) {
-                final String resp = JavaTools.javaActionResToCS(event, result, data);
-                PluginWrapper.runOnGLThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        onJavaCallback(resp);
-                    }
-                });
+        
+        // SMSSDK init must be processed on UI thread, otherwise, GL thread & UI thread will wait for each other(only in Android7.0).
+		Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+			@Override
+			public boolean handleMessage(Message msg) {
+				MobSDK.init(context, appKey, appSecret);
+		        if (isWarn) {
+		        	SMSSDK.setAskPermisionOnReadContact(isWarn);
+		        }
+		        EventHandler handler = new EventHandler(){
+		            public void afterEvent(int event, int result, Object data) {
+		                final String resp = JavaTools.javaActionResToCS(event, result, data);
+		                PluginWrapper.runOnGLThread(new Runnable() {
+		                    @Override
+		                    public void run() {
+		                        onJavaCallback(resp);
+		                    }
+		                });
 
-            }
-        };
-        SMSSDK.registerEventHandler(handler);
+		            }
+		        };
+		        SMSSDK.registerEventHandler(handler);
+				return false;
+			}
+		});
+		handler.sendEmptyMessage(0);
     }
 
-    public static void getTextCode(String zone, String phone) {
-        SMSSDK.getVerificationCode(zone,phone);
+    public static void getTextCode(String zone, String phone, String tempCode) {
+        SMSSDK.getVerificationCode(zone,phone,tempCode,null);
     }
 
     public static void getVoiceCode(String zone, String phone) {

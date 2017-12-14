@@ -40,7 +40,7 @@ namespace smssdk {
 		//jni methods
 		static bool initSDKJNI(string appKey, string appSecret, bool isWarn);
 
-		static bool getCodeJNI(SMSSDKCodeType codetype,string zone,string phone);
+		static bool getCodeJNI(SMSSDKCodeType codetype,string zone,string phone, string tempCode);
 
 		static bool commitCodeJNI(string zone, string phone, string code);
 

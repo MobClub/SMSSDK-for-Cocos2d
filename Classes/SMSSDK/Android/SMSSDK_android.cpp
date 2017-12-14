@@ -70,11 +70,11 @@ bool SMSSDK_android::initSDKJNI(string appKey, string appSecret, bool isWarn) {
 	return true;
 }
 
-bool SMSSDK_android::getCodeJNI(SMSSDKCodeType type, string zone, string phone) {
+bool SMSSDK_android::getCodeJNI(SMSSDKCodeType type, string zone, string phone, string tempCode) {
 	JniMethodInfo mi;
 	bool isHave;
 	if(type == TextCode) {
-		isHave = getMethod(mi, "getTextCode", "(Ljava/lang/String;Ljava/lang/String;)V");
+		isHave = getMethod(mi, "getTextCode", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 	} else {
 		isHave = getMethod(mi, "getVoiceCode", "(Ljava/lang/String;Ljava/lang/String;)V");
 	}
@@ -85,8 +85,9 @@ bool SMSSDK_android::getCodeJNI(SMSSDKCodeType type, string zone, string phone) 
 
 	jstring jZone = mi.env->NewStringUTF(zone.c_str());
 	jstring jPhone = mi.env->NewStringUTF(phone.c_str());
+	jstring jTempCode = mi.env->NewStringUTF(tempCode.c_str());
 
-	mi.env->CallStaticVoidMethod(mi.classID, mi.methodID, jZone, jPhone);
+	mi.env->CallStaticVoidMethod(mi.classID, mi.methodID, jZone, jPhone, jTempCode);
 	releaseMethod(mi);
 	return true;
 }
