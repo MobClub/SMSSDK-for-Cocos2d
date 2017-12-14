@@ -163,7 +163,10 @@
     UIAlertAction *ok = [UIAlertAction actionWithTitle:SMSLocalized(@"sure") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [SMSSDKUIProcessHUD showProcessHUDWithInfo:SMSLocalized(@"sendingRequest")];
-        [SMSSDK getVerificationCodeByMethod:_methodType phoneNumber:phone zone:zone result:^(NSError *error) {
+        
+        NSString *template = @"1319972";
+        
+        [SMSSDK getVerificationCodeByMethod:_methodType phoneNumber:phone zone:zone template:template result:^(NSError *error) {
             if (error)
             {
                 [SMSSDKUIProcessHUD dismiss];

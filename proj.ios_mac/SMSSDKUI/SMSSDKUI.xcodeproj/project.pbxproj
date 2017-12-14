@@ -311,7 +311,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = RS44JP5XUM;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../SDK/**";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../SDK\"/**";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -322,7 +322,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = RS44JP5XUM;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../SDK/**";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../SDK\"/**";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

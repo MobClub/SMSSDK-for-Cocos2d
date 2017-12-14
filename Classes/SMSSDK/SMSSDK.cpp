@@ -45,7 +45,7 @@ bool SMSSDK::getCode(SMSSDKCodeType codeType, string phone, string zone, string 
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
     //iOS
-    return iOSSMSSDK::getCode(codeType, phone,zone);
+    return iOSSMSSDK::getCode(codeType, phone,zone,tempCode);
     
 #endif
 }

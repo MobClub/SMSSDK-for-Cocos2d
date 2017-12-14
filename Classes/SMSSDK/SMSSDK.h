@@ -1,4 +1,4 @@
-﻿//
+//
 //  C2DXSMSSDK.h
 //  C2DXSMSSDKSample
 //

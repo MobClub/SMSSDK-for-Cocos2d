@@ -29,15 +29,18 @@ bool iOSSMSSDK::init(string appKey, string appSecret, bool isWarn)
     return true;
 }
 
-bool iOSSMSSDK::getCode(SMSSDKCodeType codeType, string phoneNumber, string zone)
+bool iOSSMSSDK::getCode(SMSSDKCodeType codeType, string phoneNumber, string zone, string tempCode)
 {
-    NSString  *phoneNumberStr = [NSString stringWithCString:phoneNumber.c_str() encoding:NSUTF8StringEncoding];
+    NSString *phoneNumberStr = [NSString stringWithCString:phoneNumber.c_str() encoding:NSUTF8StringEncoding];
     NSString *zoneStr = [NSString stringWithCString:zone.c_str() encoding:NSUTF8StringEncoding];
+    NSString *tempCodeStr = [NSString stringWithCString:tempCode.c_str() encoding:NSUTF8StringEncoding];
     SMSGetCodeMethod smsGetCodeMethod = (SMSGetCodeMethod)codeType;
+    
+    NSLog(@"Send:%@,tempCode:%@",phoneNumberStr,tempCodeStr);
     
     if (phoneNumber.length() != 0 && zone.length() != 0)
     {
-        [SMSSDK getVerificationCodeByMethod:smsGetCodeMethod phoneNumber:phoneNumberStr zone:zoneStr result:^(NSError *error) {
+        [SMSSDK getVerificationCodeByMethod:smsGetCodeMethod phoneNumber:phoneNumberStr zone:zoneStr template:tempCodeStr result:^(NSError *error) {
             
             NSLog(@"%@",error);
             
@@ -238,7 +241,7 @@ bool iOSSMSSDK::submitUserInfo (UserInfo &userInfo)
 
 string iOSSMSSDK::getVersion ()
 {
-    NSString *versionString = [SMSSDK version];
+    NSString *versionString = [SMSSDK sdkVersion];
     string resultString = [versionString cStringUsingEncoding: NSUTF8StringEncoding];
     string res (resultString);
     

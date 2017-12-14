@@ -37,7 +37,7 @@ bool HelloWorld::init()
     box->setPlaceHolder("请输入手机号");
     box->setPlaceholderFont("Arial", 8);
     box->setFont("Arial", 8);
-    box->setFontColor(Color3B(255,255,255));
+    box->setFontColor(Color3B(255,0,0));
     box->setMaxLength(20);
     this->addChild(box);
     phoneBox = box;
@@ -49,7 +49,7 @@ bool HelloWorld::init()
     zBox->setPlaceHolder("请输入区号");
     zBox->setPlaceholderFont("Arial", 8);
     zBox->setFont("Arial", 8);
-    zBox->setFontColor(Color3B(255,255,255));
+    zBox->setFontColor(Color3B(255,0,0));
     zBox->setMaxLength(5);
     this->addChild(zBox);
     zoneBox = zBox;
@@ -62,7 +62,7 @@ bool HelloWorld::init()
     vBox->setPlaceholderFont("Arial", 8);
     vBox->setMaxLength(6);
     vBox->setFont("Arial", 8);
-    vBox->setFontColor(Color3B(255,255,255));
+    vBox->setFontColor(Color3B(255,0,0));
     this->addChild(vBox);
     codeBox = vBox;
     
