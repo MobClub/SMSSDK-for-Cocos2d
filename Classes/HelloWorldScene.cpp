@@ -34,35 +34,35 @@ bool HelloWorld::init()
     EditBox *box = EditBox::create(CCSizeMake(winSize.width/2, 25), box9SprY);
     box->setPosition(ccp(winSize.width/2 + 80 , 300));
     box->setDelegate(this);
-    box->setFontColor(ccc3(0, 0, 9));
     box->setPlaceHolder("请输入手机号");
     box->setPlaceholderFont("Arial", 8);
     box->setFont("Arial", 8);
+    box->setFontColor(Color3B(0,0,0));
     box->setMaxLength(20);
     this->addChild(box);
     phoneBox = box;
-    
+
     Scale9Sprite *zone9SprY = Scale9Sprite::create("Icon@2x.png");
     EditBox *zBox = EditBox::create(CCSizeMake(winSize.width/2, 25), zone9SprY);
     zBox->setPosition(ccp(winSize.width/2 + 80 , 280));
     zBox->setDelegate(this);
-    zBox->setFontColor(ccc3(0, 0, 9));
     zBox->setPlaceHolder("请输入区号");
     zBox->setPlaceholderFont("Arial", 8);
     zBox->setFont("Arial", 8);
+    zBox->setFontColor(Color3B(0,0,0));
     zBox->setMaxLength(5);
     this->addChild(zBox);
     zoneBox = zBox;
-    
+
     Scale9Sprite *code9SprY = Scale9Sprite::create("Icon@2x.png");
     EditBox *vBox = EditBox::create(CCSizeMake(winSize.width/2, 25), code9SprY);
     vBox->setPosition(ccp(winSize.width/2 + 80 , 260));
     vBox->setDelegate(this);
-    vBox->setFontColor(ccc3(0, 0, 9));
     vBox->setPlaceHolder("请输入验证码");
     vBox->setPlaceholderFont("Arial", 8);
     vBox->setMaxLength(6);
     vBox->setFont("Arial", 8);
+    vBox->setFontColor(Color3B(0,0,0));
     this->addChild(vBox);
     codeBox = vBox;
     
@@ -185,17 +185,17 @@ void HelloWorld::editBoxReturn(cocos2d::extension::EditBox *editBox)
 void HelloWorld::editBoxTextChanged(cocos2d::extension::EditBox *editBox, const std::string &text)
 {
     string str(editBox->getText());
-    
+
     if (editBox == phoneBox)
     {
         phone = text;
     }
-    
+
     if (editBox == zoneBox)
     {
         zone = text;
     }
-    
+
     if (editBox == codeBox)
     {
         code = text;
@@ -204,13 +204,13 @@ void HelloWorld::editBoxTextChanged(cocos2d::extension::EditBox *editBox, const 
 
 void HelloWorld::getTextCodeHandler(cocos2d::Ref* pSender)
 {
-    SMSSDK::getCode(TextCode,phone,zone);
+    SMSSDK::getCode(TextCode,phone,zone,"1319972");
 }
 
 //
 void HelloWorld::getVoiceCodeHandler(cocos2d::Ref* pSender)
 {
-    SMSSDK::getCode(VoiceCode,phone,zone);
+    SMSSDK::getCode(VoiceCode,phone,zone,"1319972");
 }
 
 void HelloWorld::commitCodeHandler(cocos2d::Ref *pSender)
@@ -268,17 +268,17 @@ void HelloWorld::showContactsPageHandler(cocos2d::Ref *pSender)
 void HelloWorld::onComplete(SMSSDKActionType action,string result)
 {
     string logText = StringUtils::format("action:%d|result:%s",(int)action,result.c_str());
-    
+
     log("%s",logText.c_str());
-    
+
     label->setString(logText);
 }
 
 void HelloWorld::onError(SMSSDKActionType action,string result)
 {
     string logText = StringUtils::format("action:%d|result:%s",(int)action,result.c_str());
-    
+
     log("%s",logText.c_str());
-    
+
     label->setString(logText);
 }

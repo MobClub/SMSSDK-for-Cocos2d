@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/SMSSDK/ios/iOSSMSSDK.mm"
+            timestampString = "534924348.820236"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "iOSSMSSDK::getCode(SMSSDKCodeType codeType, string phoneNumber, string zone, string tempCode)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "smssdk::iOSSMSSDK::getCode(smssdk::SMSSDKCodeType, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;)"
+                  moduleName = "MyCppGame iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/max/Documents/Github/Cocos2dFull-For-SMSSDK/Classes/SMSSDK/ios/iOSSMSSDK.mm"
+                  timestampString = "534918521.184217"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "1044">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "___ZN6smssdk9iOSSMSSDK7getCodeENS_14SMSSDKCodeTypeENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEES8_S8__block_invoke"
+                  moduleName = "MyCppGame iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/max/Documents/Github/Cocos2dFull-For-SMSSDK/Classes/SMSSDK/ios/iOSSMSSDK.mm"
+                  timestampString = "534918521.186367"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

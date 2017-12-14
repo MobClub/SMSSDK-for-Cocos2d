@@ -93,7 +93,7 @@ void AppDelegate::applicationWillEnterForeground()
 
 void AppDelegate::initSMSSDK()
 {
-	string appKey("f3fc6baa9ac4");
-	string appSecret("7f3dedcb36d92deebcb373af921d635a");
+	string appKey("moba6b6c6d6");
+	string appSecret("b89d2427a3bc7ad1aea1e1e8c1d36bf3");
 	SMSSDK::init(appKey,appSecret,false);
 }

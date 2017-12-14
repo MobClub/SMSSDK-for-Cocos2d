@@ -10,9 +10,9 @@
 	<key>NSContactsUsageDescription</key>
 	<string></string>
 	<key>MOBAppSecret</key>
-	<string>e9f8dbe6596944056eb9c236930a4082</string>
+	<string>b89d2427a3bc7ad1aea1e1e8c1d36bf3</string>
 	<key>MOBAppKey</key>
-	<string>d63ba23c7476</string>
+	<string>moba6b6c6d6</string>
 	<key>CFBundleAllowMixedLocalizations</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

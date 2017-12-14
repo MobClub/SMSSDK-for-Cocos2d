@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <SMS_SDK/SMSSDKResultHanderDef.h>
+#import <SMS_SDK/SMSSDKResultHandlerDef.h>
 #import <SMS_SDK/SMSSDKUserInfo.h>
 
 /**
@@ -29,6 +29,22 @@
 + (void) getVerificationCodeByMethod:(SMSGetCodeMethod)method
                          phoneNumber:(NSString *)phoneNumber
                                 zone:(NSString *)zone
+                              result:(SMSGetCodeResultHandler)result __deprecated_msg("deprecated from v3.1.0");
+
+/**
+ *  @from                    v3.1.0
+ *  @brief                   获取验证码(Get verification code)
+ *
+ *  @param method            获取验证码的方法(The method of getting verificationCode)
+ *  @param phoneNumber       电话号码(The phone number)
+ *  @param zone              区域号，不要加"+"号(Area code)
+ *  @param tmpCode           模板id(template id)
+ *  @param result            请求结果回调(Results of the request)
+ */
++ (void) getVerificationCodeByMethod:(SMSGetCodeMethod)method
+                         phoneNumber:(NSString *)phoneNumber
+                                zone:(NSString *)zone
+                            template:(NSString *)tmpCode
                               result:(SMSGetCodeResultHandler)result;
 
 
@@ -49,7 +65,7 @@
  * @from                    v2.0.1
  * @return                  返回SDK版本号(Return the version number of this SDK)
  */
-+ (NSString *) version;
++ (NSString *) sdkVersion;
 
 /**
  * @from         v1.1.1

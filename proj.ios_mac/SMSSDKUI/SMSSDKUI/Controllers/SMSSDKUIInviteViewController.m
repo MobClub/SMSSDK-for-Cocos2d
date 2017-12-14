@@ -106,15 +106,18 @@
     }
     else
     {
-        if (_contact.phones)
-        {
-            [self sendMessageTo:_contact.phones];
-        }
+        [self sendMessageTo:_contact.phones];
     }
 }
 
 - (void)sendMessageTo:(NSString *)phone
 {
+    if (!phone)
+    {
+        SMSSDKAlert(@"phone is nil");
+        return;
+    }
+    
     if ([MFMessageComposeViewController canSendText])
     {
         MFMessageComposeViewController *messageVC = [[MFMessageComposeViewController alloc] init];

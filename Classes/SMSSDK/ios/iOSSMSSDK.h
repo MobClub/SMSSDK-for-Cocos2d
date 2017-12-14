@@ -29,7 +29,7 @@ namespace smssdk
             /// <summsary>
             /// Get vertificationCode
             /// </summary>
-            static bool getCode(SMSSDKCodeType type, string phoneNumber, string zone);
+            static bool getCode(SMSSDKCodeType type, string phoneNumber, string zone, string tempCode);
             
             
             /// <summary>
