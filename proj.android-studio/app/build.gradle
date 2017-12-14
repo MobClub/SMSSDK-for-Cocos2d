@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+// 添加插件
+apply plugin: 'com.mob.sdk'
 
 android {
     compileSdkVersion 22
@@ -12,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "org.cocos2dx.hellocpp"
-        minSdkVersion 10
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -54,10 +56,12 @@ android {
     }
 }
 
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
+// 在MobSDK的扩展中注册SMSSDK的相关信息
+MobSDK {
+    appKey "moba6b6c6d6"
+    appSecret "b89d2427a3bc7ad1aea1e1e8c1d36bf3"
+
+    SMSSDK {}
 }
 
 dependencies {
