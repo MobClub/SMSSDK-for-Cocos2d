@@ -261,9 +261,12 @@ bool iOSSMSSDK::enableWarn (bool isWarn)
 
 
 //SMSSDK_Demo UI
-bool iOSSMSSDK::showRegisterPage(SMSSDKCodeType type)
+bool iOSSMSSDK::showRegisterPage(SMSSDKCodeType type,string tempCode)
 {
-    SMSSDKUIGetCodeViewController *vc = [[SMSSDKUIGetCodeViewController alloc] initWithMethod:SMSGetCodeMethodSMS];
+    
+    NSString *tempCodeStr = [NSString stringWithCString:tempCode.c_str() encoding:NSUTF8StringEncoding];
+    
+    SMSSDKUIGetCodeViewController *vc = [[SMSSDKUIGetCodeViewController alloc] initWithMethod:SMSGetCodeMethodSMS template:tempCodeStr];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     

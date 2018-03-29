@@ -155,7 +155,7 @@ bool SMSSDK::showRegisterPage(SMSSDKCodeType type, string tempCode)
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
     //iOS
-    return iOSSMSSDK::showRegisterPage(type);
+    return iOSSMSSDK::showRegisterPage(type,tempCode);
 
 #endif
     return false;

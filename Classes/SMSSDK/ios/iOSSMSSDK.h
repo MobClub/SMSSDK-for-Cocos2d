@@ -76,7 +76,7 @@ namespace smssdk
             /// <summary>
             /// show Register Page with GUI Library
             /// </summary>
-            static bool showRegisterPage(SMSSDKCodeType type);
+            static bool showRegisterPage(SMSSDKCodeType type,string tempCode);
             
             /// <summary>
             /// show Contacts Page with GUI Library
