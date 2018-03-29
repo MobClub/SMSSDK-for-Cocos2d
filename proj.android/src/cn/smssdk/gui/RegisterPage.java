@@ -48,6 +48,7 @@ import cn.smssdk.SMSSDK;
 import cn.smssdk.UserInterruptException;
 import cn.smssdk.gui.layout.RegisterPageLayout;
 import cn.smssdk.gui.layout.SendMsgDialogLayout;
+import cn.smssdk.gui.util.GUISPDB;
 import cn.smssdk.utils.SMSLog;
 
 //#if def{lang} == cn
@@ -103,6 +104,7 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 	private EventHandler handler;
 	private Dialog pd;
 	private OnSendMessageHandler osmHandler;
+	private String tempCode;
 
 	public void setRegisterCallback(EventHandler callback) {
 		this.callback = callback;
@@ -125,12 +127,12 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 			currentId = DEFAULT_COUNTRY_ID;
 
 			View llBack = activity.findViewById(ResHelper.getIdRes(activity, "ll_back"));
-			TextView tv = (TextView) activity.findViewById(ResHelper.getIdRes(activity, "tv_title"));
-			int resId = ResHelper.getStringRes(activity, "smssdk_regist");
-			if (resId > 0) {
-				tv.setText(resId);
-			}
-			
+//			TextView tv = (TextView) activity.findViewById(ResHelper.getIdRes(activity, "tv_title"));
+//			int resId = ResHelper.getStringRes(activity, "smssdk_regist");
+//			if (resId > 0) {
+//				tv.setText(resId);
+//			}
+
 			View viewCountry = activity.findViewById(ResHelper.getIdRes(activity, "rl_country"));
 			btnNext = (Button) activity.findViewById(ResHelper.getIdRes(activity, "btn_next"));
 			tvCountry = (TextView) activity.findViewById(ResHelper.getIdRes(activity, "tv_country"));
@@ -158,7 +160,7 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 				
 				ivClear = (ImageView) activity.findViewById(ResHelper.getIdRes(activity, "iv_clear"));
 				ivClear.setVisibility(View.VISIBLE);
-				resId = ResHelper.getBitmapRes(activity, "smssdk_btn_enable");
+				int resId = ResHelper.getBitmapRes(activity, "smssdk_btn_enable");
 				if (resId > 0) {
 					btnNext.setBackgroundResource(resId);
 				}
@@ -205,6 +207,7 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 								}
 
 								int status = 0;
+								String confirm = getContext().getString(ResHelper.getStringRes(getContext(), "smssdk_confirm"));
 								//#if def{lang} == cn
 								// 根据服务器返回的网络错误，给toast提示
 								//#elif def{lang} == en
@@ -219,7 +222,15 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 									String des = object.optString("detail");
 									status = object.optInt("status");
 									if (!TextUtils.isEmpty(des)) {
-										Toast.makeText(activity, des, Toast.LENGTH_SHORT).show();
+//										Toast.makeText(activity, des, Toast.LENGTH_SHORT).show();
+										OnClickListener positiveClick = new OnClickListener() {
+											@Override
+											public void onClick(View v) {
+												PopupDialog.dismissDialog();
+											}
+										};
+										PopupDialog.showDialog(getContext(), null, des, confirm, positiveClick,
+												null, null, true, true, false);
 										return;
 									}
 								} catch (Exception e) {
@@ -238,9 +249,18 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 									resId = ResHelper.getStringRes(activity,
 											"smssdk_network_error");
 								}
-								
+
 								if (resId > 0) {
-									Toast.makeText(activity, resId, Toast.LENGTH_SHORT).show();
+//									Toast.makeText(activity, resId, Toast.LENGTH_SHORT).show();
+									OnClickListener positiveClick = new OnClickListener() {
+										@Override
+										public void onClick(View v) {
+											PopupDialog.dismissDialog();
+										}
+									};
+									String msg = getContext().getString(resId);
+									PopupDialog.showDialog(getContext(), null, msg, confirm, positiveClick,
+											null, null, true, true, false);
 								}
 							}
 						}
@@ -292,6 +312,12 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 
 	public void onResume() {
 		SMSSDK.registerEventHandler(handler);
+	}
+
+	@Override
+	public void onPause() {
+		// 防止在“填写验证码页面”点击重新发送时，SMSSDK.EVENT_GET_VERIFICATION_CODE事件被该页面捕获到，进而新建了一个“填写验证码页面”的实例
+		SMSSDK.unregisterEventHandler(handler);
 	}
 
 	public void onDestroy() {
@@ -351,7 +377,7 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 			//#endif
 			String phone = etPhoneNum.getText().toString().trim().replaceAll("\\s*", "");
 			String code = tvCountryNum.getText().toString().trim();
-			showDialog(phone, code);
+			confirmSend(phone, code);
 		} else if (id == idIvClear) {
 			//#if def{lang} == cn
 			// 清除电话号码输入框
@@ -390,11 +416,6 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 				
 				HashMap<String, Object> phoneMap = (HashMap<String, Object>) data.get("phone");
 				if (res != null && phoneMap != null) {
-					int resId = ResHelper.getStringRes(activity, "smssdk_your_ccount_is_verified");
-					if (resId > 0) {
-						Toast.makeText(activity, resId, Toast.LENGTH_SHORT).show();
-					}
-
 					if (callback != null) {
 						callback.afterEvent(
 								SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE,
@@ -426,60 +447,52 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 	//#elif def{lang} == en
 	/** Whether the request to send verification code */
 	//#endif
-	public void showDialog(final String phone, final String code) {
-		int resId = ResHelper.getStyleRes(activity, "CommonDialog");
-		if (resId > 0) {
-			final String phoneNum = code + " " + splitPhoneNum(phone);
-			final Dialog dialog = new Dialog(getContext(), resId);
-			
-			LinearLayout layout = SendMsgDialogLayout.create(getContext());
-			
-			if (layout != null) {
-				dialog.setContentView(layout);
-				
-				((TextView) dialog.findViewById(ResHelper.getIdRes(activity, "tv_phone"))).setText(phoneNum);
-				TextView tv = (TextView) dialog.findViewById(ResHelper.getIdRes(activity, "tv_dialog_hint"));
-				resId = ResHelper.getStringRes(activity, "smssdk_make_sure_mobile_detail");
-				if (resId > 0) {
-					String text = getContext().getString(resId);
-					
-					tv.setText(Html.fromHtml(text));
+	public void confirmSend(final String phone, final String code) {
+		String title = getContext().getResources().getString(ResHelper.getStringRes(activity, "smssdk_make_sure_mobile_num"));
+		String phoneStr = code + " " + splitPhoneNum(phone);
+		String msg = String.format(getContext().getResources().getString(
+				ResHelper.getStringRes(activity, "smssdk_make_sure_mobile_detail")), phoneStr);
+		String confirm = getContext().getResources().getString(ResHelper.getStringRes(activity, "smssdk_ok"));
+		String cancel = getContext().getResources().getString(ResHelper.getStringRes(activity, "smssdk_cancel"));
+		OnClickListener positiveOnClick = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//#if def{lang} == cn
+				// 跳转到验证码页面
+				//#elif def{lang} == en
+				// jump to verification code page
+				//#endif
+				PopupDialog.dismissDialog();
+
+				if (pd != null && pd.isShowing()) {
+					pd.dismiss();
 				}
-
-				((Button) dialog.findViewById(ResHelper.getIdRes(activity, "btn_dialog_ok"))).setOnClickListener(
-						new OnClickListener() {
-								public void onClick(View v) {
-									//#if def{lang} == cn
-									// 跳转到验证码页面
-									//#elif def{lang} == en
-									// jump to verification code page
-									//#endif
-									dialog.dismiss();
-
-									if (pd != null && pd.isShowing()) {
-										pd.dismiss();
-									}
-									pd = CommonDialog.ProgressDialog(activity);
-									if (pd != null) {
-										pd.show();
-									}
-									SMSLog.getInstance().i("verification phone ==>>" + phone);
-									SMSLog.getInstance().i("verification tempCode ==>>" + IdentifyNumPage.TEMP_CODE);
-									SMSSDK.getVerificationCode(code, phone.trim(), IdentifyNumPage.TEMP_CODE, osmHandler);
-								}
-						});
-				
-				
-				((Button) dialog.findViewById(ResHelper.getIdRes(activity, "btn_dialog_cancel"))).setOnClickListener(
-						new OnClickListener() {
-							public void onClick(View v) {
-								dialog.dismiss();
-							}
-						});
-				dialog.setCanceledOnTouchOutside(true);
-				dialog.show();
+				pd = CommonDialog.ProgressDialog(activity);
+				if (pd != null) {
+					pd.show();
+				}
+				// 若内存中无tempCode，则从本地SP中获取tempCode
+				if (TextUtils.isEmpty(tempCode)) {
+					tempCode = GUISPDB.getTempCode();
+				}
+				SMSLog.getInstance().i("verification phone ==>>" + phone);
+				SMSLog.getInstance().i("verification tempCode ==>>" + tempCode);
+				SMSSDK.getVerificationCode(code, phone.trim(), tempCode, osmHandler);
 			}
-		}
+		};
+		OnClickListener negativeOnClick = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				PopupDialog.dismissDialog();
+			}
+		};
+		PopupDialog.showDialog(getContext(), title, msg, confirm, positiveOnClick,
+				cancel, negativeOnClick, true, true, false);
+	}
+
+	public void setTempCode(String tempCode) {
+		this.tempCode = tempCode;
+		GUISPDB.setTempCode(tempCode);
 	}
 
 	//#if def{lang} == cn
@@ -507,6 +520,7 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 		} else {
 			IdentifyNumPage page = new IdentifyNumPage();
 			page.setPhone(phone, code, formatedPhone);
+			page.setTempCode(this.tempCode);
 			page.showForResult(activity, null, this);
 		}
 	}

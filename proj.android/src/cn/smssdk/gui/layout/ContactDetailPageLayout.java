@@ -1,27 +1,17 @@
-//#if def{lang} == cn
 /*
  * 官网地站:http://www.mob.com
  * 技术支持QQ: 4006852216
  * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，
  * 也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
- * 
+ *
  * Copyright (c) 2014年 mob.com. All rights reserved.
  */
-//#elif def{lang} == en
-/*
- * Offical Website:http://www.mob.com
- * Support QQ: 4006852216
- * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version.
- * If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
- * 
- * Copyright (c) 2013 mob.com. All rights reserved.
- */
-//#endif
 package cn.smssdk.gui.layout;
 
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -30,103 +20,118 @@ import android.widget.TextView;
 
 import com.mob.tools.utils.ResHelper;
 
-//#if def{lang} == cn
 /**联系人详情页面布局*/
-//#elif def{lang} == en
-/** contact detail page layout*/
-//#endif
 public class ContactDetailPageLayout extends BasePageLayout {
 
 	public ContactDetailPageLayout(Context c) {
-		super(c,false);
+		super(c,null);
 	}
-	
+
 	protected void onCreateContent(LinearLayout parent) {
 		SizeHelper.prepare(context);
-		
-		LinearLayout wrapperLayout =  new LinearLayout(context);
-		LinearLayout.LayoutParams wrapperParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		wrapperParams.setMargins(SizeHelper.fromPxWidth(25), SizeHelper.fromPxWidth(30), SizeHelper.fromPxWidth(25), 0);
-		wrapperLayout.setLayoutParams(wrapperParams);
-		
-		wrapperLayout.setBackgroundDrawable(DrawableHelper.createCornerBgNormal(context));
-		wrapperLayout.setOrientation(LinearLayout.HORIZONTAL);
-		parent.addView(wrapperLayout);
-		
-		ImageView contactIcon = new ImageView(context);
-		contactIcon.setId(ResHelper.getIdRes(context, "iv_contact_icon"));
-		LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(SizeHelper.fromPxWidth(88),SizeHelper.fromPxWidth(88));
-		int margin = SizeHelper.fromPxWidth(16);
-		imageParams.setMargins(margin, margin, margin, margin);
-		contactIcon.setLayoutParams(imageParams);
-		contactIcon.setScaleType(ScaleType.FIT_CENTER);
-		int resid = ResHelper.getBitmapRes(context, "smssdk_default_avatar");
-		contactIcon.setBackgroundResource(resid);
-		wrapperLayout.addView(contactIcon);
-		
-		LinearLayout innerLayout =  new LinearLayout(context);
-		LinearLayout.LayoutParams innerParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		innerParams.setMargins(SizeHelper.fromPxWidth(4), SizeHelper.fromPxWidth(10), 0, SizeHelper.fromPxWidth(15));
-		innerLayout.setLayoutParams(innerParams);
-		innerLayout.setOrientation(LinearLayout.VERTICAL);
-		wrapperLayout.addView(innerLayout);
-		
+
+		// 名字
 		TextView contactName = new TextView(context);
 		contactName.setId(ResHelper.getIdRes(context, "tv_contact_name"));
-		LinearLayout.LayoutParams contactNameParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+		LinearLayout.LayoutParams contactNameParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		contactNameParams.topMargin = SizeHelper.fromPxWidth(10);
+		contactNameParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(60), SizeHelper.fromPxWidth(26), 0);
 		contactName.setLayoutParams(contactNameParams);
-		contactName.setTextColor(0xff000000);
-		contactName.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(24));
-		innerLayout.addView(contactName);
-		
-		LinearLayout nestLayout =  new LinearLayout(context);
-		LinearLayout.LayoutParams nestParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+		contactName.setGravity(Gravity.CENTER);
+		contactName.setTextColor(context.getResources().getColor(ResHelper.getColorRes(context, "smssdk_main_color")));
+		contactName.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(52));
+		parent.addView(contactName);
+
+		// 手机号Container
+		LinearLayout llPhone = new LinearLayout(context);
+		LinearLayout.LayoutParams llPhoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		nestParams.setMargins(0, SizeHelper.fromPxWidth(10), SizeHelper.fromPxWidth(15), 0);
-		nestLayout.setLayoutParams(nestParams);
-		nestLayout.setOrientation(LinearLayout.HORIZONTAL);
-		innerLayout.addView(nestLayout);
-		
-		TextView tvPhone = new TextView(context);
-		LinearLayout.LayoutParams tvPhoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+		llPhoneParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(60), SizeHelper.fromPxWidth(26), 0);
+		llPhone.setLayoutParams(llPhoneParams);
+		llPhone.setOrientation(LinearLayout.HORIZONTAL);
+		parent.addView(llPhone);
+
+		int labelWidth = ResHelper.dipToPx(context, 80);
+		int textSize = ResHelper.dipToPx(context, 14);
+		int textColor = context.getResources().getColor(ResHelper.getColorRes(context, "smssdk_black"));
+		TextView tvPhoneLabel = new TextView(context);
+		LinearLayout.LayoutParams tvPhoneLabelParams = new LinearLayout.LayoutParams(labelWidth,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		tvPhone.setLayoutParams(tvPhoneParams);
-		resid = ResHelper.getStringRes(context, "smssdk_contacts_phones");
-		tvPhone.setText(resid);
-		tvPhone.setTextColor(0xff000000);
-		tvPhone.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(20));
-		nestLayout.addView(tvPhone);
-		
-		TextView contactPhone = new TextView(context);
-		contactPhone.setId(ResHelper.getIdRes(context, "tv_contact_phones"));
-		LinearLayout.LayoutParams contactPhoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+		tvPhoneLabel.setLayoutParams(tvPhoneLabelParams);
+		int resid = ResHelper.getStringRes(context, "smssdk_label_phone");
+		tvPhoneLabel.setText(resid);
+		tvPhoneLabel.setTextColor(textColor);
+		tvPhoneLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+		llPhone.addView(tvPhoneLabel);
+
+		TextView phone = new TextView(context);
+		phone.setId(ResHelper.getIdRes(context, "tv_phone"));
+		LinearLayout.LayoutParams phoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		contactPhoneParams.leftMargin = SizeHelper.fromPxWidth(10);
-		contactPhone.setLayoutParams(contactPhoneParams);
-		contactPhone.setTextColor(0xff000000);
-		contactPhone.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(20));
-		nestLayout.addView(contactPhone);
-		
-		TextView tv = new TextView(context);
-		tv.setId(ResHelper.getIdRes(context, "tv_invite_hint"));
-		LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+		phone.setLayoutParams(phoneParams);
+		phone.setGravity(Gravity.RIGHT);
+		phone.setTextColor(context.getResources().getColor(ResHelper.getColorRes(context, "smssdk_tv_light_gray")));
+		phone.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+		llPhone.addView(phone);
+
+		// 分割线
+		View linePhone = new View(context);
+		LinearLayout.LayoutParams linePhoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+				ResHelper.dipToPx(context, 1));
+		linePhoneParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(10), SizeHelper.fromPxWidth(26), 0);
+		linePhone.setLayoutParams(linePhoneParams);
+		resid = ResHelper.getColorRes(context, "smssdk_line_light_gray");
+		linePhone.setBackgroundResource(resid);
+		parent.addView(linePhone);
+
+		// 手机号2Container
+		LinearLayout llPhone2 = new LinearLayout(context);
+		LinearLayout.LayoutParams llPhone2Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		tvParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(24), SizeHelper.fromPxWidth(26), 0);
-		tvParams.gravity = Gravity.CENTER_HORIZONTAL;
-		tv.setLayoutParams(tvParams);
-		tv.setTextColor(0xff5c5c5c);
-		tv.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(28));
-		parent.addView(tv);
-		
+		llPhone2Params.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(22), SizeHelper.fromPxWidth(26), 0);
+		llPhone2.setId(ResHelper.getIdRes(context, "ll_phone2"));
+		llPhone2.setLayoutParams(llPhone2Params);
+		llPhone2.setOrientation(LinearLayout.HORIZONTAL);
+		llPhone2.setVisibility(View.GONE);
+		parent.addView(llPhone2);
+
+		TextView tvPhoneLabel2 = new TextView(context);
+		LinearLayout.LayoutParams tvPhoneLabel2Params = new LinearLayout.LayoutParams(labelWidth,
+				LinearLayout.LayoutParams.WRAP_CONTENT);
+		tvPhoneLabel2.setLayoutParams(tvPhoneLabel2Params);
+		resid = ResHelper.getStringRes(context, "smssdk_label_phone2");
+		tvPhoneLabel2.setText(resid);
+		tvPhoneLabel2.setTextColor(textColor);
+		tvPhoneLabel2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+		llPhone2.addView(tvPhoneLabel2);
+
+		TextView phone2 = new TextView(context);
+		phone2.setId(ResHelper.getIdRes(context, "tv_phone2"));
+		LinearLayout.LayoutParams phone2Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT);
+		phone2.setLayoutParams(phone2Params);
+		phone2.setGravity(Gravity.RIGHT);
+		phone2.setTextColor(context.getResources().getColor(ResHelper.getColorRes(context, "smssdk_tv_light_gray")));
+		phone2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+		llPhone2.addView(phone2);
+
+		// 分割线2
+		View linephone2 = new View(context);
+		LinearLayout.LayoutParams linephone2Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+				ResHelper.dipToPx(context, 1));
+		linephone2Params.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(10), SizeHelper.fromPxWidth(26), 0);
+		linephone2.setLayoutParams(linephone2Params);
+		linephone2.setId(ResHelper.getIdRes(context, "vw_divider2"));
+		resid = ResHelper.getColorRes(context, "smssdk_line_light_gray");
+		linephone2.setBackgroundResource(resid);
+		linephone2.setVisibility(View.GONE);
+		parent.addView(linephone2);
+
 		Button inviteBtn = new Button(context);
 		inviteBtn.setId(ResHelper.getIdRes(context, "btn_invite"));
 		LinearLayout.LayoutParams inviteParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				SizeHelper.fromPxWidth(72));
-		inviteParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(22), SizeHelper.fromPxWidth(26), 0);
+		inviteParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(40), SizeHelper.fromPxWidth(26), 0);
 		inviteBtn.setLayoutParams(inviteParams);
 		resid = ResHelper.getBitmapRes(context, "smssdk_btn_enable");
 		inviteBtn.setBackgroundResource(resid);

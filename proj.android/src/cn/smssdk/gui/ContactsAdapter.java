@@ -1,22 +1,11 @@
-//#if def{lang} == cn
 /*
  * 官网地站:http://www.mob.com
  * 技术支持QQ: 4006852216
  * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，
  * 也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
- * 
+ *
  * Copyright (c) 2014年 mob.com. All rights reserved.
  */
-//#elif def{lang} == en
-/*
- * Offical Website:http://www.mob.com
- * Support QQ: 4006852216
- * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version.
- * If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
- * 
- * Copyright (c) 2013 mob.com. All rights reserved.
- */
-//#endif
 package cn.smssdk.gui;
 
 import android.text.TextUtils;
@@ -36,15 +25,9 @@ import cn.smssdk.gui.ContactsListView.GroupAdapter;
 import cn.smssdk.gui.layout.SizeHelper;
 
 
-//#if def{lang} == cn
 /**
  * 联系人列表adapter
  */
-//#elif def{lang} == en
-/**
- * The group adapter of the contacts-listview
- */
-//#endif
 public class ContactsAdapter extends GroupAdapter {
 	private ArrayList<String> titles;
 	private ArrayList<ArrayList<HashMap<String, Object>>> contacts;
@@ -54,8 +37,8 @@ public class ContactsAdapter extends GroupAdapter {
 
 	private ContactItemMaker itemMaker;
 	private SearchEngine sEngine;
-	
-	public ContactsAdapter(ContactsListView view, ArrayList<HashMap<String, Object>> friendsInApp, 
+
+	public ContactsAdapter(ContactsListView view, ArrayList<HashMap<String, Object>> friendsInApp,
 			ArrayList<HashMap<String, Object>> contactsOutApp) {
 		super(view);
 		this.friendsInApp = friendsInApp;
@@ -63,7 +46,7 @@ public class ContactsAdapter extends GroupAdapter {
 		initSearchEngine();
 		search(null);
 	}
-	
+
 	private void initSearchEngine() {
 		sEngine = new SearchEngine();
 		ArrayList<String> data = new ArrayList<String>();
@@ -90,17 +73,10 @@ public class ContactsAdapter extends GroupAdapter {
 		sEngine.setIndex(data);
 	}
 
-	//#if def{lang} == cn
 	/**
 	 * 搜索
 	 * @param token  搜索的关键字
 	 */
-	//#elif def{lang} == en
-	/**
-	 * search
-	 * @param token  search keyword
-	 */
-	//#endif
 	public void search(String token) {
 		ArrayList<String> res = sEngine.match(token);
 		boolean isEmptyToken = false;
@@ -108,12 +84,12 @@ public class ContactsAdapter extends GroupAdapter {
 			res = new ArrayList<String>();
 			isEmptyToken = true;
 		}
-		
+
 		HashMap<String, String> resMap = new HashMap<String, String>();
 		for (String r : res) {
 			resMap.put(r, r);
 		}
-		
+
 		titles = new ArrayList<String>();
 		contacts = new ArrayList<ArrayList<HashMap<String, Object>>>();
 
@@ -125,13 +101,9 @@ public class ContactsAdapter extends GroupAdapter {
 		}
 
 	}
-	
-	//#if def{lang} == cn
+
 	/** 数据处理 ,对应用内好友列表的数据进行排列*/
-	//#elif def{lang} == en
-	/** Sort the friends' data which use this app*/
-	//#endif
-	private void reSortFia(HashMap<String, String> resMap, boolean isEmptyToken, 
+	private void reSortFia(HashMap<String, String> resMap, boolean isEmptyToken,
 			ArrayList<HashMap<String, Object>> data) {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		for (HashMap<String, Object> contact : data) {
@@ -146,7 +118,7 @@ public class ContactsAdapter extends GroupAdapter {
 				list.add(contact);
 			}
 		}
-		
+
 		if (list.size() > 0) {
 			int resId = ResHelper.getStringRes(view.getContext(), "smssdk_contacts_in_app");
 			if (resId > 0) {
@@ -156,12 +128,8 @@ public class ContactsAdapter extends GroupAdapter {
 		}
 	}
 
-	//#if def{lang} == cn
 	/** 数据处理 ,对不是应用内好友列表的数据进行排列 */
-	//#elif def{lang} == en
-	/** Sort the contacts' data which not use the app*/
-	//#endif
-	private void reSortFoa(HashMap<String, String> resMap, boolean isEmptyToken, 
+	private void reSortFoa(HashMap<String, String> resMap, boolean isEmptyToken,
 			ArrayList<HashMap<String, Object>> data) {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		for (HashMap<String, Object> contact : data) {
@@ -176,7 +144,7 @@ public class ContactsAdapter extends GroupAdapter {
 				list.add(contact);
 			}
 		}
-		
+
 		if (list.size() > 0) {
 			int resId = ResHelper.getStringRes(view.getContext(), "smssdk_contacts_out_app");
 			if (resId > 0) {
@@ -185,7 +153,7 @@ public class ContactsAdapter extends GroupAdapter {
 			contacts.add(list);
 		}
 	}
-	
+
 	public void setContactItemMaker(ContactItemMaker itemMaker) {
 		this.itemMaker = itemMaker;
 	}
@@ -210,7 +178,7 @@ public class ContactsAdapter extends GroupAdapter {
 //				list.add(contact);
 //			}
 //		}
-//		
+//
 //		if (list.size() > 0) {
 //			int resId = getStringRes(view.getContext(), "smssdk_contacts_in_app");
 //			if (resId > 0) {
@@ -219,7 +187,7 @@ public class ContactsAdapter extends GroupAdapter {
 //			contacts.add(list);
 //		}
 //	}
-//	
+//
 //	/** 数据处理 */
 //	private void reSortFoa(String token, ArrayList<HashMap<String, Object>> data) {
 //		boolean isEmptyToken = TextUtils.isEmpty(token);
@@ -230,7 +198,7 @@ public class ContactsAdapter extends GroupAdapter {
 //				name = String.valueOf(contact.get("displayname"));
 //			} else if (contact.containsKey("phones")) {
 //				@SuppressWarnings("unchecked")
-//				ArrayList<HashMap<String, Object>> phones 
+//				ArrayList<HashMap<String, Object>> phones
 //						= (ArrayList<HashMap<String, Object>>) contact.get("phones");
 //				if (phones != null && phones.size() > 0) {
 //					name = (String) phones.get(0).get("phone");
@@ -252,7 +220,7 @@ public class ContactsAdapter extends GroupAdapter {
 //			contacts.add(list);
 //		}
 //	}
-	
+
 	public int getGroupCount() {
 		return titles == null ? 0 : titles.size();
 	}
@@ -289,11 +257,11 @@ public class ContactsAdapter extends GroupAdapter {
 	public TextView getTitleView(int group, TextView convertView, ViewGroup parent) {
 		if (convertView == null) {
 			SizeHelper.prepare(parent.getContext());
-			
+
 			convertView = new TextView(parent.getContext());
-			convertView.setBackgroundColor(0xffeae8ee);
+			convertView.setBackgroundResource(ResHelper.getColorRes(parent.getContext(), "smssdk_bg_gray"));
 			convertView.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(25));
-			convertView.setTextColor(0xff999999);
+			convertView.setTextColor(0xff000000);
 			int padding = SizeHelper.fromPxWidth(18);
 			convertView.setPadding(padding, 0, 0, 0);
 			convertView.setWidth(LayoutParams.MATCH_PARENT);

@@ -1,14 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:Theme.Light">
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
-    <!-- dialog -->
-    <style name="CommonDialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowBackground">@drawable/smssdk_dialog_bg</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-    <style name="smssdk_DialogStyle" parent="@android:style/Theme.Dialog">
+	<style name="smssdk_DialogStyle" parent="@android:style/Theme.Dialog">
 		<!-- 边框 -->
 		<item name="android:windowFrame">@null</item>
 		<!-- 是否浮现在activity之上 -->
@@ -23,4 +15,6 @@
 		<!-- 模糊 -->
 		<item name="android:backgroundDimEnabled">true</item>
 	</style>
+
+
 </resources>

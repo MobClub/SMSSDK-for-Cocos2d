@@ -15,9 +15,11 @@ import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import cn.smssdk.gui.ContactsPage;
 import cn.smssdk.gui.RegisterPage;
+import cn.smssdk.utils.SMSLog;
 import cn.smssdk.utils.SPHelper;
 
 public class SMSSDKBridge {
+	private static final String TAG = "SMSSDKBridge";
     private static boolean DEBUG = true;
 
     private static Context context;
@@ -59,6 +61,7 @@ public class SMSSDKBridge {
     }
 
     public static void getTextCode(String zone, String phone, String tempCode) {
+    	SMSLog.getInstance().d("=========>getTextCode. tempCode= " + tempCode);
         SMSSDK.getVerificationCode(zone,phone,tempCode,null);
     }
 
@@ -91,7 +94,7 @@ public class SMSSDKBridge {
         SPHelper.getInstance().setWarnWhenReadContact(isWarn);
     }
 
-    public static void showRegisterPage() {
+    public static void showRegisterPage(String tempCode) {
         RegisterPage registerPage = new RegisterPage();
         EventHandler handler = new EventHandler(){
             public void afterEvent(int event, int result, Object data) {
@@ -104,7 +107,8 @@ public class SMSSDKBridge {
                 });
             }
         };
-
+        SMSLog.getInstance().d("=========>Open ResgisterPage. tempCode= " + tempCode);
+        registerPage.setTempCode(tempCode);
         registerPage.setRegisterCallback(handler);
         registerPage.show(context);
     }

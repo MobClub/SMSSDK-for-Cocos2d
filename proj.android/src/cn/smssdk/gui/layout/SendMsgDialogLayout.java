@@ -1,22 +1,11 @@
-//#if def{lang} == cn
 /*
  * 官网地站:http://www.mob.com
  * 技术支持QQ: 4006852216
  * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，
  * 也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
- * 
+ *
  * Copyright (c) 2014年 mob.com. All rights reserved.
  */
-//#elif def{lang} == en
-/*
- * Offical Website:http://www.mob.com
- * Support QQ: 4006852216
- * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version.
- * If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
- * 
- * Copyright (c) 2013 mob.com. All rights reserved.
- */
-//#endif
 package cn.smssdk.gui.layout;
 
 import android.content.Context;
@@ -31,13 +20,10 @@ import android.widget.TextView;
 
 import com.mob.tools.utils.ResHelper;
 
-//#if def{lang} == cn
 /**确定发送短信对话框*/
-//#elif def{lang} == en
-/**send message dialog layout*/
-//#endif
+@Deprecated
 public class SendMsgDialogLayout {
-	
+
 	public static LinearLayout create(Context context) {
 		SizeHelper.prepare(context);
 		LinearLayout root = new LinearLayout(context);
@@ -45,7 +31,7 @@ public class SendMsgDialogLayout {
 				ViewGroup.LayoutParams.WRAP_CONTENT);
 		root.setLayoutParams(params);
 		root.setOrientation(LinearLayout.VERTICAL);
-		
+
 		TextView dialogTitle = new TextView(context);
 		dialogTitle.setId(ResHelper.getIdRes(context, "tv_dialog_title"));
 		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -60,14 +46,14 @@ public class SendMsgDialogLayout {
 		dialogTitle.setGravity(Gravity.CENTER_VERTICAL);
 		dialogTitle.setTypeface(Typeface.DEFAULT_BOLD);
 		root.addView(dialogTitle);
-		
+
 		View line1 = new View(context);
 		LinearLayout.LayoutParams line1Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				SizeHelper.fromPxWidth(1));
 		line1.setLayoutParams(line1Params);
 		line1.setBackgroundColor(0xff3cac17);
 		root.addView(line1);
-		
+
 		TextView dialogHint = new TextView(context);
 		dialogHint.setId(ResHelper.getIdRes(context, "tv_dialog_hint"));
 		LinearLayout.LayoutParams hintParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -80,7 +66,7 @@ public class SendMsgDialogLayout {
 		dialogHint.setTextColor(0xffffffff);
 		dialogHint.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(24));
 		root.addView(dialogHint);
-		
+
 		TextView phone = new TextView(context);
 		phone.setId(ResHelper.getIdRes(context, "tv_phone"));
 		LinearLayout.LayoutParams phoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -91,20 +77,20 @@ public class SendMsgDialogLayout {
 		phone.setTextColor(0xffffffff);
 		phone.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(24));
 		root.addView(phone);
-		
+
 		View line2 = new View(context);
 		LinearLayout.LayoutParams line2Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				SizeHelper.fromPxWidth(1));
 		line2.setLayoutParams(line2Params);
 		line2.setBackgroundColor(0xff737373);
 		root.addView(line2);
-		
+
 		LinearLayout wrapper = new LinearLayout(context);
 		LinearLayout.LayoutParams wrapperParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 		wrapper.setLayoutParams(wrapperParams);
-		
-		
+
+
 		Button ok = new Button(context);
 		ok.setId(ResHelper.getIdRes(context, "btn_dialog_ok"));
 		LinearLayout.LayoutParams okParams = new LinearLayout.LayoutParams(0,SizeHelper.fromPxWidth(80),1);
@@ -119,14 +105,14 @@ public class SendMsgDialogLayout {
 		ok.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(22));
 		ok.setTextColor(0xffffffff);
 		wrapper.addView(ok);
-		
+
 		View line3 = new View(context);
 		LinearLayout.LayoutParams line3Params = new LinearLayout.LayoutParams(SizeHelper.fromPxWidth(1),
 				LinearLayout.LayoutParams.MATCH_PARENT);
 		line3.setLayoutParams(line3Params);
 		line3.setBackgroundColor(0xff737373);
 		wrapper.addView(line3);
-		
+
 		Button cancel = new Button(context);
 		cancel.setId(ResHelper.getIdRes(context, "btn_dialog_cancel"));
 		LinearLayout.LayoutParams cancelParams = new LinearLayout.LayoutParams(0,SizeHelper.fromPxWidth(80),1);
@@ -140,7 +126,7 @@ public class SendMsgDialogLayout {
 		cancel.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(22));
 		cancel.setTextColor(0xffffffff);
 		wrapper.addView(cancel);
-		
+
 		root.addView(wrapper);
 		return root;
 	}

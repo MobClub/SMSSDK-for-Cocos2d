@@ -21,11 +21,17 @@
     <item name="btn_invite" type="id" />
     <item name="tv_identify_notify" type="id" />
     <item name="tv_phone" type="id" />
+	<item name="tv_phone2" type="id" />
     <item name="btn_sounds" type="id" />
     <item name="tv_unreceive_identify" type="id" />
     <item name="btn_submit" type="id" />
     <item name="clContact" type="id" />
     <item name="clCountry" type="id" />
+	<item name="tv_resend" type="id" />
+	<item name="tv_voice" type="id" />
+	<item name="ll_voice" type="id" />
+	<item name="ll_phone2" type="id" />
+	<item name="vw_divider2" type="id" />
     <!--dialog-->
     <item name="btn_dialog_ok" type="id" />
     <item name="btn_dialog_cancel" type="id" />

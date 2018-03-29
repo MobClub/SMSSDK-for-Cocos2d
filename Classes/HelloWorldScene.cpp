@@ -256,8 +256,8 @@ void HelloWorld::enableWarnHandler(cocos2d::Ref *pSender)
 
 
 void HelloWorld::showRegPageHandler(cocos2d::Ref *pSender)
-{    
-    SMSSDK::showRegisterPage(SMSSDKCodeType(1));
+{    //模板号可以为空
+    SMSSDK::showRegisterPage(SMSSDKCodeType(1), "1319972");
 }
 
 void HelloWorld::showContactsPageHandler(cocos2d::Ref *pSender)

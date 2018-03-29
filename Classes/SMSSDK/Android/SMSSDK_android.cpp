@@ -34,6 +34,8 @@ JNIEXPORT void JNICALL Java_cn_smssdk_cocos2dx_SMSSDKBridge_onJavaCallback
 	if (res == nullptr) {
 		res = new C2DXString("NULL");
 	}
+	log("status:%d",status->getIntValue());
+	log("action:%d",action->getIntValue());
 	log("res:%s",res->_string.c_str());
 	// TODO add codes here
 	if(1 == status->getIntValue()){
@@ -175,14 +177,15 @@ bool SMSSDK_android::enableWarnJNI(bool isWarn){
 	return true;
 }
 
-bool SMSSDK_android::showRegisterPageJNI()
+bool SMSSDK_android::showRegisterPageJNI(string tempCode)
 {
 	JniMethodInfo mi;
-	bool isHave = getMethod(mi, "showRegisterPage", "()V");
+	bool isHave = getMethod(mi, "showRegisterPage", "(Ljava/lang/String;)V");
 	if (!isHave) {
 		return false;
 	}
-	mi.env->CallStaticVoidMethod(mi.classID, mi.methodID);
+	jstring jTempCode = mi.env->NewStringUTF(tempCode.c_str());
+	mi.env->CallStaticVoidMethod(mi.classID, mi.methodID, jTempCode);
 	releaseMethod(mi);
 
 	return true;

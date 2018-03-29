@@ -25,6 +25,8 @@ import android.widget.LinearLayout;
 import com.mob.tools.utils.ResHelper;
 
 import cn.smssdk.gui.ContactsListView;
+import cn.smssdk.gui.PersonalInfoView;
+import cn.smssdk.gui.SearchView;
 
 //#if def{lang} == cn
 /**联系人列表页面布局*/
@@ -34,10 +36,22 @@ import cn.smssdk.gui.ContactsListView;
 public class ContactListPageLayout extends BasePageLayout {
 
 	public ContactListPageLayout(Context c) {
-		super(c, true);
+		super(c, null);
 	}
 
 	protected void onCreateContent(LinearLayout parent) {
+		// 搜索框
+		SearchView searchView = new SearchView(context, true);
+		parent.addView(searchView);
+
+//		LayoutInflater inflater = LayoutInflater.from(context);
+//		View personalInfoView = inflater.inflate(R.layout.smssdk_personal_info, null);
+//		parent.addView(personalInfoView);
+
+		// 我的资料
+		parent.addView(PersonalInfoView.create(context));
+
+		//通讯录列表（包括我的资料）rootView
 		ContactsListView contactsList = new ContactsListView(context);
 		contactsList.setId(ResHelper.getIdRes(context, "clContact"));
 		LinearLayout.LayoutParams listParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,

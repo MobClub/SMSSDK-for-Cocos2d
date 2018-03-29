@@ -54,7 +54,7 @@ namespace smssdk {
 
 		static bool enableWarnJNI(bool isWarn);
 
-		static bool showRegisterPageJNI();
+		static bool showRegisterPageJNI(string tempCode);
 
 		static bool showContactsPageJNI();
 

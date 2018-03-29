@@ -1,22 +1,11 @@
-//#if def{lang} == cn
 /*
  * 官网地站:http://www.mob.com
  * 技术支持QQ: 4006852216
  * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，
  * 也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
- * 
+ *
  * Copyright (c) 2014年 mob.com. All rights reserved.
  */
-//#elif def{lang} == en
-/*
- * Offical Website:http://www.mob.com
- * Support QQ: 4006852216
- * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version.
- * If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
- * 
- * Copyright (c) 2013 mob.com. All rights reserved.
- */
-//#endif
 package cn.smssdk.gui;
 
 import android.content.Context;
@@ -27,7 +16,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mob.tools.gui.AsyncImageView;
 import com.mob.tools.gui.BitmapProcessor;
@@ -46,10 +34,10 @@ public class DefaultContactViewItem implements cn.smssdk.gui.ContactItemMaker {
 		ViewHolder viewHolder;
 		if (convertView == null) {
 			viewHolder = new ViewHolder();
-		
+
 			Context context = parent.getContext();
 			convertView = ContactsListviewItemLayout.create(context);
-			
+
 			int resId = ResHelper.getIdRes(context, "iv_contact");
 			viewHolder.ivContact = (AsyncImageView) convertView.findViewById(resId);
 			resId = ResHelper.getIdRes(context, "tv_name");
@@ -64,13 +52,9 @@ public class DefaultContactViewItem implements cn.smssdk.gui.ContactItemMaker {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		
+
 		if(user != null){
-			//#if def{lang} == cn
 			// 如果user包含“fia”，则为应用内好友
-			//#elif def{lang} == en
-			// if the user info contains "fia", then the user is app's user
-			//#endif
 			if (user.containsKey("fia")) {
 				viewHolder.tvName.setText(String.valueOf(user.get("nickname")));
 				viewHolder.tvContact.setVisibility(View.VISIBLE);
@@ -83,12 +67,15 @@ public class DefaultContactViewItem implements cn.smssdk.gui.ContactItemMaker {
 				int resId = ResHelper.getStringRes(parent.getContext(), "smssdk_add_contact");
 				if (resId > 0) {
 					viewHolder.btnAdd.setText(resId);
+					viewHolder.btnAdd.setTextColor(parent.getResources().getColor(
+							ResHelper.getColorRes(parent.getContext(), "smssdk_white")));
+					viewHolder.btnAdd.setBackgroundResource(ResHelper.getBitmapRes(parent.getContext(), "smssdk_btn_enable"));
 				}
 			} else {
 				String dspName = (String) user.get("displayname");
 				if (TextUtils.isEmpty(dspName)) {
 					@SuppressWarnings("unchecked")
-					ArrayList<HashMap<String, Object>> phones 
+					ArrayList<HashMap<String, Object>> phones
 							= (ArrayList<HashMap<String, Object>>) user.get("phones");
 					if (phones != null && phones.size() > 0) {
 						String cp = (String) phones.get(0).get("phone");
@@ -101,53 +88,56 @@ public class DefaultContactViewItem implements cn.smssdk.gui.ContactItemMaker {
 				int resId = ResHelper.getStringRes(parent.getContext(), "smssdk_invite");
 				if (resId > 0) {
 					viewHolder.btnAdd.setText(resId);
+					viewHolder.btnAdd.setTextColor(parent.getResources().getColor(
+							ResHelper.getColorRes(parent.getContext(), "smssdk_main_color")));
+					viewHolder.btnAdd.setBackgroundResource(ResHelper.getBitmapRes(parent.getContext(), "smssdk_btn_line_bg"));
 				}
 			}
 
 			viewHolder.bg.setBackgroundColor(0xffffffff);
-			//#if def{lang} == cn
 			// 是否有新好友，如有，改变背景颜色
-			//#elif def{lang} == en
-			// change the background color when the friends is new
-			//#endif
 			if(user.containsKey("isnew")){
 				boolean isNew = Boolean.valueOf(String.valueOf(user.get("isnew")));
 				if(isNew){
 					viewHolder.bg.setBackgroundColor(0xfff7fcff);
 				}
 			}
-			
+
 			String iconUrl = user.containsKey("avatar") ? (String) user.get("avatar") : null;
-			//#if def{lang} == cn
 			// 设置默认头像，如果有url，就去下载
-			//#elif def{lang} == en
-			// Setting the default avatar, download the icon when the user info contains "url"
-			//#endif
 			int resId = ResHelper.getBitmapRes(parent.getContext(), "smssdk_cp_default_avatar");
 			if (resId > 0) {
 				viewHolder.ivContact.execute(null, resId);
 			}
 			if(!TextUtils.isEmpty(iconUrl)){
 				SMSLog.getInstance().i(String.valueOf(user.get("displayname")) + " icon url ==>> " + iconUrl);
-				Bitmap bm = BitmapProcessor.getBitmapFromCache(iconUrl);
-				if (bm != null && !bm.isRecycled()) {
-					viewHolder.ivContact.setImageBitmap(bm);
-				} else{
-					viewHolder.ivContact.execute(iconUrl, resId);
-				}
-			}			
-			
+				// 使用本地缓存的Bitmap，将导致ivContact的圆形处理失效
+//				Bitmap bm = BitmapProcessor.getBitmapFromCache(iconUrl);
+//				if (bm != null && !bm.isRecycled()) {
+//					viewHolder.ivContact.setImageBitmap(bm);
+//				} else{
+//					viewHolder.ivContact.execute(iconUrl, resId);
+//				}
+				viewHolder.ivContact.execute(iconUrl, resId);
+			}
+
 			viewHolder.btnAdd.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					if(user.containsKey("fia")){
-						//#if def{lang} == cn
 						// 在这里添加第一组的按钮事件
-						//#elif def{lang} == en
-						// developer can write some code here to excute some action
-						//#endif
-						Toast.makeText(parent.getContext(), String.valueOf(user), Toast.LENGTH_SHORT).show();	
+//						Toast.makeText(parent.getContext(), String.valueOf(user), Toast.LENGTH_SHORT).show();
+
+						String confirm = parent.getResources().getString(ResHelper.getStringRes(parent.getContext(), "smssdk_i_know"));
+						OnClickListener positiveClick = new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								PopupDialog.dismissDialog();
+							}
+						};
+						PopupDialog.showDialog(parent.getContext(), null, String.valueOf(user),
+								confirm, positiveClick, null, null, true, true, false);
 					} else{
 						ContactDetailPage contactDetailPage = new ContactDetailPage();
 						contactDetailPage.setContact(user);
@@ -158,7 +148,7 @@ public class DefaultContactViewItem implements cn.smssdk.gui.ContactItemMaker {
 		}
 		return convertView;
 	}
-	
+
 	public class ViewHolder{
 		public View bg;
 		public AsyncImageView ivContact;

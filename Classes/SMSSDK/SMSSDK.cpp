@@ -145,12 +145,12 @@ bool SMSSDK::enableWarn(bool isWarn)
     return false;
 }
 
-bool SMSSDK::showRegisterPage(SMSSDKCodeType type)
+bool SMSSDK::showRegisterPage(SMSSDKCodeType type, string tempCode)
 {
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
     //Andorid
-    return SMSSDK_android::showRegisterPageJNI();
+    return SMSSDK_android::showRegisterPageJNI(tempCode);
 
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
