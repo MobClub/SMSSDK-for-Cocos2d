@@ -1,11 +1,15 @@
-SMSSDK for Cocos2d-x
-===
-### This is a sample of SMSSDK for Cocos2d-x.
+# SMSSDK for Cocos2d-x
+### This is  cocos2dx plugin support to use SMSSDK([iOS](https://github.com/MobClub/SMSSDK-for-iOS),[Android](https://github.com/MobClub/SMSSDK-for-Android)). [中文官网](http://sms.mob.com/).
 **supported original SMSSDK version:**
 
-- Android - V3.1.1~
-- iOS - V3.1.0~
-- Cocos2d-x v3.0.0~
+- Android - V3.1.1
+- iOS - V3.1.2
+- Cocos2d-x v3.0.0
+
+**中文集成文档**
+
+- [Android](http://wiki.mob.com/smssdk-android-for-cocos2d/)
+- [iOS](http://wiki.mob.com/smssdk-ios-for-cocos2d/)
 
 ----------------------------------------------------
 
@@ -69,3 +73,5 @@ Until now,the Cocos2d-x party is everything ok,the next you need to import the S
 > * or Skype:amber
 
 More information About SMSSDK, please visit our website [Mob.com](http://www.mob.com)
+
+
