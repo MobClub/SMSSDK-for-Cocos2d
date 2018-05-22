@@ -133,11 +133,11 @@ public class DefaultContactViewItem implements cn.smssdk.gui.ContactItemMaker {
 						OnClickListener positiveClick = new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								PopupDialog.dismissDialog();
+								// Nothing to do
 							}
 						};
-						PopupDialog.showDialog(parent.getContext(), null, String.valueOf(user),
-								confirm, positiveClick, null, null, true, true, false);
+						PopupDialog.create(parent.getContext(), null, String.valueOf(user),
+								confirm, positiveClick, null, null, true, true, false).show();
 					} else{
 						ContactDetailPage contactDetailPage = new ContactDetailPage();
 						contactDetailPage.setContact(user);

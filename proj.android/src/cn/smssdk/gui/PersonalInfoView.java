@@ -17,14 +17,19 @@ import cn.smssdk.gui.util.GUISPDB;
  */
 
 public class PersonalInfoView {
-	private static View view;
+	private Context context;
+	private View view;
 	private AsyncImageView ivAvatar;
 	private TextView tvNickname;
 	private LinearLayout llPhone;
 	private TextView tvPhone;
 	private TextView tvBind;
 
-	public static View create(Context context) {
+	public PersonalInfoView(Context context) {
+		this.context = context;
+	}
+
+	public View create() {
 		LayoutInflater inflater = LayoutInflater.from(context);
 		view = inflater.inflate(ResHelper.getLayoutRes(context, "smssdk_personal_info"), null);
 		// 为保证视觉美观，先隐藏，等通讯录列表数据加载完毕后再和通讯录列表一起显示（ContactsPage.initData()中显示）
@@ -46,11 +51,13 @@ public class PersonalInfoView {
 			((TextView)view.findViewById(ResHelper.getIdRes(context, "tv_profile_rebind"))).setText(
 					ResHelper.getStringRes(context, "smssdk_rebind_profile"));
 		}
-
 		return view;
 	}
 
-	public static void updateUI(Context context, Profile profile) {
+	public void updateUI(Profile profile) {
+		if (this.view == null || this.context == null || profile == null) {
+			return;
+		}
 		AsyncImageView ivAvatar = ((AsyncImageView) view.findViewById(ResHelper.getIdRes(context, "iv_avatar")));
 		ivAvatar.setRound(ResHelper.dipToPx(context, 60 / 2));
 		if (profile != null) {

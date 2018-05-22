@@ -181,7 +181,7 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 			public void run() {
 				time--;
 				setResendText(time);
-				if (time == 0) {
+				if (time <= 0) {
 //					int resId = ResHelper.getStringRes(activity,
 //							"smssdk_unreceive_identify_code");
 //					if (resId > 0) {
@@ -201,6 +201,13 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 				}
 			}
 		}, 1000);
+	}
+
+	/**
+	 * 停止读秒计数器，如果不在适当的时候停止计数器，会造成MobUIShell的泄漏，知道读秒结束为止
+	 */
+	private void stopCountDown() {
+		time = 1;
 	}
 
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -228,6 +235,7 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 	}
 
 	public void afterTextChanged(Editable s) {
+
 	}
 
 	public void onClick(View v) {
@@ -275,8 +283,6 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 				OnClickListener positiveOnClick = new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						PopupDialog.dismissDialog();
-
 						if (pd != null && pd.isShowing()) {
 							pd.dismiss();
 						}
@@ -287,8 +293,8 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 						SMSSDK.getVoiceVerifyCode(code,phone);
 					}
 				};
-				PopupDialog.showDialog(getContext(), null, msg, confirm, positiveOnClick,
-						null, null, true, true, false);
+				PopupDialog.create(getContext(), null, msg, confirm, positiveOnClick,
+						null, null, true, true, false).show();
 			}
 		} else if (id == idTvResend) {
 			if (pd != null && pd.isShowing()) {
@@ -317,12 +323,14 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 				}
 
 				if (result == SMSSDK.RESULT_COMPLETE) {
+					// 提交验证码成功后停止读秒计数器
+					stopCountDown();
+
 					String msg = getContext().getResources().getString(ResHelper.getStringRes(getContext(), "smssdk_identify_success"));
 					String confirm = getContext().getResources().getString(ResHelper.getStringRes(getContext(), "smssdk_confirm"));
 					OnClickListener positiveClick = new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							PopupDialog.dismissDialog();
 							HashMap<String, Object> res = new HashMap<String, Object>();
 							res.put("res", true);
 							res.put("page", 2);
@@ -331,8 +339,8 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 							finish();
 						}
 					};
-					PopupDialog.showDialog(getContext(), null, msg, confirm, positiveClick,
-							null, null, false, false, false);
+					PopupDialog.create(getContext(), null, msg, confirm, positiveClick,
+							null, null, false, false, false).show();
 				} else {
 					((Throwable) data).printStackTrace();
 					// 验证码不正确
@@ -356,11 +364,11 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 						OnClickListener positiveClick = new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								PopupDialog.dismissDialog();
+								// Nothing to do
 							}
 						};
-						PopupDialog.showDialog(getContext(), null, msg, confirm, positiveClick,
-								null, null, true, true, false);
+						PopupDialog.create(getContext(), null, msg, confirm, positiveClick,
+								null, null, true, true, false).show();
 					}
 				}
 			}
@@ -480,7 +488,8 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 		OnClickListener positiveClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				PopupDialog.dismissDialog();
+				// 退出当前页面前停止读秒计数器
+				stopCountDown();
 				finish();
 			}
 		};
@@ -488,11 +497,11 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 		OnClickListener negativeClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				PopupDialog.dismissDialog();
+				// Nothing to do
 			}
 		};
-		PopupDialog.showDialog(getContext(), null, msg, confirm, positiveClick,
-				cancel, negativeClick, true, true, false);
+		PopupDialog.create(getContext(), null, msg, confirm, positiveClick,
+				cancel, negativeClick, true, true, false).show();
 	}
 
 	@Override

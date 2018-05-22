@@ -13,44 +13,32 @@ import com.mob.tools.utils.ResHelper;
 
 
 public class SizeHelper {
-	public static float designedDensity = 1.5f;
-	public static int designedScreenWidth = 540;
-	private static Context context = null;
-
-	protected static SizeHelper helper;
-
-	private SizeHelper() {
-	}
-
-	public static void prepare(Context c) {
-		if(context == null || context != c.getApplicationContext()) {
-			context = c;
-		}
-	}
+	public static final float DESIGNED_DENSITY = 1.5f;
+	public static final int DESIGNED_SCREEN_WIDTH = 540;
 
 	/**
 	 * 根据density转换设计的px到目标机器，返回px大小
 	 * @return 像素大小
 	 */
-	public static int fromPx(int px) {
-		return ResHelper.designToDevice(context, designedDensity, px);
+	public static int fromPx(Context context, int px) {
+		return ResHelper.designToDevice(context, DESIGNED_DENSITY, px);
 	}
 
 	/**
 	* 根据屏幕宽度转换设计的px到目标机器，返回px大小
 	* @return 像素大小
 	*/
-	public static int fromPxWidth(int px) {
-		return ResHelper.designToDevice(context, designedScreenWidth, px);
+	public static int fromPxWidth(Context context, int px) {
+		return ResHelper.designToDevice(context, DESIGNED_SCREEN_WIDTH, px);
 	}
 
 	/**
 	* 根据density转换设计的dp到目标机器，返回px大小
 	* @return 像素大小
 	*/
-	public static int fromDp(int dp) {
+	public static int fromDp(Context context, int dp) {
 		int px = ResHelper.dipToPx(context, dp);
-		return ResHelper.designToDevice(context, designedDensity, px);
+		return ResHelper.designToDevice(context, DESIGNED_DENSITY, px);
 	}
 
 }

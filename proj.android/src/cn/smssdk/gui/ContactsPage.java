@@ -52,6 +52,7 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 	private EventHandler handler;
 	private ArrayList<HashMap<String,Object>> friendsInApp;
 	private ArrayList<HashMap<String,Object>> contactsInMobile;
+	private OnUserInfoSubmitListener onUserInfoSubmitListener;
 
 	@Override
 	public void onCreate() {
@@ -79,6 +80,7 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 
 				ContactListPageLayout page = new ContactListPageLayout(activity);
 				LinearLayout layout = page.getLayout();
+				onUserInfoSubmitListener = page.getUserInfoSubmitListenerInstance();
 
 				if (layout != null) {
 					activity.setContentView(layout);
@@ -208,7 +210,9 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 			Boolean res = (Boolean) data.get("res");
 			// 提交资料成功
 			if (res != null && res) {
-				PersonalInfoView.updateUI(getContext(), GUISPDB.getProfile());
+				if (this.onUserInfoSubmitListener != null) {
+					this.onUserInfoSubmitListener.onSubmitted(GUISPDB.getProfile());
+				}
 			} else {
 				// Nothing to do
 			}
@@ -450,4 +454,11 @@ public class ContactsPage extends FakeActivity implements OnClickListener, TextW
 
 	}
 
+	public void setOnUserInfoSubmitListener(OnUserInfoSubmitListener l) {
+		this.onUserInfoSubmitListener = l;
+	}
+
+	public interface OnUserInfoSubmitListener {
+		void onSubmitted(Profile p);
+	}
 }

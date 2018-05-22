@@ -38,14 +38,14 @@ public class IdentifyNumPageLayout extends BasePageLayout {
 		wrapperLayout.setLayoutParams(wrapperParams);
 		wrapperLayout.setBackgroundColor(0xffffffff);
 		wrapperLayout.setOrientation(LinearLayout.VERTICAL);
-		wrapperLayout.setPadding(SizeHelper.fromPxWidth(26), 0, SizeHelper.fromPxWidth(26), 0);
+		wrapperLayout.setPadding(SizeHelper.fromPxWidth(context, 26), 0, SizeHelper.fromPxWidth(context, 26), 0);
 		parent.addView(wrapperLayout);
 
 		TextView identifyNotify = new TextView(context);
 		identifyNotify.setId(ResHelper.getIdRes(context, "tv_identify_notify"));
 		LinearLayout.LayoutParams identifyNotifyParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		identifyNotifyParams.topMargin = SizeHelper.fromPxWidth(32);
+		identifyNotifyParams.topMargin = SizeHelper.fromPxWidth(context, 32);
 		identifyNotify.setGravity(Gravity.CENTER);
 		identifyNotify.setLayoutParams(identifyNotifyParams);
 		int resid = ResHelper.getStringRes(context, "smssdk_make_sure_mobile_detail");
@@ -58,7 +58,7 @@ public class IdentifyNumPageLayout extends BasePageLayout {
 		LinearLayout llPhone = new LinearLayout(context);
 		LinearLayout.LayoutParams llPhoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		llPhoneParams.topMargin = SizeHelper.fromPxWidth(60);
+		llPhoneParams.topMargin = SizeHelper.fromPxWidth(context, 60);
 		llPhone.setLayoutParams(llPhoneParams);
 		llPhone.setOrientation(LinearLayout.HORIZONTAL);
 		wrapperLayout.addView(llPhone);
@@ -167,7 +167,7 @@ public class IdentifyNumPageLayout extends BasePageLayout {
 		Button submitBtn = new Button(context);
 		submitBtn.setId(ResHelper.getIdRes(context, "btn_submit"));
 		LinearLayout.LayoutParams submitParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(72));
+				SizeHelper.fromPxWidth(context, 72));
 		submitParams.topMargin = ResHelper.dipToPx(context, 40);
 		submitBtn.setLayoutParams(submitParams);
 		resid = ResHelper.getBitmapRes(context, "smssdk_btn_disenable");
@@ -175,15 +175,15 @@ public class IdentifyNumPageLayout extends BasePageLayout {
 		resid = ResHelper.getStringRes(context, "smssdk_next");
 		submitBtn.setText(resid);
 		submitBtn.setTextColor(0xffffffff);
-		submitBtn.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(24));
-		submitBtn.setPadding(SizeHelper.fromPxWidth(10), 0, SizeHelper.fromPxWidth(10), 0);
+		submitBtn.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(context, 24));
+		submitBtn.setPadding(SizeHelper.fromPxWidth(context, 10), 0, SizeHelper.fromPxWidth(context, 10), 0);
 		wrapperLayout.addView(submitBtn);
 
 		// 语音验证码Container
 		LinearLayout llVoice = new LinearLayout(context);
 		LinearLayout.LayoutParams llVoiceParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		llVoiceParams.topMargin = SizeHelper.fromPxWidth(20);
+		llVoiceParams.topMargin = SizeHelper.fromPxWidth(context, 20);
 		llVoice.setId(ResHelper.getIdRes(context, "ll_voice"));
 		llVoice.setLayoutParams(llVoiceParams);
 		llVoice.setOrientation(LinearLayout.HORIZONTAL);

@@ -50,11 +50,9 @@ public class CountryListView extends RelativeLayout implements OnTouchListener {
 	}
 
 	private void init(Context context) {
-		SizeHelper.prepare(context);
-
 		// 国家列表
 		lvContries = new GroupListView(context);
-		lvContries.setDividerHeight(SizeHelper.fromPxWidth(1));
+		lvContries.setDividerHeight(SizeHelper.fromPxWidth(context, 1));
 		int resId = ResHelper.getBitmapRes(context, "smssdk_cl_divider");
 		if (resId > 0) {
 			lvContries.setDivider(context.getResources().getDrawable(resId));
@@ -75,11 +73,11 @@ public class CountryListView extends RelativeLayout implements OnTouchListener {
 		if (resId > 0) {
 			tvScroll.setBackgroundResource(resId);
 		}
-		tvScroll.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(80));
+		tvScroll.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(context, 80));
 		tvScroll.setTypeface(Typeface.DEFAULT);
 		tvScroll.setVisibility(GONE);
 		tvScroll.setGravity(Gravity.CENTER);
-		int dp80 = SizeHelper.fromPxWidth(120);
+		int dp80 = SizeHelper.fromPxWidth(context, 120);
 		LayoutParams lp = new LayoutParams(dp80, dp80);
 		lp.addRule(CENTER_IN_PARENT);
 		addView(tvScroll, lp);
@@ -96,7 +94,7 @@ public class CountryListView extends RelativeLayout implements OnTouchListener {
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp.addRule(ALIGN_PARENT_RIGHT);
 		lp.addRule(CENTER_VERTICAL);
-		lp.rightMargin = SizeHelper.fromPxWidth(7);
+		lp.rightMargin = SizeHelper.fromPxWidth(context, 7);
 		addView(llScroll, lp);
 
 		initScroll(context);
@@ -108,15 +106,14 @@ public class CountryListView extends RelativeLayout implements OnTouchListener {
 	 */
 	private void initScroll(Context context) {
 		llScroll.removeAllViews();
-		SizeHelper.prepare(context);
 
 		int size = adapter.getGroupCount();
-		int dp3 = SizeHelper.fromPxWidth(6);
-		int dp2 = SizeHelper.fromPxWidth(4);
+		int dp3 = SizeHelper.fromPxWidth(context, 6);
+		int dp2 = SizeHelper.fromPxWidth(context, 4);
 		for (int i = 0; i < size; i++) {
 			TextView tv = new TextView(context);
 			tv.setText(adapter.getGroupTitle(i));
-			tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(18));
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(context, 18));
 			tv.setGravity(Gravity.CENTER);
 			tv.setPadding(dp3, dp2, dp3, dp2);
 			int resId = ResHelper.getColorRes(context, "smssdk_main_color");

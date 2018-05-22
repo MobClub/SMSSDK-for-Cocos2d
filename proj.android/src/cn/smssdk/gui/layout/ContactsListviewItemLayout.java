@@ -26,21 +26,19 @@ import com.mob.tools.utils.ResHelper;
 public class ContactsListviewItemLayout {
 
 	public static LinearLayout create(Context context) {
-		SizeHelper.prepare(context);
-
 		LinearLayout root = new LinearLayout(context);
 		root.setId(ResHelper.getIdRes(context, "rl_lv_item_bg"));
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(95));
+		AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
+				SizeHelper.fromPxWidth(context, 95));
 		root.setLayoutParams(params);
-		int padding = SizeHelper.fromPxWidth(14);
+		int padding = SizeHelper.fromPxWidth(context, 14);
 		root.setPadding(padding, padding, padding, padding);
 		root.setGravity(Gravity.CENTER_VERTICAL);
 		root.setBackgroundColor(0xffffffff);
 
 		AsyncImageView contactImage = new AsyncImageView(context);
 		contactImage.setId(ResHelper.getIdRes(context, "iv_contact"));
-		int width= SizeHelper.fromPxWidth(64);
+		int width= SizeHelper.fromPxWidth(context, 64);
 		LinearLayout.LayoutParams contactImageParams = new LinearLayout.LayoutParams(width, width);
 		float radius = width / 2;
 		contactImage.setRound(radius);
@@ -52,7 +50,7 @@ public class ContactsListviewItemLayout {
 		LinearLayout.LayoutParams wrapperParams = new LinearLayout.LayoutParams(0,
 				RelativeLayout.LayoutParams.WRAP_CONTENT);
 		wrapperParams.weight = 1;
-		wrapperParams.leftMargin = SizeHelper.fromPxWidth(12);
+		wrapperParams.leftMargin = SizeHelper.fromPxWidth(context, 12);
 		wrapper.setLayoutParams(wrapperParams);
 		wrapper.setOrientation(LinearLayout.VERTICAL);
 		root.addView(wrapper);
@@ -63,7 +61,7 @@ public class ContactsListviewItemLayout {
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 		name.setLayoutParams(nameParams);
 		name.setTextColor(0xff333333);
-		name.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(28));
+		name.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(context, 28));
 		name.setSingleLine(true);
 		name.setEllipsize(TextUtils.TruncateAt.END);
 		wrapper.addView(name);
@@ -75,7 +73,7 @@ public class ContactsListviewItemLayout {
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 		contact.setLayoutParams(contactParams);
 		contact.setTextColor(0xff999999);
-		contact.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(22));
+		contact.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(context, 22));
 		name.setSingleLine(true);
 		name.setEllipsize(TextUtils.TruncateAt.END);
 		// 新UI中去掉了该组件(隐藏）
@@ -84,13 +82,13 @@ public class ContactsListviewItemLayout {
 
 		Button add = new Button(context);
 		add.setId(ResHelper.getIdRes(context, "btn_add"));
-		LinearLayout.LayoutParams addParams = new LinearLayout.LayoutParams(SizeHelper.fromPxWidth(100),
-				SizeHelper.fromPxWidth(46));
+		LinearLayout.LayoutParams addParams = new LinearLayout.LayoutParams(SizeHelper.fromPxWidth(context, 100),
+				SizeHelper.fromPxWidth(context, 46));
 		addParams.leftMargin = ResHelper.dipToPx(context, 5);
 		add.setLayoutParams(addParams);
 		int resid = ResHelper.getStringRes(context, "smssdk_add_contact");
 		add.setText(resid);
-		add.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(22));
+		add.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(context, 22));
 		add.setTextColor(0xffffffff);
 		add.setBackgroundResource(ResHelper.getBitmapRes(context, "smssdk_btn_enable"));
 		add.setPadding(0, 0, 0, 0);

@@ -21,8 +21,6 @@ import com.mob.tools.utils.ResHelper;
 public class ListviewTitleLayout {
 
 	static RelativeLayout create(Context context) {
-		SizeHelper.prepare(context);
-
 		RelativeLayout root = new RelativeLayout(context);
 		ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.MATCH_PARENT);
@@ -31,15 +29,15 @@ public class ListviewTitleLayout {
 		TextView title = new TextView(context);
 		title.setId(ResHelper.getIdRes(context, "tv_title"));
 		RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(40));
-		titleParams.topMargin = SizeHelper.fromPxWidth(-20);
+				SizeHelper.fromPxWidth(context, 40));
+		titleParams.topMargin = SizeHelper.fromPxWidth(context, -20);
 		title.setLayoutParams(titleParams);
-		title.setPadding(SizeHelper.fromPxWidth(20), 0, 0, 0);
-		title.setLineSpacing(SizeHelper.fromPxWidth(8), 1);
+		title.setPadding(SizeHelper.fromPxWidth(context, 20), 0, 0, 0);
+		title.setLineSpacing(SizeHelper.fromPxWidth(context, 8), 1);
 		int resid = ResHelper.getStringRes(context, "smssdk_regist");
 		title.setText(resid);
 		title.setTextColor(0xff999999);
-		title.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(26));
+		title.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(context, 26));
 		title.setGravity(Gravity.CENTER_VERTICAL);
 		title.setBackgroundColor(0xffeae8ee);
 		root.addView(title);

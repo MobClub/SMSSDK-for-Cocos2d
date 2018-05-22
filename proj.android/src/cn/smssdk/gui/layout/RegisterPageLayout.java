@@ -31,8 +31,6 @@ public class RegisterPageLayout extends BasePageLayout {
 	}
 
 	protected void onCreateContent(LinearLayout parent) {
-		SizeHelper.prepare(context);
-
 		TextView topLabel = new TextView(context);
 		LinearLayout.LayoutParams topLabelParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -46,8 +44,8 @@ public class RegisterPageLayout extends BasePageLayout {
 
 		LinearLayout rlCountry = new LinearLayout(context);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(96));
-		params.setMargins(SizeHelper.fromPx(26), SizeHelper.fromPxWidth(32), SizeHelper.fromPxWidth(26), 0);
+				SizeHelper.fromPxWidth(context, 96));
+		params.setMargins(SizeHelper.fromPx(context, 26), SizeHelper.fromPxWidth(context, 32), SizeHelper.fromPxWidth(context, 26), 0);
 		rlCountry.setLayoutParams(params);
 		rlCountry.setId(ResHelper.getIdRes(context, "rl_country"));
 
@@ -60,7 +58,7 @@ public class RegisterPageLayout extends BasePageLayout {
 		int resid = ResHelper.getStringRes(context, "smssdk_country");
 		tv.setText(resid);
 		tv.setTextColor(0xff000000);
-		tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(25));
+		tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(context, 25));
 		rlCountry.addView(tv);
 
 		TextView tvCountry = new TextView(context);
@@ -71,31 +69,31 @@ public class RegisterPageLayout extends BasePageLayout {
 		tvCountryParams.weight = 1;
 		tvCountry.setLayoutParams(tvCountryParams);
 		tvCountry.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-		tvCountry.setPadding(SizeHelper.fromPxWidth(14), 0, 0, 0);
+		tvCountry.setPadding(SizeHelper.fromPxWidth(context, 14), 0, 0, 0);
 		Drawable rArrow = context.getResources().getDrawable(ResHelper.getBitmapRes(context, "smssdk_arrow_right"));
 		rArrow.setBounds(0, 0, ResHelper.dipToPx(context, 25), ResHelper.dipToPx(context, 25));
 		// 使用图片的默认大小
 //		rArrow.setBounds(0, 0, rArrow.getIntrinsicWidth(), rArrow.getIntrinsicHeight());
 		tvCountry.setCompoundDrawables(null, null, rArrow, null);
 		tvCountry.setTextColor(0xff000000);
-		tvCountry.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(25));
+		tvCountry.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(context, 25));
 		rlCountry.addView(tvCountry);
 
 		parent.addView(rlCountry);
 
 		View line = new View(context);
 		LinearLayout.LayoutParams lineParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-				SizeHelper.fromPxWidth(1));
-		lineParams.leftMargin = SizeHelper.fromPxWidth(26);
-		lineParams.rightMargin = SizeHelper.fromPxWidth(26);
+				SizeHelper.fromPxWidth(context, 1));
+		lineParams.leftMargin = SizeHelper.fromPxWidth(context, 26);
+		lineParams.rightMargin = SizeHelper.fromPxWidth(context, 26);
 		line.setLayoutParams(lineParams);
 		line.setBackgroundColor(context.getResources().getColor(ResHelper.getColorRes(context, "smssdk_gray_press")));
 		parent.addView(line);
 
 		LinearLayout phoneLayout =  new LinearLayout(context);
 		LinearLayout.LayoutParams phoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(70));
-		phoneParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(30), SizeHelper.fromPxWidth(26), 0);
+				SizeHelper.fromPxWidth(context, 70));
+		phoneParams.setMargins(SizeHelper.fromPxWidth(context, 26), SizeHelper.fromPxWidth(context, 30), SizeHelper.fromPxWidth(context, 26), 0);
 		phoneLayout.setLayoutParams(phoneParams);
 
 		TextView countryNum = new TextView(context);
@@ -105,7 +103,7 @@ public class RegisterPageLayout extends BasePageLayout {
 		countryNum.setLayoutParams(countryNumParams);
 		countryNum.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 		countryNum.setTextColor(0xff353535);
-		countryNum.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(25));
+		countryNum.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(context, 25));
 		phoneLayout.addView(countryNum);
 
 		LinearLayout wrapperLayout =  new LinearLayout(context);
@@ -126,15 +124,15 @@ public class RegisterPageLayout extends BasePageLayout {
 		writePhone.setHint(resid);
 		writePhone.setInputType(InputType.TYPE_CLASS_PHONE);
 		writePhone.setTextColor(0xff353535);
-		writePhone.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(25));
+		writePhone.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(context, 25));
 		wrapperLayout.addView(writePhone);
 
 		ImageView image = new ImageView(context);
 		image.setId(ResHelper.getIdRes(context, "iv_clear"));
-		LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(SizeHelper.fromPxWidth(24),
-				SizeHelper.fromPxWidth(24));
+		LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(SizeHelper.fromPxWidth(context, 24),
+				SizeHelper.fromPxWidth(context, 24));
 		imageParams.gravity = Gravity.CENTER_VERTICAL;
-		imageParams.rightMargin = SizeHelper.fromPxWidth(20);
+		imageParams.rightMargin = SizeHelper.fromPxWidth(context, 20);
 		image.setLayoutParams(imageParams);
 		resid = ResHelper.getBitmapRes(context, "smssdk_clear_search");
 		image.setBackgroundResource(resid);
@@ -146,9 +144,9 @@ public class RegisterPageLayout extends BasePageLayout {
 
 		View phoneLine = new View(context);
 		LinearLayout.LayoutParams phoneLineParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-				SizeHelper.fromPxWidth(1));
-		phoneLineParams.leftMargin = SizeHelper.fromPxWidth(26);
-		phoneLineParams.rightMargin = SizeHelper.fromPxWidth(26);
+				SizeHelper.fromPxWidth(context, 1));
+		phoneLineParams.leftMargin = SizeHelper.fromPxWidth(context, 26);
+		phoneLineParams.rightMargin = SizeHelper.fromPxWidth(context, 26);
 		phoneLine.setLayoutParams(phoneLineParams);
 		phoneLine.setBackgroundColor(context.getResources().getColor(ResHelper.getColorRes(context, "smssdk_gray_press")));
 		parent.addView(phoneLine);
@@ -156,15 +154,15 @@ public class RegisterPageLayout extends BasePageLayout {
 		Button nextBtn = new Button(context);
 		nextBtn.setId(ResHelper.getIdRes(context, "btn_next"));
 		LinearLayout.LayoutParams nextParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(72));
-		nextParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(36), SizeHelper.fromPxWidth(26), 0);
+				SizeHelper.fromPxWidth(context, 72));
+		nextParams.setMargins(SizeHelper.fromPxWidth(context, 26), SizeHelper.fromPxWidth(context, 36), SizeHelper.fromPxWidth(context, 26), 0);
 		nextBtn.setLayoutParams(nextParams);
 		resid = ResHelper.getBitmapRes(context, "smssdk_btn_disenable");
 		nextBtn.setBackgroundResource(resid);
 		resid = ResHelper.getStringRes(context, "smssdk_next");
 		nextBtn.setText(resid);
 		nextBtn.setTextColor(0xffffffff);
-		nextBtn.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(25));
+		nextBtn.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(context, 25));
 		nextBtn.setPadding(0, 0, 0, 0);
 		parent.addView(nextBtn);
 	}

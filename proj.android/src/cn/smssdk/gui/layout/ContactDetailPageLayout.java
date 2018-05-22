@@ -28,25 +28,23 @@ public class ContactDetailPageLayout extends BasePageLayout {
 	}
 
 	protected void onCreateContent(LinearLayout parent) {
-		SizeHelper.prepare(context);
-
 		// 名字
 		TextView contactName = new TextView(context);
 		contactName.setId(ResHelper.getIdRes(context, "tv_contact_name"));
 		LinearLayout.LayoutParams contactNameParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		contactNameParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(60), SizeHelper.fromPxWidth(26), 0);
+		contactNameParams.setMargins(SizeHelper.fromPxWidth(context, 26), SizeHelper.fromPxWidth(context, 60), SizeHelper.fromPxWidth(context, 26), 0);
 		contactName.setLayoutParams(contactNameParams);
 		contactName.setGravity(Gravity.CENTER);
 		contactName.setTextColor(context.getResources().getColor(ResHelper.getColorRes(context, "smssdk_main_color")));
-		contactName.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(52));
+		contactName.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(context, 52));
 		parent.addView(contactName);
 
 		// 手机号Container
 		LinearLayout llPhone = new LinearLayout(context);
 		LinearLayout.LayoutParams llPhoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		llPhoneParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(60), SizeHelper.fromPxWidth(26), 0);
+		llPhoneParams.setMargins(SizeHelper.fromPxWidth(context, 26), SizeHelper.fromPxWidth(context, 60), SizeHelper.fromPxWidth(context, 26), 0);
 		llPhone.setLayoutParams(llPhoneParams);
 		llPhone.setOrientation(LinearLayout.HORIZONTAL);
 		parent.addView(llPhone);
@@ -78,7 +76,7 @@ public class ContactDetailPageLayout extends BasePageLayout {
 		View linePhone = new View(context);
 		LinearLayout.LayoutParams linePhoneParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				ResHelper.dipToPx(context, 1));
-		linePhoneParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(10), SizeHelper.fromPxWidth(26), 0);
+		linePhoneParams.setMargins(SizeHelper.fromPxWidth(context, 26), SizeHelper.fromPxWidth(context, 10), SizeHelper.fromPxWidth(context, 26), 0);
 		linePhone.setLayoutParams(linePhoneParams);
 		resid = ResHelper.getColorRes(context, "smssdk_line_light_gray");
 		linePhone.setBackgroundResource(resid);
@@ -88,7 +86,7 @@ public class ContactDetailPageLayout extends BasePageLayout {
 		LinearLayout llPhone2 = new LinearLayout(context);
 		LinearLayout.LayoutParams llPhone2Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		llPhone2Params.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(22), SizeHelper.fromPxWidth(26), 0);
+		llPhone2Params.setMargins(SizeHelper.fromPxWidth(context, 26), SizeHelper.fromPxWidth(context, 22), SizeHelper.fromPxWidth(context, 26), 0);
 		llPhone2.setId(ResHelper.getIdRes(context, "ll_phone2"));
 		llPhone2.setLayoutParams(llPhone2Params);
 		llPhone2.setOrientation(LinearLayout.HORIZONTAL);
@@ -119,7 +117,7 @@ public class ContactDetailPageLayout extends BasePageLayout {
 		View linephone2 = new View(context);
 		LinearLayout.LayoutParams linephone2Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				ResHelper.dipToPx(context, 1));
-		linephone2Params.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(10), SizeHelper.fromPxWidth(26), 0);
+		linephone2Params.setMargins(SizeHelper.fromPxWidth(context, 26), SizeHelper.fromPxWidth(context, 10), SizeHelper.fromPxWidth(context, 26), 0);
 		linephone2.setLayoutParams(linephone2Params);
 		linephone2.setId(ResHelper.getIdRes(context, "vw_divider2"));
 		resid = ResHelper.getColorRes(context, "smssdk_line_light_gray");
@@ -130,15 +128,15 @@ public class ContactDetailPageLayout extends BasePageLayout {
 		Button inviteBtn = new Button(context);
 		inviteBtn.setId(ResHelper.getIdRes(context, "btn_invite"));
 		LinearLayout.LayoutParams inviteParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(72));
-		inviteParams.setMargins(SizeHelper.fromPxWidth(26), SizeHelper.fromPxWidth(40), SizeHelper.fromPxWidth(26), 0);
+				SizeHelper.fromPxWidth(context, 72));
+		inviteParams.setMargins(SizeHelper.fromPxWidth(context, 26), SizeHelper.fromPxWidth(context, 40), SizeHelper.fromPxWidth(context, 26), 0);
 		inviteBtn.setLayoutParams(inviteParams);
 		resid = ResHelper.getBitmapRes(context, "smssdk_btn_enable");
 		inviteBtn.setBackgroundResource(resid);
 		resid = ResHelper.getStringRes(context, "smssdk_send_invitation");
 		inviteBtn.setText(resid);
 		inviteBtn.setTextColor(0xffffffff);
-		inviteBtn.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(28));
+		inviteBtn.setTextSize(TypedValue.COMPLEX_UNIT_PX,SizeHelper.fromPxWidth(context, 28));
 		inviteBtn.setPadding(0, 0, 0, 0);
 		parent.addView(inviteBtn);
 	}

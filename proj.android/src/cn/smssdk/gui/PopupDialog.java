@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,13 +22,14 @@ import com.mob.tools.utils.ResHelper;
 
 import java.lang.reflect.Method;
 
+import cn.smssdk.utils.SMSLog;
+
 /**
  * Created by weishj on 2018/1/11.
  */
 
 public class PopupDialog extends AlertDialog {
-	private static final String TAG = PopupDialog.class.getSimpleName();
-	private static PopupDialog dialog;
+	private static final String TAG = "PopupDialog";
 	private View view;
 	private Context context;
 	private TextView title;
@@ -105,7 +105,7 @@ public class PopupDialog extends AlertDialog {
 					break;
 				}
 				default: {
-					Log.e(TAG, "Button can not be found. whichButton=" + whichButton);
+					SMSLog.getInstance().e(SMSLog.FORMAT, TAG, "setDialogButton", "Button can not be found. whichButton=" + whichButton);
 				}
 			}
 		} else {
@@ -119,6 +119,7 @@ public class PopupDialog extends AlertDialog {
 								if (listener != null) {
 									listener.onClick(v);
 								}
+								dismiss();
 							}
 						});
 					}
@@ -133,13 +134,14 @@ public class PopupDialog extends AlertDialog {
 								if (listener != null) {
 									listener.onClick(v);
 								}
+								dismiss();
 							}
 						});
 					}
 					break;
 				}
 				default: {
-					Log.e(TAG, "Button can not be found. whichButton=" + whichButton);
+					SMSLog.getInstance().e(SMSLog.FORMAT, TAG, "setDialogButton", "Button can not be found. whichButton=" + whichButton);
 				}
 			}
 		}
@@ -185,14 +187,14 @@ public class PopupDialog extends AlertDialog {
 			this.close.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					dismissDialog();
+					dismiss();
 				}
 			});
 		}
 	}
 
 	/**
-	 * Open a confirm dialog
+	 * Obtain a confirm dialog instance
 	 *
 	 * @param context                context
 	 * @param title                  title of the dialog, pass null or "" if no title is needed
@@ -204,20 +206,22 @@ public class PopupDialog extends AlertDialog {
 	 * @param cancelable             cancelable when press back
 	 * @param canceledOnTouchOutside canceled on touch outside
 	 * @param closeBtn               whether to show close button
+	 *
+	 * @return PopupDialog
 	 */
-	public static void showDialog(Context context, String title, String message, String confirm, View.OnClickListener
+	public static PopupDialog create(Context context, String title, String message, String confirm, View.OnClickListener
 			positiveClickListener, String cancel, View.OnClickListener negativeClickListener, boolean cancelable,
-								  boolean canceledOnTouchOutside, boolean closeBtn) {
-		dismissDialog();
-		dialog = new PopupDialog(context, cancelable, canceledOnTouchOutside);
+									 boolean canceledOnTouchOutside, boolean closeBtn) {
+		PopupDialog dialog = new PopupDialog(context, cancelable, canceledOnTouchOutside);
 		dialog.setDialogTitle(title, closeBtn);
 		dialog.setDialogMessage(message);
 		dialog.setDialogButton(confirm, positiveClickListener, cancel, negativeClickListener);
-		dialog.show();
+
+		return dialog;
 	}
 
 	/**
-	 * Open a confirm dialog
+	 * Obtain a confirm dialog instance
 	 *
 	 * @param context                context
 	 * @param titleRes               resource id of the dialog's title, pass 0 if no title is needed
@@ -229,19 +233,20 @@ public class PopupDialog extends AlertDialog {
 	 * @param cancelable             cancelable when press back
 	 * @param canceledOnTouchOutside canceled on touch outside
 	 * @param closeBtn               whether to show close button
+	 *
+	 * @return PopupDialog
 	 */
-	public static void showDialog(Context context, int titleRes, int messageRes, int confirmRes, View.OnClickListener
+	public static PopupDialog create(Context context, int titleRes, int messageRes, int confirmRes, View.OnClickListener
 			positiveClickListener, int cancelRes, View.OnClickListener negativeClickListener, boolean cancelable,
-								  boolean canceledOnTouchOutside, boolean closeBtn) {
-		showDialog(context, titleRes, messageRes, confirmRes, positiveClickListener, cancelRes, negativeClickListener,
+								boolean canceledOnTouchOutside, boolean closeBtn) {
+		return create(context, titleRes, messageRes, confirmRes, positiveClickListener, cancelRes, negativeClickListener,
 				cancelable, canceledOnTouchOutside, closeBtn, null);
 	}
 
-	public static void showDialog(Context context, int titleRes, int messageRes, int confirmRes, View.OnClickListener
+	public static PopupDialog create(Context context, int titleRes, int messageRes, int confirmRes, View.OnClickListener
 			positiveClickListener, int cancelRes, View.OnClickListener negativeClickListener, boolean cancelable,
-								  boolean canceledOnTouchOutside, boolean closeBtn, OnDismissListener listener) {
-		dismissDialog();
-		dialog = new PopupDialog(context, cancelable, canceledOnTouchOutside);
+								boolean canceledOnTouchOutside, boolean closeBtn, OnDismissListener listener) {
+		PopupDialog dialog = new PopupDialog(context, cancelable, canceledOnTouchOutside);
 		if (listener != null) {
 			dialog.setOnDismissListener(listener);
 		}
@@ -249,14 +254,14 @@ public class PopupDialog extends AlertDialog {
 		try {
 			title = titleRes > 0 ? context.getResources().getString(titleRes) : null;
 		} catch (Resources.NotFoundException e) {
-			Log.w(TAG, "Resource not found. resId=" + titleRes, e);
+			SMSLog.getInstance().w(SMSLog.FORMAT, TAG, "create", "Resource not found. resId=" + titleRes, e);
 		}
 		dialog.setDialogTitle(title, closeBtn);
 		String msg = null;
 		try {
 			msg = messageRes > 0 ? context.getResources().getString(messageRes) : null;
 		} catch (Resources.NotFoundException e) {
-			Log.w(TAG, "Resource not found. resId=" + messageRes, e);
+			SMSLog.getInstance().w(SMSLog.FORMAT, TAG, "create", "Resource not found. resId=" + messageRes, e);
 		}
 		dialog.setDialogMessage(msg);
 		String confirm = null;
@@ -265,20 +270,11 @@ public class PopupDialog extends AlertDialog {
 			confirm = confirmRes > 0 ? context.getResources().getString(confirmRes) : null;
 			cancel = cancelRes > 0 ? context.getResources().getString(cancelRes) : null;
 		} catch (Resources.NotFoundException e) {
-			Log.w(TAG, "Resource not found.", e);
+			SMSLog.getInstance().w(SMSLog.FORMAT, TAG, "create", "Resource not found.", e);
 		}
 		dialog.setDialogButton(confirm, positiveClickListener, cancel, negativeClickListener);
-		dialog.show();
-	}
 
-	public static void dismissDialog() {
-		try {
-			if (dialog != null && dialog.isShowing()) {
-				dialog.dismiss();
-			}
-		} catch (Throwable t) {
-			Log.w(TAG, t);
-		}
+		return dialog;
 	}
 
 	public void setCancel(int cancelRes) {
@@ -298,7 +294,7 @@ public class PopupDialog extends AlertDialog {
 		try {
 			windowManager = (WindowManager)context.getSystemService("window");
 		} catch (Throwable var6) {
-			Log.w(TAG, var6);
+			SMSLog.getInstance().w(SMSLog.FORMAT, TAG, "getScreenSize", var6);
 			windowManager = null;
 		}
 
@@ -318,7 +314,7 @@ public class PopupDialog extends AlertDialog {
 					method.invoke(display, new Object[]{t});
 					return new int[]{t.x, t.y};
 				} catch (Throwable var5) {
-					Log.w(TAG, var5);
+					SMSLog.getInstance().w(SMSLog.FORMAT, TAG, "getScreenSize", var5);
 					return new int[]{0, 0};
 				}
 			}
