@@ -153,15 +153,13 @@ public class CountryAdapter extends GroupAdapter {
 			ll.setPadding(ResHelper.dipToPx(parent.getContext(), 10), 0, 0, 0);
 			convertView = ll;
 
-			SizeHelper.prepare(parent.getContext());
-
 			TextView tv = new TextView(parent.getContext());
-			tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(16));
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(parent.getContext(), 16));
 			int resId = ResHelper.getColorRes(parent.getContext(), "smssdk_lv_title_color");
 			if (resId > 0) {
 				tv.setTextColor(parent.getContext().getResources().getColor(resId));
 			}
-			int dp6 = SizeHelper.fromPxWidth(14);
+			int dp6 = SizeHelper.fromPxWidth(parent.getContext(), 14);
 			tv.setPadding(0, dp6, 0, dp6);
 			tv.setLayoutParams(new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -188,16 +186,14 @@ public class CountryAdapter extends GroupAdapter {
 			ll.setPadding(ResHelper.dipToPx(parent.getContext(), 10), 0, ResHelper.dipToPx(parent.getContext(), 40), 0);
 			convertView = ll;
 
-			SizeHelper.prepare(parent.getContext());
-
 			// 国家列表item的国家名，如“中国”
 			TextView tv = new TextView(parent.getContext());
 			int resId = ResHelper.getColorRes(parent.getContext(), "smssdk_lv_tv_color");
 			if (resId > 0) {
 				tv.setTextColor(parent.getContext().getResources().getColor(resId));
 			}
-			tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(24));
-			int dp16 = SizeHelper.fromPxWidth(30);
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(parent.getContext(), 24));
+			int dp16 = SizeHelper.fromPxWidth(parent.getContext(), 30);
 			tv.setPadding(0, dp16, 0, dp16);
 			LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT);
 			tvParams.weight = 1;
@@ -209,7 +205,7 @@ public class CountryAdapter extends GroupAdapter {
 			if (resId > 0) {
 				tvCode.setTextColor(parent.getContext().getResources().getColor(resId));
 			}
-			tvCode.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(24));
+			tvCode.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(parent.getContext(), 24));
 			tvCode.setPadding(0, dp16, 0, dp16);
 			ll.addView(tvCode, new LinearLayout.LayoutParams(
 					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));

@@ -29,8 +29,6 @@ public class TitleLayout {
 
 	/**根据是否带搜索功能，创建头部标题布局*/
 	static LinearLayout create(Context context,boolean isSearch) {
-		SizeHelper.prepare(context);
-
 		//init base LinearLayout
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -40,7 +38,7 @@ public class TitleLayout {
 
 		View topLine = new View(context);
 		LinearLayout.LayoutParams topLineParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(1));
+				SizeHelper.fromPxWidth(context, 1));
 		topLine.setLayoutParams(topLineParams);
 		topLine.setBackgroundColor(0xff454a4b);
 		titleLayout.addView(topLine);
@@ -53,7 +51,7 @@ public class TitleLayout {
 
 		View bottomLine = new View(context);
 		LinearLayout.LayoutParams bottomLineParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(2));
+				SizeHelper.fromPxWidth(context, 2));
 		bottomLine.setLayoutParams(bottomLineParams);
 		bottomLine.setBackgroundColor(0xff1a1c1d);
 		titleLayout.addView(bottomLine);
@@ -63,8 +61,6 @@ public class TitleLayout {
 
 	/**根据左侧是否自定义文字，创建头部标题布局*/
 	static LinearLayout create(Context context, String leftStringName) {
-		SizeHelper.prepare(context);
-
 		//init base LinearLayout
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -74,7 +70,7 @@ public class TitleLayout {
 
 		View topLine = new View(context);
 		LinearLayout.LayoutParams topLineParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				SizeHelper.fromPxWidth(1));
+				SizeHelper.fromPxWidth(context, 1));
 		topLine.setLayoutParams(topLineParams);
 		topLine.setBackgroundColor(0xff454a4b);
 		titleLayout.addView(topLine);
@@ -90,7 +86,7 @@ public class TitleLayout {
 
 	private static void createNormal(LinearLayout titleLayout,Context context) {
 		//build the inside linearLayout
-		int height = SizeHelper.fromPx(IN_HEIGHT);
+		int height = SizeHelper.fromPx(context, IN_HEIGHT);
 
 		LinearLayout.LayoutParams inParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height);
 		LinearLayout inLayout = new LinearLayout(context);
@@ -102,19 +98,19 @@ public class TitleLayout {
 		LinearLayout backLayout = new LinearLayout(context);
 		backLayout.setLayoutParams(backParams);
 		backLayout.setId(ResHelper.getIdRes(context, "ll_back"));
-		backLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(26), 0);
+		backLayout.setPadding(SizeHelper.fromPx(context, 14), 0, SizeHelper.fromPx(context, 26), 0);
 
-		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(15),SizeHelper.fromPx(25));
+		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(context, 15),SizeHelper.fromPx(context, 25));
 		arrowParams.gravity = Gravity.CENTER_VERTICAL;
-		arrowParams.rightMargin = SizeHelper.fromPx(14);
+		arrowParams.rightMargin = SizeHelper.fromPx(context, 14);
 		ImageView backArrow = new ImageView(context);
 		backArrow.setLayoutParams(arrowParams);
 		int res = ResHelper.getBitmapRes(context, "smssdk_back_arrow");
 		backArrow.setBackgroundResource(res);
 
-		LinearLayout.LayoutParams logoParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(30),SizeHelper.fromPx(44));
+		LinearLayout.LayoutParams logoParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(context, 30),SizeHelper.fromPx(context, 44));
 		logoParams.gravity = Gravity.CENTER_VERTICAL;
-		logoParams.rightMargin = SizeHelper.fromPx(14);
+		logoParams.rightMargin = SizeHelper.fromPx(context, 14);
 		ImageView backLogo = new ImageView(context);
 		backLogo.setLayoutParams(logoParams);
 		res = ResHelper.getBitmapRes(context, "smssdk_sharesdk_icon");
@@ -132,7 +128,7 @@ public class TitleLayout {
 		title.setLayoutParams(titleParams);
 		title.setId(ResHelper.getIdRes(context, "tv_title"));
 		title.setTextColor(0xffcfcfcf);
-		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(32));
+		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(context, 32));
 		inLayout.addView(title);
 
 		titleLayout.addView(inLayout);
@@ -140,7 +136,7 @@ public class TitleLayout {
 
 	private static void createSearch(LinearLayout titleLayout,Context context) {
 		//build the inside linearLayout
-		int height = SizeHelper.fromPx(IN_HEIGHT);
+		int height = SizeHelper.fromPx(context, IN_HEIGHT);
 		LinearLayout.LayoutParams inParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height);
 		LinearLayout inLayout = new LinearLayout(context);
 		inLayout.setLayoutParams(inParams);
@@ -152,19 +148,19 @@ public class TitleLayout {
 		LinearLayout backLayout = new LinearLayout(context);
 		backLayout.setLayoutParams(backParams);
 		backLayout.setId(ResHelper.getIdRes(context, "ll_back"));
-		backLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(26), 0);
+		backLayout.setPadding(SizeHelper.fromPx(context, 14), 0, SizeHelper.fromPx(context, 26), 0);
 
-		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(15),SizeHelper.fromPx(25));
+		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(context, 15),SizeHelper.fromPx(context, 25));
 		arrowParams.gravity = Gravity.CENTER_VERTICAL;
-		arrowParams.rightMargin = SizeHelper.fromPxWidth(14);
+		arrowParams.rightMargin = SizeHelper.fromPxWidth(context, 14);
 		ImageView backArrow = new ImageView(context);
 		backArrow.setLayoutParams(arrowParams);
 		int res = ResHelper.getBitmapRes(context, "smssdk_back_arrow");
 		backArrow.setBackgroundResource(res);
 
-		LinearLayout.LayoutParams logoParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(30),SizeHelper.fromPx(44));
+		LinearLayout.LayoutParams logoParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(context, 30),SizeHelper.fromPx(context, 44));
 		logoParams.gravity = Gravity.CENTER_VERTICAL;
-		logoParams.rightMargin = SizeHelper.fromPx(14);
+		logoParams.rightMargin = SizeHelper.fromPx(context, 14);
 		ImageView backLogo = new ImageView(context);
 		backLogo.setLayoutParams(logoParams);
 		res = ResHelper.getBitmapRes(context, "smssdk_sharesdk_icon");
@@ -190,10 +186,10 @@ public class TitleLayout {
 		res = ResHelper.getStringRes(context, "smssdk_choose_country");
 		title.setText(res);
 		title.setTextColor(0xffcfcfcf);
-		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(32));
+		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(context, 32));
 		innerTitleLayout.addView(title);
 
-		LinearLayout.LayoutParams searchImageParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(70),
+		LinearLayout.LayoutParams searchImageParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(context, 70),
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 		searchImageParams.gravity = Gravity.CENTER_VERTICAL;
 		ImageView searchImage = new ImageView(context);
@@ -202,25 +198,25 @@ public class TitleLayout {
 		res = ResHelper.getBitmapRes(context, "smssdk_search_icon");
 		searchImage.setImageResource(res);
 		searchImage.setScaleType(ScaleType.CENTER_INSIDE);
-		searchImage.setPadding(SizeHelper.fromPx(15), 0, SizeHelper.fromPx(15), 0);
+		searchImage.setPadding(SizeHelper.fromPx(context, 15), 0, SizeHelper.fromPx(context, 15), 0);
 		innerTitleLayout.addView(searchImage);
 
 		LinearLayout.LayoutParams innerSearchParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT,1);
 		innerSearchParams.gravity = Gravity.CENTER_VERTICAL;
-		innerSearchParams.rightMargin = SizeHelper.fromPx(18);
+		innerSearchParams.rightMargin = SizeHelper.fromPx(context, 18);
 		LinearLayout innerSearchLayout = new LinearLayout(context);
 		innerSearchLayout.setLayoutParams(innerSearchParams);
 		innerSearchLayout.setId(ResHelper.getIdRes(context, "llSearch"));
 		res = ResHelper.getBitmapRes(context, "smssdk_input_bg_focus");
 		innerSearchLayout.setBackgroundResource(res);
-		innerSearchLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(14), 0);
+		innerSearchLayout.setPadding(SizeHelper.fromPx(context, 14), 0, SizeHelper.fromPx(context, 14), 0);
 		innerSearchLayout.setVisibility(View.GONE);
 		inLayout.addView(innerSearchLayout);
 
-		LinearLayout.LayoutParams searchIconParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(36),SizeHelper.fromPx(36));
+		LinearLayout.LayoutParams searchIconParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(context, 36),SizeHelper.fromPx(context, 36));
 		searchIconParams.gravity = Gravity.CENTER_VERTICAL;
-		searchIconParams.rightMargin = SizeHelper.fromPx(8);
+		searchIconParams.rightMargin = SizeHelper.fromPx(context, 8);
 		ImageView searchIcon = new ImageView(context);
 		searchIcon.setLayoutParams(searchIconParams);
 		res = ResHelper.getBitmapRes(context, "smssdk_search_icon");
@@ -240,9 +236,9 @@ public class TitleLayout {
 		identify.setSingleLine(true);
 		innerSearchLayout.addView(identify);
 
-		LinearLayout.LayoutParams clearParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(30),SizeHelper.fromPx(30));
+		LinearLayout.LayoutParams clearParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(context, 30),SizeHelper.fromPx(context, 30));
 		clearParams.gravity = Gravity.CENTER_VERTICAL;
-		clearParams.rightMargin = SizeHelper.fromPxWidth(5);
+		clearParams.rightMargin = SizeHelper.fromPxWidth(context, 5);
 		ImageView clear = new ImageView(context);
 		clear.setLayoutParams(clearParams);
 		clear.setId(ResHelper.getIdRes(context, "iv_clear"));
@@ -256,7 +252,7 @@ public class TitleLayout {
 
 	private static void createBackLeft(LinearLayout titleLayout,Context context) {
 		//build the inside linearLayout
-		int height = SizeHelper.fromPx(IN_HEIGHT);
+		int height = SizeHelper.fromPx(context, IN_HEIGHT);
 
 		LinearLayout.LayoutParams inParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height);
 		LinearLayout inLayout = new LinearLayout(context);
@@ -268,9 +264,9 @@ public class TitleLayout {
 		LinearLayout backLayout = new LinearLayout(context);
 		backLayout.setLayoutParams(backParams);
 		backLayout.setId(ResHelper.getIdRes(context, "ll_back"));
-		backLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(26), 0);
+		backLayout.setPadding(SizeHelper.fromPx(context, 14), 0, SizeHelper.fromPx(context, 26), 0);
 
-		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(40),SizeHelper.fromPx(40));
+		LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(SizeHelper.fromPx(context, 40),SizeHelper.fromPx(context, 40));
 		arrowParams.gravity = Gravity.CENTER_VERTICAL;
 		ImageView backArrow = new ImageView(context);
 		backArrow.setLayoutParams(arrowParams);
@@ -289,7 +285,7 @@ public class TitleLayout {
 		title.setGravity(Gravity.CENTER);
 		title.setId(ResHelper.getIdRes(context, "tv_title"));
 		title.setTextColor(0xff000000);
-		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(32));
+		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(context, 32));
 		inLayout.addView(title);
 
 		LinearLayout.LayoutParams rightParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -302,7 +298,7 @@ public class TitleLayout {
 		right.setGravity(Gravity.CENTER);
 		right.setMinWidth(ResHelper.dipToPx(context, 40));
 		right.setTextColor(0xff00D69C);
-		right.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(24));
+		right.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(context, 24));
 		inLayout.addView(right);
 
 		titleLayout.addView(inLayout);
@@ -310,7 +306,7 @@ public class TitleLayout {
 
 	private static void createStringLeft(LinearLayout titleLayout,Context context, String leftStringName) {
 		//build the inside linearLayout
-		int height = SizeHelper.fromPx(IN_HEIGHT);
+		int height = SizeHelper.fromPx(context, IN_HEIGHT);
 
 		LinearLayout.LayoutParams inParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height);
 		LinearLayout inLayout = new LinearLayout(context);
@@ -322,7 +318,7 @@ public class TitleLayout {
 		LinearLayout backLayout = new LinearLayout(context);
 		backLayout.setLayoutParams(backParams);
 		backLayout.setId(ResHelper.getIdRes(context, "ll_back"));
-		backLayout.setPadding(SizeHelper.fromPx(14), 0, SizeHelper.fromPx(26), 0);
+		backLayout.setPadding(SizeHelper.fromPx(context, 14), 0, SizeHelper.fromPx(context, 26), 0);
 
 		LinearLayout.LayoutParams leftParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.MATCH_PARENT);
@@ -332,7 +328,7 @@ public class TitleLayout {
 		left.setLayoutParams(leftParams);
 		left.setText(ResHelper.getStringRes(context, leftStringName));
 		left.setTextColor(0xff000000);
-		left.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(24));
+		left.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(context, 24));
 
 		backLayout.addView(left);
 		inLayout.addView(backLayout);
@@ -346,7 +342,7 @@ public class TitleLayout {
 		title.setGravity(Gravity.CENTER);
 		title.setId(ResHelper.getIdRes(context, "tv_title"));
 		title.setTextColor(0xff000000);
-		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(32));
+		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(context, 32));
 		inLayout.addView(title);
 
 		LinearLayout.LayoutParams rightParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -359,7 +355,7 @@ public class TitleLayout {
 		right.setGravity(Gravity.CENTER);
 		right.setMinWidth(ResHelper.dipToPx(context, 40));
 		right.setTextColor(0xff00D69C);
-		right.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(24));
+		right.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPx(context, 24));
 		inLayout.addView(right);
 
 		titleLayout.addView(inLayout);

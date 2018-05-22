@@ -27,8 +27,7 @@ public class ProgressDialogLayout {
 		LinearLayout.LayoutParams barParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 		bar.setLayoutParams(barParams);
-		SizeHelper.prepare(context);
-		int padding = SizeHelper.fromPxWidth(20);
+		int padding = SizeHelper.fromPxWidth(context, 20);
 		bar.setPadding(padding, padding, padding, padding);
 
 		root.addView(bar);

@@ -256,16 +256,15 @@ public class ContactsAdapter extends GroupAdapter {
 
 	public TextView getTitleView(int group, TextView convertView, ViewGroup parent) {
 		if (convertView == null) {
-			SizeHelper.prepare(parent.getContext());
 
 			convertView = new TextView(parent.getContext());
 			convertView.setBackgroundResource(ResHelper.getColorRes(parent.getContext(), "smssdk_bg_gray"));
-			convertView.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(25));
+			convertView.setTextSize(TypedValue.COMPLEX_UNIT_PX, SizeHelper.fromPxWidth(parent.getContext(), 25));
 			convertView.setTextColor(0xff000000);
-			int padding = SizeHelper.fromPxWidth(18);
+			int padding = SizeHelper.fromPxWidth(parent.getContext(), 18);
 			convertView.setPadding(padding, 0, 0, 0);
 			convertView.setWidth(LayoutParams.MATCH_PARENT);
-			int height = SizeHelper.fromPxWidth(40);
+			int height = SizeHelper.fromPxWidth(parent.getContext(), 40);
 			convertView.setHeight(height);
 			convertView.setGravity(Gravity.CENTER_VERTICAL);
 		}
