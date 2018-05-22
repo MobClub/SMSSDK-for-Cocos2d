@@ -86,6 +86,8 @@
 		8D168C422050F49000AB965B /* SMSSDKUIAvatarFLowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMSSDKUIAvatarFLowLayout.m; sourceTree = "<group>"; };
 		8D4C7D65204FEAC100023509 /* SMSSDKUIBindUserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMSSDKUIBindUserInfoViewController.h; sourceTree = "<group>"; };
 		8D4C7D66204FEAC100023509 /* SMSSDKUIBindUserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMSSDKUIBindUserInfoViewController.m; sourceTree = "<group>"; };
+		8D55ECEC208845C60096FCE7 /* SMSSDKUIGetCodeViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMSSDKUIGetCodeViewController_Private.h; sourceTree = "<group>"; };
+		8D55ECED208846070096FCE7 /* SMSSDKUICommitCodeViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMSSDKUICommitCodeViewController_Private.h; sourceTree = "<group>"; };
 		8D73E54020576C4200B656E3 /* SMSSDKUIBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSDKUIBaseViewController.h; sourceTree = "<group>"; };
 		8D73E54120576C4300B656E3 /* SMSSDKUIBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSDKUIBaseViewController.m; sourceTree = "<group>"; };
 		8D95A1AC2056220F005B3067 /* SMSSDKUIZonesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMSSDKUIZonesCell.h; sourceTree = "<group>"; };
@@ -175,6 +177,8 @@
 				8D95A1B020567BFF005B3067 /* SMSSDKUIZonesResultViewController.m */,
 				8D95A1B220568FAC005B3067 /* SMSSDKUIFriendsResultViewController.h */,
 				8D95A1B320568FAC005B3067 /* SMSSDKUIFriendsResultViewController.m */,
+				8D55ECEC208845C60096FCE7 /* SMSSDKUIGetCodeViewController_Private.h */,
+				8D55ECED208846070096FCE7 /* SMSSDKUICommitCodeViewController_Private.h */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

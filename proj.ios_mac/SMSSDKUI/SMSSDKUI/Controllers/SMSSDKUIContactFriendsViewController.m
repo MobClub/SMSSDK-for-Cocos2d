@@ -16,6 +16,7 @@
 #import "SMSSDKUIBindUserInfoViewController.h"
 #import "SMSGlobalManager.h"
 #import "SMSSDKUIFriendsResultViewController.h"
+#import "SMSSDKUIGetCodeViewController_Private.h"
 
 @interface SMSSDKUIContactFriendsViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,SMSSDKUIContactTableViewCellDelegate,UISearchResultsUpdating>
 
@@ -42,6 +43,10 @@
 
 //搜索控制器
 @property (nonatomic, strong) UISearchController *searchController;
+
+//模板code
+@property (nonatomic, strong) NSString *tempCode;
+
 @end
 
 @implementation SMSSDKUIContactFriendsViewController
@@ -53,6 +58,17 @@
     if (self = [super init])
     {
         _contactFriends = contactFriends;
+    }
+    return self;
+}
+
+
+- (instancetype)initWithContactFriends:(NSArray *)contactFriends template:(NSString *)tempCode
+{
+    if (self = [super init])
+    {
+        _contactFriends = contactFriends;
+        _tempCode = tempCode;
     }
     return self;
 }
@@ -234,7 +250,7 @@
 - (void)inviteInfo:(id)sender
 {
     
-    SMSSDKUIGetCodeViewController *vc = [[SMSSDKUIGetCodeViewController alloc] initWithMethod:SMSGetCodeMethodSMS codeBusiness:SMSCheckCodeBusinessBindInfo];
+    SMSSDKUIGetCodeViewController *vc = [[SMSSDKUIGetCodeViewController alloc] initWithMethod:SMSGetCodeMethodSMS codeBusiness:SMSCheckCodeBusinessBindInfo template:_tempCode];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
@@ -278,9 +294,11 @@
         
         for (SMSSDKAddressBook *contact in _contactsTmp.copy)
         {
+            
             for (NSString *contactPhone in contact.phonesEx)
             {
-                if ([contactPhone isEqualToString:phone])
+                NSString *noSpacePhone = [[[contactPhone stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"-" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+                if ([noSpacePhone isEqualToString:phone])
                 {
                     [_contactsTmp removeObject:contact];
                     [_friendsTmp addObject:contact];
@@ -373,19 +391,25 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSString *title = nil;
-    if (!_friendsTmp.count)
-    {
-        title = SMSLocalized(@"toinvitefriends");
-    }
     
-    if (section)
+    
+    if (!_friendsTmp.count)
     {
         title = SMSLocalized(@"toinvitefriends");
     }
     else
     {
-        title = SMSLocalized(@"toaddusers");
+        if (section)
+        {
+            title = SMSLocalized(@"toinvitefriends");
+        }
+        else
+        {
+            title = SMSLocalized(@"toaddusers");
+
+        }
     }
+
     
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 31)];
     bgView.backgroundColor = SMSRGB(0xEFEFF3);

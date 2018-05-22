@@ -13,6 +13,7 @@
 #import "SMSSDKUIProcessHUD.h"
 #import "SMSSDKUIBindUserInfoViewController.h"
 #import "SMSSDKAvatarSelectViewController.h"
+#import "SMSSDKUICommitCodeViewController_Private.h"
 
 @interface SMSSDKUIGetCodeViewController()<UIAlertViewDelegate>
 
@@ -47,12 +48,13 @@
     return self;
 }
 
-- (instancetype)initWithMethod:(SMSGetCodeMethod)methodType codeBusiness:(SMSCheckCodeBusiness)codeBusiness
+- (instancetype)initWithMethod:(SMSGetCodeMethod)methodType codeBusiness:(SMSCheckCodeBusiness)codeBusiness template:(NSString *)tempCode
 {
     if (self = [super init])
     {
         _methodType = methodType;
         _codeBusiness = codeBusiness;
+        _tempCode = tempCode;
     }
     return self;
 }
@@ -242,14 +244,16 @@
     
     NSString *template = self.tempCode;
 #ifdef MOB_SMSSDK_Test
-        if(template.length == 0)
+        if(template && template.length == 0)
         {
-            template = @"14100540";
+            //template = @"14100540";
+            template = nil;
         }
 #else
-        if(template.length == 0)
+        if(template && template.length == 0)
         {
-            template = @"1319972";
+            //template = @"1319972";
+            template = nil;
         }
 
 #endif
