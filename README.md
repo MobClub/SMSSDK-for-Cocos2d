@@ -2,9 +2,9 @@
 ### This is  cocos2dx plugin support to use SMSSDK([iOS](https://github.com/MobClub/SMSSDK-for-iOS),[Android](https://github.com/MobClub/SMSSDK-for-Android)). [中文官网](http://sms.mob.com/).
 **supported original SMSSDK version:**
 
-- Android - V3.2.1
+- Android - V3.3.0
 - iOS - V3.1.2
-- Cocos2d-x v3.0.0
+- Cocos2d-x v3.13.1
 
 **中文集成文档**
 

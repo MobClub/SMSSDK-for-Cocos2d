@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.mob.tools.FakeActivity;
 import com.mob.tools.utils.ResHelper;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -92,11 +94,35 @@ public class CountryPage extends FakeActivity implements OnClickListener, TextWa
 										if (result == SMSSDK.RESULT_COMPLETE) {
 											onCountryListGot((ArrayList<HashMap<String,Object>>) data);
 										} else {
-											((Throwable) data).printStackTrace();
-											int resId = ResHelper.getStringRes(activity, "smssdk_network_error");
+											int status = 0;
+											// 根据服务器返回的网络错误，给toast提示
+											try {
+												((Throwable) data).printStackTrace();
+												Throwable throwable = (Throwable) data;
+
+												JSONObject object = new JSONObject(
+														throwable.getMessage());
+												String des = object.optString("detail");
+												status = object.optInt("status");
+												if (!TextUtils.isEmpty(des)) {
+													Toast.makeText(activity, des, Toast.LENGTH_SHORT).show();
+													finish();
+													return;
+												}
+											} catch (Exception e) {
+												SMSLog.getInstance().w(e);
+											}
+											// 如果木有找到资源，默认提示
+											int resId = 0;
+											if(status >= 400) {
+												resId = ResHelper.getStringRes(activity, "smssdk_error_desc_" + status);
+											} else {
+												resId = ResHelper.getStringRes(activity,
+														"smssdk_network_error");
+											}
+
 											if (resId > 0) {
 												Toast.makeText(activity, resId, Toast.LENGTH_SHORT).show();
-
 											}
 											finish();
 										}
